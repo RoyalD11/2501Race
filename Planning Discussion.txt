@@ -1,6 +1,5 @@
 TOP DOWN RACING GAME
 ====================
-testagain
 
 Componenets we WANT to implement:
 ---------------------------------
