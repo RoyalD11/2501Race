@@ -1,0 +1,88 @@
+TOP DOWN RACING GAME
+====================
+test
+
+Componenets we WANT to implement:
+---------------------------------
+	movement
+		- 
+		
+	opponents
+		- AI
+			start stupid make smart
+		
+	weapons
+		- heat seeking missle (red shell)
+			path finding
+		- blue shell (hits player in first)
+			can hit others
+		- 
+		
+		
+	hazards
+		- potholes
+		- items left on ground from other players
+		
+	multiple levels
+		- one long race
+		- 2 lap races
+		- 3 lap races
+		- one super short race with multiple laps
+		
+	cars
+		- speed
+		- acceleration
+		- if you get hit, spin out, re acceletate
+		
+	music/sound effects
+		- 
+		
+	Race Start animations
+		- Stick figure starter
+			think bikini starter waving flag but a stick man
+			
+	
+
+
+
+Possible Componenets:
+---------------------
+	Turbo
+	
+	Drifting
+	
+	Drafting
+		distance detection
+		timer
+		after x amount of time at certain distance
+			acceleration up for 5ish seconds
+			degrade over time after leaving sweet spot behind other car
+	
+	Directional aiming/steering
+		- keyboard/mouse
+			yet to be decided
+			
+	multiple levels
+		scrolling map/on same screen
+		track that bridges other parts
+			- bridges
+		
+	differnt kinds of cars
+		- weight classes
+		- stat changes
+
+	List of placements (1st, 2nd, 3rd, etc)
+		- on side of screen
+		
+	If you finish first you start next in first
+		start in position you finished last race
+	
+
+Definetly not:
+--------------
+	grand prix
+	multiplayer
+	customizing cars
+	3D
+	
+	
