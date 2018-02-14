@@ -201,9 +201,31 @@ int main(void){
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
 				player.setVelocity(0.001);
+				
+				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
+					player.setRotation(0.25);
+				}
+
+				//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS) {
+					player.setRotation(-0.25);
+				}
 			}
-			else {
+			else{
+				
 				player.setVelocity(-0.001);
+				if (player.getVelocity() > 0.8) {
+					//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+					if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
+						player.setRotation(0.25);
+					}
+
+					//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+					if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS) {
+						player.setRotation(-0.25);
+					}
+				}
 
 			}
 
@@ -211,15 +233,7 @@ int main(void){
 				player.setVelocity(-0.005);
 			}
 
-			//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
-				player.setRotation(0.25);
-			}
 			
-			//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS) {
-				player.setRotation(-0.25);
-			}
 
 			if (reload > 0) {
 				reload--;

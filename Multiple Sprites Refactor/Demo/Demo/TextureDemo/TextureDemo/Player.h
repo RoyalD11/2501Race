@@ -14,6 +14,8 @@ public:
 
 	float Player::getRotation();
 
+	float Player::getVelocity();
+
 private:
 	float velocity;
 };

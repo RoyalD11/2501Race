@@ -48,6 +48,10 @@ void Player::setVelocity(float z) {
 	}
 }
 
+float Player::getVelocity() {
+	return velocity;
+}
+
 //Sets the ships rotation based on the direction you inputed from main
 void Player::setRotation(float increment) {
 	rotationAmount += increment;
