@@ -8,10 +8,3 @@ Bullet::Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 void Bullet::update(double deltaTime) {
 	position += velocity * (float)deltaTime;
 }
-
-void Bullet::fire(glm::vec3 playerpos) {
-	position.x = playerpos.x;
-	position.y = playerpos.y;
-	velocity.x = 2;
-	velocity.y = 2;
-}

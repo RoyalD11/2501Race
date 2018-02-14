@@ -1,52 +1,90 @@
 TOP DOWN RACING GAME
 ====================
 
-Componenets we WANT to implement:
+Componenets we WANT to implement/Required:
 ---------------------------------
 	movement
-		- 
+		- Top down
 		
-	opponents
+	opponents (REQUIRED)
 		- AI
 			start stupid make smart
 		
-	weapons
+	weapons/Power Ups (REQUIRED)
 		- heat seeking missle (red shell)
 			path finding
 		- blue shell (hits player in first)
 			can hit others
-		- 
+		- Turbo
 		
-		
-	hazards
+	hazards (REQUIRED)
 		- potholes
 		- items left on ground from other players
-		
-	multiple levels
+
+	multiple levels (REQUIRED)
+		- scrolling map/on same screen
+		- track that bridges other parts
+			- bridges
 		- one long race
 		- 2 lap races
 		- 3 lap races
 		- one super short race with multiple laps
+	
+	Race Conditions (REQUIRED)
+		- When the player finishes the race ends, all AI are then ranked where they would have finished when the player finishes
 		
-	cars
+	cars/Customization (REQUIRED)
 		- speed
 		- acceleration
 		- if you get hit, spin out, re acceletate
+		- Up-Grade you car
+			- Better engine (Faster acceleration + higher top speed)
+			- Better tires (Faster acceleration)
+			- Make car more aerodynamic (helps acceleration)
+			- Gear ratio improvement (increase top speed)
 		
+	HUD (REQUIRED)
+		- Shows current place out of the total number of racers
+		- Shows the current weapon you have on you/Current power up you have or are using
+		- Shows the current lap/total number of laps
+		- Timer? How long youve been racing/or time per lap.	
+
 	music/sound effects
 		- 
 		
 	Race Start animations
 		- Stick figure starter
 			think bikini starter waving flag but a stick man
-			
-	
 
+Technical Requirements
+----------------------
+• OpenGL graphics, C++
+• Physics-based movement, collisions
+• Movement through transformations
+	• Hierarchical transformation used in some way
+• Particle system effect (explosion, sparks, …)
+• Finite state machine for AI; multiple game states (e.g., store)
+• Multiple game entities with different behaviours
+• Multiple terrain types with different effects
+• Gameworld larger than the screen
+
+Suggestions:
+------------
+Ongoing game: several levels with persistent elements
+	• E.g., earn money by placing high, spend on
+	• E.g., gain skill points and train up your driver
+
+• Various resources
+	• Fuel, ammunition, wear & tear on the car
+
+• Various hazards
+	• oil slick, ice, spikes, pedestrians, monsters
+
+• Music
 
 
 Possible Componenets:
 ---------------------
-	Turbo
 	
 	Drifting
 	
@@ -61,10 +99,7 @@ Possible Componenets:
 		- keyboard/mouse
 			yet to be decided
 			
-	multiple levels
-		scrolling map/on same screen
-		track that bridges other parts
-			- bridges
+	
 		
 	differnt kinds of cars
 		- weight classes

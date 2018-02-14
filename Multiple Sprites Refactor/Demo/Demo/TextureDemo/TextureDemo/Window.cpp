@@ -39,7 +39,6 @@ void Window::clear(const glm::vec3 &colour) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-
 // Callback for when a key is pressed
 static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
@@ -47,22 +46,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
 	if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
-	
-	/*if (key == GLFW_KEY_W ) {
-	Player.setPosition(0, 1);
-	}
-	if (key == GLFW_KEY_A ) {
-	glfwSetWindowShouldClose(window, true);
-	}
-	if (key == GLFW_KEY_S ) {
-	glfwSetWindowShouldClose(window, true);
-	}
-	if (key == GLFW_KEY_D ) {
-	glfwSetWindowShouldClose(window, true);
-	}*/
-
 }
-
 
 // Callback for when the window is resized
 static void ResizeCallback(GLFWwindow* window, int width, int height) {

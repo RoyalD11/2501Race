@@ -87,7 +87,7 @@ void setthisTexture(GLuint w, char *fname)
 
 void setallTexture(void)
 {
-	//	tex = new GLuint[3];
+//	tex = new GLuint[3];
 	glGenTextures(3, tex);
 	setthisTexture(tex[0], "blueships1.png");
 	setthisTexture(tex[1], "orb.png");
@@ -97,20 +97,15 @@ void setallTexture(void)
 }
 
 
-
-
-
-
-
 // Main function that builds and runs the game
-int main(void) {
-	try {
+int main(void){
+    try {
 		// Setup window
 		Window window(window_width_g, window_height_g, window_title_g);
 
-		// Set up z-buffer for rendering
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
+        // Set up z-buffer for rendering
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
 
 		// Enable Alpha blending
 		glEnable(GL_BLEND);
@@ -119,27 +114,25 @@ int main(void) {
 		// Create geometry of the square
 		int size = CreateSquare();
 
-		// Set up shaders
-		Shader shader("shader.vert", "shader.frag");
+        // Set up shaders
+		Shader shader("shader.vert", "shader.frag"); 
 
 		setallTexture();
 
 		// Setup game objects
 		Player player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[0], size);
-		Bullet bullet(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
 		Enemy enemy(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
 
-		// Run the main loop
-		bool animating = 1;
+        // Run the main loop
+        bool animating = 1;
 		double lastTime = glfwGetTime();
-		while (!glfwWindowShouldClose(window.getWindow())) {
-			// Clear background
+        while (!glfwWindowShouldClose(window.getWindow())){
+            // Clear background
 			window.clear(viewport_background_color_g);
 
-			// Select proper shader program to use
+            // Select proper shader program to use
 			shader.enable();
-
+			
 			// Update entities
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
@@ -147,31 +140,9 @@ int main(void) {
 			player.update(deltaTime);
 			enemy.update(deltaTime);
 
-			bullet.update(deltaTime);
-
-
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-				player.setPosition(0, 0.001);
-			}
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-				player.setPosition(0, -0.001);
-			}
-
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_A) == GLFW_PRESS) {
-				player.setPosition(-0.001, 0);
-			}
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_D) == GLFW_PRESS) {
-				player.setPosition(0.001, 0);
-			}
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-				bullet.fire(player.getPosition());
-			}
-
 			// Render entities
 			player.render(shader);
 			enemy.render(shader);
-
-			bullet.render(shader);
 			
 		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 
