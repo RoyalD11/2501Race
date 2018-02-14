@@ -19,6 +19,8 @@
 #include "Enemy.h"
 #include "Bullet.h"
 
+using namespace std;
+
 // Macro for printing exceptions
 #define PrintException(exception_object)\
 	std::cerr << exception_object.what() << std::endl
@@ -99,6 +101,9 @@ void setallTexture(void)
 	setthisTexture(tex[0], "Black_viper.png");
 	setthisTexture(tex[1], "orb.png");
 	setthisTexture(tex[2], "saw.png");
+	setthisTexture(tex[3], "police2.png");
+	setthisTexture(tex[4], "police3.png");
+	setthisTexture(tex[5], "police1.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
@@ -137,6 +142,8 @@ int main(void){
 		Enemy enemy5(glm::vec3(-0.3f, -0.6f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
 		Enemy enemy6(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
 
+		Enemy police(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, &player);
+
 		//Bullet constructor
 		Bullet bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Bullet bullet2(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -171,6 +178,9 @@ int main(void){
 		//Int I added to count the number of shots released, does not work as intended due to my frame rate shooting all the bullets at once. should shoot one at a time
 		int shot = 0;
 		int reload = 0;
+		int anicounter = 3;
+		int wait = 250;
+
 		
 
         while (!glfwWindowShouldClose(window.getWindow())){
@@ -193,6 +203,8 @@ int main(void){
 			enemy4.update(deltaTime);
 			enemy5.update(deltaTime);
 			enemy6.update(deltaTime);
+
+			//police.update(deltaTime);
 
 			//Added Bullets update methods
 			for (int i = 0; i<AMMO_CAP; i++) ammo[i]->update(deltaTime);
@@ -251,10 +263,36 @@ int main(void){
 			}
 
 
+			
+
+			if (anicounter == 6) {
+				anicounter = 3;
+				police.animate(tex[anicounter]);
+
+			}
+			police.animate(tex[anicounter]);
+
+			if (wait == 0) {
+				
+				if (anicounter == 3) cout << "white" << endl;
+				anicounter++;
+				wait = 500;
+			}
+
+
+			if (wait > 0) {
+				wait--;
+			}
+			
+
+
 			// Render entities, I added the bullet.render
 			player.render(shader);
 			
 			enemy.render(shader);
+			police.render(shader);
+
+
 
 			//Added enemies render methods
 			enemy2.render(shader);

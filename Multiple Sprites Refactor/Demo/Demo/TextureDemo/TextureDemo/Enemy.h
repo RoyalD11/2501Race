@@ -10,7 +10,9 @@ public:
 	Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, Player *playerEntity);
 
 	virtual void update(double deltaTime) override;
-	
+
+	void animate(GLuint t);
+
 	//method added to the enemy class
 	void collision(Bullet bullet);
 

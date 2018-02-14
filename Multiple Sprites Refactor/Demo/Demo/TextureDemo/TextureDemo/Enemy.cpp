@@ -24,6 +24,10 @@ void Enemy::update(double deltaTime) {
 	rotationAmount++;
 }
 
+void Enemy::animate(GLuint t) {
+	texture = t;
+}
+
 //method added to check collision, if the bullet radius is within the enemy radius then the enemy is removed from the screen
 void Enemy::collision(Bullet bullet) {
 	float colDetect = pow((bullet.getPosition().x - position.x), 2) + pow((bullet.getPosition().y - position.y), 2);
