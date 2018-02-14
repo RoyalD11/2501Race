@@ -36,7 +36,7 @@ const glm::vec3 viewport_background_color_g(0.0, 0.0, 0.2);
 const int AMMO_CAP = 10;
 
 // Global texture info
-GLuint tex[3];
+GLuint tex[6];
 
 // Create the geometry for a square (with two triangles)
 // Return the number of array elements that form the square
@@ -96,8 +96,8 @@ void setthisTexture(GLuint w, char *fname)
 
 void setallTexture(void)
 {
-//	tex = new GLuint[3];
-	glGenTextures(3, tex);
+	//Holds all textures/sprites used
+	glGenTextures(6, tex);
 	setthisTexture(tex[0], "Black_viper.png");
 	setthisTexture(tex[1], "orb.png");
 	setthisTexture(tex[2], "saw.png");
@@ -224,9 +224,13 @@ int main(void){
 					player.setRotation(-0.25);
 				}
 			}
+
+			//Slows down car when W is not pressed, similar to letting off the gas
 			else{
 				
 				player.setVelocity(-0.001);
+
+				//Allows for turning when car is slowing down
 				if (player.getVelocity() > 0.8) {
 					//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
 					if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
@@ -241,12 +245,13 @@ int main(void){
 
 			}
 
+			//Brake mechanic for the car, if S is pressed slows down quickly
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
 				player.setVelocity(-0.005);
 			}
 
 			
-
+			//Timer to keep track of when next shot can be fired
 			if (reload > 0) {
 				reload--;
 			}
@@ -262,33 +267,28 @@ int main(void){
 				}
 			}
 
-
 			
-
+			//Out of bounds check to make sure we only loop through the elements we want to use
 			if (anicounter == 6) {
 				anicounter = 3;
-				police.animate(tex[anicounter]);
-
 			}
+
+			//Calls animate to change the texture of the police car
 			police.animate(tex[anicounter]);
 
-			if (wait == 0) {
-				
-				if (anicounter == 3) cout << "white" << endl;
-				anicounter++;
-				wait = 500;
-			}
-
-
+			//Timer that slows the speed of the animation
 			if (wait > 0) {
 				wait--;
 			}
-			
 
+			//If timer has finished increment to the next texture to be displayed and reset the timer
+			if (wait == 0) {
+				anicounter++;
+				wait = 150;
+			}
 
-			// Render entities, I added the bullet.render
+			// Render entities
 			player.render(shader);
-			
 			enemy.render(shader);
 			police.render(shader);
 

@@ -24,6 +24,7 @@ void Enemy::update(double deltaTime) {
 	rotationAmount++;
 }
 
+//Changes the sprite currently being displayed
 void Enemy::animate(GLuint t) {
 	texture = t;
 }
