@@ -1,9 +1,8 @@
 #pragma once
 
-#include "updateable.hpp"
+#include "updateable.h"
 
-#include "player.hpp"
-#include "background.hpp"
+#include "background.h"
 
 class Model
 {
@@ -12,14 +11,14 @@ public:
 
 
 	// MOVED FROM GAME.HPP
-	std::vector<Updateable *> updateables;
-	Player* the_player;
+	std::vector<Updateable *> Updateables;
+
 	Background*** backgroundSprites;
 
 
 	Model();
 	//~Model();
 
-	void update(sf::Time);
+	void update();
 
 };

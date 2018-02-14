@@ -1,1 +1,4 @@
-#include "updateable.h"
+#include "Updateable.h"
+
+Updateable::Updateable() {}
+

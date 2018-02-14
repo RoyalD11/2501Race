@@ -1,14 +1,13 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 
 class Updateable
 {
 
 public:
 
-	virtual void update(sf::Time) = 0;
+	virtual void update() = 0;
 
-	sf::Vector2i position;
+	Vector2i position;
 
 };
