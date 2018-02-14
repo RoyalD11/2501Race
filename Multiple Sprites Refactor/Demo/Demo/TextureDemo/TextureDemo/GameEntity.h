@@ -15,6 +15,7 @@ public:
 	void render(Shader &shader);
 
 	inline glm::vec3 getPosition() { return position; }
+
 protected:
 	glm::vec3 position, scale;
 	float rotationAmount;

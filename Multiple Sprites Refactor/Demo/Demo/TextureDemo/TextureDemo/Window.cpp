@@ -42,8 +42,8 @@ void Window::clear(const glm::vec3 &colour) {
 // Callback for when a key is pressed
 static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	// Quit the program when pressing 'q'
-	if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
+	// Quit the program when pressing 'p'
+	if (key == GLFW_KEY_P && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
 }

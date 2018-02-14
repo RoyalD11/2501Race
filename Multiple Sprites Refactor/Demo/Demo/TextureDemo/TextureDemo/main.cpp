@@ -10,6 +10,9 @@
 #include <chrono>
 #include <thread>
 
+//Extra libraries I added
+#include <stdio.h>
+
 #include "Shader.h"
 #include "Window.h"
 #include "Player.h"
@@ -25,6 +28,10 @@ const std::string window_title_g = "Multiple Sprites Demo";
 const unsigned int window_width_g = 800;
 const unsigned int window_height_g = 600;
 const glm::vec3 viewport_background_color_g(0.0, 0.0, 0.2);
+
+
+//Const I added for Bullet Detection
+const int AMMO_CAP = 10;
 
 // Global texture info
 GLuint tex[3];
@@ -89,7 +96,7 @@ void setallTexture(void)
 {
 //	tex = new GLuint[3];
 	glGenTextures(3, tex);
-	setthisTexture(tex[0], "blueships1.png");
+	setthisTexture(tex[0], "Black_viper.png");
 	setthisTexture(tex[1], "orb.png");
 	setthisTexture(tex[2], "saw.png");
 
@@ -113,19 +120,59 @@ int main(void){
 
 		// Create geometry of the square
 		int size = CreateSquare();
-
+		
         // Set up shaders
 		Shader shader("shader.vert", "shader.frag"); 
 
 		setallTexture();
 
 		// Setup game objects
-		Player player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[0], size);
-		Enemy enemy(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+		Player player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Enemy enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+
+		//Added Enemies
+		Enemy enemy2(glm::vec3(0.1f, -0.9f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+		Enemy enemy3(glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+		Enemy enemy4(glm::vec3(-0.7f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+		Enemy enemy5(glm::vec3(-0.3f, -0.6f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+		Enemy enemy6(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, &player);
+
+		//Bullet constructor
+		Bullet bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet2(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet3(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet4(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet5(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet6(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet7(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet8(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet9(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Bullet bullet10(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
+
+
+		//Array that holds all the bullets
+		Bullet* ammo[AMMO_CAP];
+		ammo[0] = &bullet;
+		ammo[1] = &bullet2;
+		ammo[2] = &bullet3;
+		ammo[3] = &bullet4;
+		ammo[4] = &bullet5;
+		ammo[5] = &bullet6;
+		ammo[6] = &bullet7;
+		ammo[7] = &bullet8;
+		ammo[8] = &bullet9;
+		ammo[9] = &bullet10;
+		
 
         // Run the main loop
         bool animating = 1;
 		double lastTime = glfwGetTime();
+		
+		//Int I added to count the number of shots released, does not work as intended due to my frame rate shooting all the bullets at once. should shoot one at a time
+		int shot = 0;
+		int reload = 0;
+		
+
         while (!glfwWindowShouldClose(window.getWindow())){
             // Clear background
 			window.clear(viewport_background_color_g);
@@ -133,16 +180,85 @@ int main(void){
             // Select proper shader program to use
 			shader.enable();
 			
-			// Update entities
+			// Update entities, I added the bullet.update
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
 			player.update(deltaTime);
 			enemy.update(deltaTime);
 
-			// Render entities
+			//Added enemies update methods
+			enemy2.update(deltaTime);
+			enemy3.update(deltaTime);
+			enemy4.update(deltaTime);
+			enemy5.update(deltaTime);
+			enemy6.update(deltaTime);
+
+			//Added Bullets update methods
+			for (int i = 0; i<AMMO_CAP; i++) ammo[i]->update(deltaTime);
+
+
+			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
+			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
+				player.setVelocity(0.001);
+			}
+			else {
+				player.setVelocity(-0.001);
+
+			}
+
+			if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
+				player.setVelocity(-0.005);
+			}
+
+			//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+			if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
+				player.setRotation(0.25);
+			}
+			
+			//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+			if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS) {
+				player.setRotation(-0.25);
+			}
+
+			if (reload > 0) {
+				reload--;
+			}
+
+			//Space is used to fire a blade, calls the fire method from the bullet class
+			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
+				
+				//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
+				if (shot < AMMO_CAP && reload <=0) {
+					ammo[shot]->fire(player.getPosition(), player.getRotation());
+					shot++;
+					reload = 500;
+				}
+			}
+
+
+			// Render entities, I added the bullet.render
 			player.render(shader);
+			
 			enemy.render(shader);
+
+			//Added enemies render methods
+			enemy2.render(shader);
+			enemy3.render(shader);
+			enemy4.render(shader);
+			enemy5.render(shader);
+			enemy6.render(shader);
+
+			//Added bullets render methods and where i check for collision detection
+			for (int i = 0; i < shot; i++) {
+				ammo[i]->render(shader);
+				enemy.collision(*ammo[i]);
+				enemy2.collision(*ammo[i]);
+				enemy3.collision(*ammo[i]);
+				enemy4.collision(*ammo[i]);
+				enemy5.collision(*ammo[i]);
+				enemy6.collision(*ammo[i]);
+			}
 			
 		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 
