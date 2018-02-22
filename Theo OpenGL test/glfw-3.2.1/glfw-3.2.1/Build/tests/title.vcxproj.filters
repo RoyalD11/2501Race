@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Theo\Documents\GitHub\2501Race\Theo OpenGL test\glfw-3.2.1\glfw-3.2.1\tests\title.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Theo\Documents\GitHub\2501Race\Theo OpenGL test\glfw-3.2.1\glfw-3.2.1\deps\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Theo\Documents\GitHub\2501Race\Theo OpenGL test\glfw-3.2.1\glfw-3.2.1\deps\glad\glad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Theo\Documents\GitHub\2501Race\Theo OpenGL test\glfw-3.2.1\glfw-3.2.1\tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8E5C3A16-43A5-391F-822A-8BCAB9A45C1A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FB37BC53-F36A-3D99-B8CF-0673E4FFBBFC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
