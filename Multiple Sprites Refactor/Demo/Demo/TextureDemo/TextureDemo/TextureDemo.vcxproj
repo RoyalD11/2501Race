@@ -76,6 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
