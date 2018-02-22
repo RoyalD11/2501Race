@@ -1,7 +1,7 @@
+#define GLEW_STATIC
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#define GLEW_STATIC
 #include <GL/glew.h> // window management library
 #include <GL/glfw3.h>
 #include <glm/glm.hpp>
@@ -9,10 +9,8 @@
 #include <SOIL/SOIL.h> // read image file
 #include <chrono>
 #include <thread>
-
 //Extra libraries I added
 #include <stdio.h>
-
 #include "Shader.h"
 #include "Window.h"
 #include "Player.h"
@@ -26,7 +24,7 @@ using namespace std;
 	std::cerr << exception_object.what() << std::endl
 
 // Globals that define the OpenGL window and viewport
-const std::string window_title_g = "Multiple Sprites Demo";
+const std::string window_title_g = "ZoomZoomGame";
 const unsigned int window_width_g = 800;
 const unsigned int window_height_g = 600;
 const glm::vec3 viewport_background_color_g(0.0, 0.0, 0.2);
