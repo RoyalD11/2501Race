@@ -170,6 +170,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Libraries\include\GL\glew.h" />
+    <ClInclude Include="..\..\Libraries\include\GL\glfw3.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameEntity.h" />
