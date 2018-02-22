@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(SolutionPath)/../../Libraries/lib;C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\lib</LibraryPath>
+    <LibraryPath>$(SolutionPath)/../../Libraries/lib;C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\lib;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\include;</LibraryPath>
     <IncludePath>$(SolutionPath)/../../Libraries/Include;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\include;C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
