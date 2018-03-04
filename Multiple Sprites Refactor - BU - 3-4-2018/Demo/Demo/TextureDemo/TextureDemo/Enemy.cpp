@@ -21,7 +21,7 @@ void Enemy::update(double deltaTime) {
 		calc = -0.4;
 		if (position.x <= -1) check = true;
 	}
-	rotationAmount++;
+	//rotationAmount++;
 }
 
 //Changes the sprite currently being displayed

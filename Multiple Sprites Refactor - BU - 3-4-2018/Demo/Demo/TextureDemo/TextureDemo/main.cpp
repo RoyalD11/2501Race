@@ -176,6 +176,26 @@ int main(void){
 		//push back objects
 		updateables.push_back(player);
 
+		updateables.push_back(enemy);
+		updateables.push_back(enemy2);
+		updateables.push_back(enemy3);
+		updateables.push_back(enemy4);
+		updateables.push_back(enemy5);
+		updateables.push_back(enemy6);
+
+		updateables.push_back(police);
+		
+		updateables.push_back(bullet);
+		updateables.push_back(bullet2);
+		updateables.push_back(bullet3);
+		updateables.push_back(bullet4);
+		updateables.push_back(bullet5);
+		updateables.push_back(bullet6);
+		updateables.push_back(bullet7);
+		updateables.push_back(bullet8);
+		updateables.push_back(bullet9);
+		updateables.push_back(bullet10);
+
 
         // Run the main loop
         bool animating = 1;
@@ -200,15 +220,11 @@ int main(void){
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
-			player->update(deltaTime);
-			enemy->update(deltaTime);
 
-			//Added enemies update methods
-			enemy2->update(deltaTime);
-			enemy3->update(deltaTime);
-			enemy4->update(deltaTime);
-			enemy5->update(deltaTime);
-			enemy6->update(deltaTime);
+
+			for (int i = 0; i < updateables.size(); i++) {
+				updateables[i]->update(deltaTime);
+			}
 
 			//police.update(deltaTime);
 
@@ -219,14 +235,15 @@ int main(void){
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
 				player->setVelocity(0.001);
+
 				
 				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS && player->getVelocity() > 0.3) {
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_A) == GLFW_PRESS && player->getVelocity() > 0.3) {
 					player->setRotation(0.25);
 				}
 
 				//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS && player->getVelocity() > 0.3) {
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_D) == GLFW_PRESS && player->getVelocity() > 0.3) {
 					player->setRotation(-0.25);
 				}
 			}
@@ -254,6 +271,7 @@ int main(void){
 			//Brake mechanic for the car, if S is pressed slows down quickly
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
 				player->setVelocity(-0.005);
+
 			}
 
 			
@@ -271,7 +289,9 @@ int main(void){
 					shot++;
 					reload = 500;
 				}
+				
 			}
+			
 
 			
 			//Out of bounds check to make sure we only loop through the elements we want to use
@@ -309,7 +329,7 @@ int main(void){
 
 			//Added bullets render methods and where i check for collision detection
 			for (int i = 0; i < shot; i++) {
-				ammo[i]->render(shader);
+				ammo[i]->render(shader); 
 				enemy->collision(*ammo[i]);
 				enemy2->collision(*ammo[i]);
 				enemy3->collision(*ammo[i]);

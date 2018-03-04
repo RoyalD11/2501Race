@@ -13,6 +13,7 @@ Bullet::Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 //Updates the position of the bullet, also rotates the bullet as it moves through the air
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Bullet::update(double deltaTime) {
+
 	position.x += velocity.x * (float)deltaTime * cos(bulletRotate * 0.01745333);
 	position.y += velocity.y * (float)deltaTime * sin(bulletRotate * 0.01745333);
 	rotationAmount++;
@@ -35,3 +36,4 @@ void Bullet::setPosition(float change) {
 	bulletRotate = change;
 
 }
+

@@ -10,6 +10,7 @@ public:
 	Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &bulletVelocity);
 
 	virtual void update(double deltaTime) override;
+	//virtual void camera(glm::vec3 &entityPos) override;
 
 	//Prototype of the fire function added
 	void fire(glm::vec3 playerPos, float playerRotation);
