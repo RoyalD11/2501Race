@@ -11,13 +11,14 @@ uniform sampler2D onetex;
 
 void main()
 {
-	vec4 color = texture2D(onetex, uv_interp);
-	FragColor = vec4(color.r,color.g,color.b,color.a);
-    if(FragColor.a < 0.9)
+	vec4 color = texture2D(onetex, uv_interp) ;
+	gl_FragColor = vec4(color.r,color.g,color.b,color.a);
+    if(gl_FragColor.a < 0.9)
 	{
-		//discard;
-		gl_FragDepth = 10000;
-//		FragColor = vec4(color.r,color.g,color.b,0.5);
-	}
-//	 FragColor = color_interp;
-}
+		discard; 
+	//	gl_FragDepth = 10000;
+//		gl_FragColor = vec4(color.r,color.g,color.b,0.5);
+	} 
+//	 gl_FragColor = color_interp;
+
+};
