@@ -5,7 +5,7 @@
 
 class Sound {
 public:
-	void playersound();
+	void playersound(float x);
 
 private:
 
