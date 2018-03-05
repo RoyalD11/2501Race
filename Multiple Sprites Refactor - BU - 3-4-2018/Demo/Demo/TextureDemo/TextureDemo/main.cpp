@@ -274,7 +274,7 @@ int main(void){
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
 				player->setVelocity(0.001);
-				playersound.playersound();
+				
 
 				
 				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
@@ -314,7 +314,9 @@ int main(void){
 
 			}
 
-			
+			//if pasyer is moving play engine sound
+			playersound.playersound(player->getVelocity());
+
 			//Timer to keep track of when next shot can be fired
 			if (reload > 0) {
 				reload--;
