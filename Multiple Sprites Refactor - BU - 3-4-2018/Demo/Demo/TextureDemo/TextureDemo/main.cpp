@@ -230,13 +230,13 @@ int main(void){
 			lastTime = currentTime;
 
 
-			//Camera
+			/*//Camera
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 			gluOrtho2D(temp.x - 600 / 2.0, temp.x + 600 / 2.0, temp.y - 600 / 2.0, temp.y + 600 / 2.0);
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
-
+			*/
 
 			temp = player->getPosition();
 
