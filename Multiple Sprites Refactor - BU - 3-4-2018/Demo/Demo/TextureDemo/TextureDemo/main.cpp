@@ -98,12 +98,12 @@ void setallTexture(void)
 {
 	//Holds all textures/sprites used
 	glGenTextures(6, tex);
-	setthisTexture(tex[0], "Black_viper.png");
-	setthisTexture(tex[1], "orb.png");
-	setthisTexture(tex[2], "saw.png");
-	setthisTexture(tex[3], "police2.png");
-	setthisTexture(tex[4], "police3.png");
-	setthisTexture(tex[5], "police1.png");
+	setthisTexture(tex[0], "Sprites/Black_viper.png");
+	setthisTexture(tex[1], "Sprites/orb.png");
+	setthisTexture(tex[2], "Sprites/saw.png");
+	setthisTexture(tex[3], "Sprites/police2.png");
+	setthisTexture(tex[4], "Sprites/police3.png");
+	setthisTexture(tex[5], "Sprites/police1.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
@@ -219,6 +219,7 @@ int main(void){
 		
         while (!glfwWindowShouldClose(window.getWindow())){
             // Clear background
+			temp = player->getPosition();
 			window.clear(viewport_background_color_g);
 
             // Select proper shader program to use
@@ -229,14 +230,13 @@ int main(void){
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
 
-
+			
 			//Camera
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
-			gluOrtho2D(temp.x - 600 / 2.0, temp.x + 600 / 2.0, temp.y - 600 / 2.0, temp.y + 600 / 2.0);
+			glOrtho(temp.x, 640, 480, temp.y, 1, -1);
 			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
-
+			
 
 			temp = player->getPosition();
 
