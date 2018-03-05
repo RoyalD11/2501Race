@@ -35,5 +35,10 @@ void Enemy::collision(Bullet bullet) {
 	if (pow(colDetect, 0.5) <= scale.x) {
 		bullet.setPosition(10000.0); 
 		position.y = 10000;
+		hit = true;
 	}
+}
+
+bool Enemy::getIfHit() {
+	return hit;
 }

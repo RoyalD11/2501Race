@@ -16,8 +16,11 @@ public:
 	//method added to the enemy class
 	void collision(Bullet bullet);
 
+	bool getIfHit();
+
 private:
 	Player *player;
 	bool check;
 	float calc;
+	bool hit;
 };

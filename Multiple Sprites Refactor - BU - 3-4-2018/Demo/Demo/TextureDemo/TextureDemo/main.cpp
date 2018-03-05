@@ -140,11 +140,13 @@ int main(void){
 		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 
 		//Added Enemies
+		/*
 		Enemy* enemy2=new Enemy(glm::vec3(0.1f, -0.9f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 		Enemy* enemy3 = new Enemy(glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 		Enemy* enemy4 = new Enemy(glm::vec3(-0.7f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 		Enemy* enemy5 = new Enemy(glm::vec3(-0.3f, -0.6f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 		Enemy* enemy6 = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
+		*/
 
 		Enemy* police = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 
@@ -177,15 +179,15 @@ int main(void){
 		//push back objects
 		updateables.push_back(player);
 
+		/*
 		updateables.push_back(enemy);
 		updateables.push_back(enemy2);
 		updateables.push_back(enemy3);
 		updateables.push_back(enemy4);
 		updateables.push_back(enemy5);
 		updateables.push_back(enemy6);
+		*/
 
-		updateables.push_back(police);
-		
 		updateables.push_back(bullet);
 		updateables.push_back(bullet2);
 		updateables.push_back(bullet3);
@@ -196,6 +198,8 @@ int main(void){
 		updateables.push_back(bullet8);
 		updateables.push_back(bullet9);
 		updateables.push_back(bullet10);
+
+		updateables.push_back(police);
 
 
         // Run the main loop
@@ -226,10 +230,13 @@ int main(void){
 			temp = player->getPosition();
 
 			for (int i = 0; i < updateables.size(); i++) {
+				/*
+				calls render and update functions
+				*/
 				updateables[i]->update(deltaTime);
+				updateables[i]->render(shader);
 			}
 
-			//police.update(deltaTime);
 
 			//Added Bullets update methods
 			for (int i = 0; i<AMMO_CAP; i++) ammo[i]->update(deltaTime);
@@ -315,30 +322,24 @@ int main(void){
 				anicounter++;
 				wait = 150;
 			}
-
-			// Render entities
-			player->render(shader);
-			enemy->render(shader);
-			police->render(shader);
-
-
-
-			//Added enemies render methods
-			enemy2->render(shader);
-			enemy3->render(shader);
-			enemy4->render(shader);
-			enemy5->render(shader);
-			enemy6->render(shader);
+			
 
 			//Added bullets render methods and where i check for collision detection
 			for (int i = 0; i < shot; i++) {
 				ammo[i]->render(shader); 
+				police->collision(*ammo[i]);
+				if (police->getIfHit()) {
+					//updateables.pop_back();
+				}
+
+				/*
 				enemy->collision(*ammo[i]);
 				enemy2->collision(*ammo[i]);
 				enemy3->collision(*ammo[i]);
 				enemy4->collision(*ammo[i]);
 				enemy5->collision(*ammo[i]);
 				enemy6->collision(*ammo[i]);
+				*/
 			}
 			
 			
