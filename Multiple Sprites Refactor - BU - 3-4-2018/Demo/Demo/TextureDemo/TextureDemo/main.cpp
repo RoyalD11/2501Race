@@ -19,6 +19,7 @@
 #include "Bullet.h"
 #include "Camera.h"
 #include "Sound.h"
+#include "Background.h"
 #include <vector>
 
 using namespace std;
@@ -52,7 +53,7 @@ GLfloat lastFrame = 0.0f;
 const int AMMO_CAP = 10;
 
 // Global texture info
-GLuint tex[6];
+GLuint tex[7];
 
 // Create the geometry for a square (with two triangles)
 // Return the number of array elements that form the square
@@ -113,13 +114,14 @@ void setthisTexture(GLuint w, char *fname)
 void setallTexture(void)
 {
 	//Holds all textures/sprites used
-	glGenTextures(6, tex);
+	glGenTextures(7, tex);
 	setthisTexture(tex[0], "Sprites/Black_viper.png");
 	setthisTexture(tex[1], "Sprites/orb.png");
 	setthisTexture(tex[2], "Sprites/saw.png");
 	setthisTexture(tex[3], "Sprites/police2.png");
 	setthisTexture(tex[4], "Sprites/police3.png");
 	setthisTexture(tex[5], "Sprites/police1.png");
+	setthisTexture(tex[6], "Sprites/Background.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
@@ -151,6 +153,7 @@ int main(void){
 		std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
 
 		// Setup game objects
+		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		Player* player=new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 
@@ -198,6 +201,7 @@ int main(void){
 		ammo[9] = bullet10;
 
 		//push back objects
+		//updateables.push_back(bg);
 		updateables.push_back(player);
 
 		/*
