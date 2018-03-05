@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionPath)/../../Libraries/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionPath)/../../Libraries/inlcude;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -102,7 +102,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionPath)/../../Libraries/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;SOIL.lib;glew32s.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
