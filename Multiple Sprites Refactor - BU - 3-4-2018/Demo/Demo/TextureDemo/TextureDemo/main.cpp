@@ -23,11 +23,6 @@
 
 using namespace std;
 
-// Function prototypes
-void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
-void ScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
-void MouseCallback(GLFWwindow *window, double xPos, double yPos);
-void DoMovement();
 
 // Macro for printing exceptions
 #define PrintException(exception_object)\
@@ -279,7 +274,7 @@ int main(void){
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
 				player->setVelocity(0.001);
-				playersound.playersound();
+				//playersound.playersound();
 
 				
 				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
@@ -380,10 +375,14 @@ int main(void){
 			
 		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 			
+			//shader.setUniformMat4();
 
 
             // Update other events like input handling
             glfwPollEvents();
+			
+			//camera
+			
 
             // Push buffer drawn in the background onto the display
             glfwSwapBuffers(window.getWindow());
@@ -398,76 +397,3 @@ int main(void){
     return 0;
 }
 
-
-// Moves/alters the camera positions based on user input
-void DoMovement()
-{
-	// Camera controls
-	if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
-	{
-		camera.ProcessKeyboard(FORWARD, deltaTime);
-	}
-
-	if (keys[GLFW_KEY_S] || keys[GLFW_KEY_DOWN])
-	{
-		camera.ProcessKeyboard(BACKWARD, deltaTime);
-	}
-
-	if (keys[GLFW_KEY_A] || keys[GLFW_KEY_LEFT])
-	{
-		camera.ProcessKeyboard(LEFT, deltaTime);
-	}
-
-	if (keys[GLFW_KEY_D] || keys[GLFW_KEY_RIGHT])
-	{
-		camera.ProcessKeyboard(RIGHT, deltaTime);
-	}
-}
-
-// Is called whenever a key is pressed/released via GLFW
-void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	}
-
-	if (key >= 0 && key < 1024)
-	{
-		if (action == GLFW_PRESS)
-		{
-			keys[key] = true;
-		}
-		else if (action == GLFW_RELEASE)
-		{
-			keys[key] = false;
-		}
-	}
-}
-
-void MouseCallback(GLFWwindow *window, double xPos, double yPos)
-{
-	if (firstMouse)
-	{
-		lastX = xPos;
-		lastY = yPos;
-		firstMouse = false;
-	}
-
-	GLfloat xOffset = xPos - lastX;
-	GLfloat yOffset = lastY - yPos;  // Reversed since y-coordinates go from bottom to left
-
-	lastX = xPos;
-	lastY = yPos;
-
-	camera.ProcessMouseMovement(xOffset, yOffset);
-}
-
-
-void ScrollCallback(GLFWwindow *window, double xOffset, double yOffset)
-{
-	camera.ProcessMouseScroll(yOffset);
-}
-
-
- 
