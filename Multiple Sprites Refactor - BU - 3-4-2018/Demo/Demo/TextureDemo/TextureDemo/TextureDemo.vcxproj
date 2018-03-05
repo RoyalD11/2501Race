@@ -71,19 +71,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(SolutionPath)/../../Libraries/lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionPath)/../../Libraries/include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\include;F:\Github\2501Race\Multiple Sprites Refactor - BU - 2-22-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor\Demo\Demo\Libraries\lib;F:\Github\2501Race\Multiple Sprites Refactor - BU - 2-22-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
