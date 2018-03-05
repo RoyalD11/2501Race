@@ -147,6 +147,9 @@ int main(void){
 		Enemy* enemy6 = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 		*/
 
+		
+		
+
 		Enemy* police = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 
 		//Bullet constructor
@@ -225,6 +228,15 @@ int main(void){
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
+
+
+			//Camera
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			gluOrtho2D(temp.x - 600 / 2.0, temp.x + 600 / 2.0, temp.y - 600 / 2.0, temp.y + 600 / 2.0);
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+
 
 			temp = player->getPosition();
 
