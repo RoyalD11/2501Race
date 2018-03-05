@@ -18,6 +18,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Camera.h"
+#include "Sound.h"
 #include <vector>
 
 using namespace std;
@@ -139,6 +140,9 @@ int main(void){
 		Player* player=new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 
+		//Setup sound object
+		Sound playersound;
+
 		//Added Enemies
 		/*
 		Enemy* enemy2=new Enemy(glm::vec3(0.1f, -0.9f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
@@ -256,6 +260,7 @@ int main(void){
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
 				player->setVelocity(0.001);
+				playersound.playersound();
 
 				
 				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
