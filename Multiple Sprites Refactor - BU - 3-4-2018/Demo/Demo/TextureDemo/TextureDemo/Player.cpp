@@ -17,6 +17,7 @@ void Player::update(double deltaTime) {
 	position.y += sin(rotationAmount * 0.01745333) * (float)deltaTime * velocity;
 
 	//These four if statements make it so the ship will loop around the screen, so if you leave from the top you come back from the bottom etc
+	/*
 	if (position.x > 1) {
 		position.x = -0.98;
 	}
@@ -32,6 +33,7 @@ void Player::update(double deltaTime) {
 	if (position.y < -1) {
 		position.y = 0.98;
 	}
+	*/
 }
 
 //Sets the ships velocity, and make sure the max speed is maintained and that it can slow to a stop if wanted
