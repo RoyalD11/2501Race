@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Camera.h"
 #include <vector>
 
 using namespace std;
