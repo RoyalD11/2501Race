@@ -236,7 +236,6 @@ int main(void){
 			glLoadIdentity();
 			glOrtho(temp.x, 640, 480, temp.y, 1, -1);
 			glMatrixMode(GL_MODELVIEW);
-			
 
 			temp = player->getPosition();
 
