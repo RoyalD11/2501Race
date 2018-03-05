@@ -4,7 +4,6 @@
 #include <string>
 #include <GL/glew.h> // window management library
 #include <GL/glfw3.h>
-#include <GL/glut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> //
 #include <SOIL/SOIL.h> // read image file
@@ -345,8 +344,7 @@ int main(void){
 			
 		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 			
-			gluLookAt(temp.x, temp.y, temp.z, temp.x, temp.y, (temp.z+5), 1, 1, 1);
-			//gluLookAt(3,3,3,3,3,3,3,3,3);
+
 
             // Update other events like input handling
             glfwPollEvents();
