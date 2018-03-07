@@ -1,31 +1,27 @@
 #include "Background.h"
 
-Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements)
+//Extra library so I can hold all the bullets
+#include <list>
+
+Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &bulletVelocity)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), velocity(bulletVelocity)
 {
-	position.x = 0;
-	position.y = 0;
+	bulletRotate = rotationAmount;
+
 }
 
-//Updates the position of the spaceship based on how the ship has rotated and its current velocity
+//Updates the position of the bullet, also rotates the bullet as it moves through the air
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Background::update(double deltaTime) {
 
 }
 
-//Sets the ships velocity, and make sure the max speed is maintained and that it can slow to a stop if wanted
-void Background::setVelocity(float z) {
 
-}
+void Background::setPosition(float change) {
+	position.y = change;
+	position.x = change;
+	velocity.x = change;
+	velocity.y = change;
+	bulletRotate = change;
 
-float Background::getVelocity() {
-	return velocity;
-}
-
-//Sets the ships rotation based on the direction you inputed from main
-void Background::setRotation(float increment) {
-}
-
-float Background::getRotation() {
-	return rotationAmount;
 }

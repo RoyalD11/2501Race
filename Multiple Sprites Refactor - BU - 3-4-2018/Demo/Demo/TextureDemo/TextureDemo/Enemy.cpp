@@ -11,7 +11,7 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
 void Enemy::update(double deltaTime) {
-	
+	/*
 	position.x += calc*(float)deltaTime;
 	if (check) {
 		calc = 0.4;
@@ -21,7 +21,8 @@ void Enemy::update(double deltaTime) {
 		calc = -0.4;
 		if (position.x <= -1) check = true;
 	}
-	rotationAmount++;
+	*/
+	//rotationAmount++;
 }
 
 //Changes the sprite currently being displayed

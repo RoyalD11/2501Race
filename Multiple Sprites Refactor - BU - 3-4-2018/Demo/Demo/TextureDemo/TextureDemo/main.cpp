@@ -9,6 +9,7 @@
 #include <SOIL/SOIL.h> // read image file
 #include <chrono>
 #include <thread>
+#include <cmath>
 
 //Extra libraries I added
 #include <stdio.h>
@@ -20,6 +21,8 @@
 #include "Camera.h"
 #include "Sound.h"
 #include "Background.h"
+#include "Model.h"
+#include "Controller.h"
 #include <vector>
 
 using namespace std;
@@ -149,28 +152,17 @@ int main(void){
 
 		setallTexture();
 
+		Model* model = new Model();
+		//Controller* controller = new Controller(model);
+
 		//Made arraylist updateables.
-		std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
+		//std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
+		
 
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		Player* player=new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-
-		//Setup sound object
-		Sound playersound;
-
-		//Added Enemies
-		/*
-		Enemy* enemy2=new Enemy(glm::vec3(0.1f, -0.9f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-		Enemy* enemy3 = new Enemy(glm::vec3(0.5f, -0.4f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-		Enemy* enemy4 = new Enemy(glm::vec3(-0.7f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-		Enemy* enemy5 = new Enemy(glm::vec3(-0.3f, -0.6f, -0.1f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-		Enemy* enemy6 = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-		*/
-
-		
-		
+		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);		
 
 		Enemy* police = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 
@@ -187,6 +179,9 @@ int main(void){
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
+		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5, 5, 5), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
+
+
 		//Array that holds all the bullets
 		Bullet* ammo[AMMO_CAP];
 		ammo[0] = bullet;
@@ -201,31 +196,26 @@ int main(void){
 		ammo[9] = bullet10;
 
 		//push back objects
-		//updateables.push_back(bg);
-		updateables.push_back(player);
+		model->updateables.push_back(player);
 
-		/*
-		updateables.push_back(enemy);
-		updateables.push_back(enemy2);
-		updateables.push_back(enemy3);
-		updateables.push_back(enemy4);
-		updateables.push_back(enemy5);
-		updateables.push_back(enemy6);
-		*/
+		model->updateables.push_back(bullet);
+		model->updateables.push_back(bullet2);
+		model->updateables.push_back(bullet3);
+		model->updateables.push_back(bullet4);
+		model->updateables.push_back(bullet5);
+		model->updateables.push_back(bullet6);
+		model->updateables.push_back(bullet7);
+		model->updateables.push_back(bullet8);
+		model->updateables.push_back(bullet9);
+		model->updateables.push_back(bullet10);
 
-		updateables.push_back(bullet);
-		updateables.push_back(bullet2);
-		updateables.push_back(bullet3);
-		updateables.push_back(bullet4);
-		updateables.push_back(bullet5);
-		updateables.push_back(bullet6);
-		updateables.push_back(bullet7);
-		updateables.push_back(bullet8);
-		updateables.push_back(bullet9);
-		updateables.push_back(bullet10);
+		model->updateables.push_back(police);
 
-		updateables.push_back(police);
+		model->updateables.push_back(test);
 
+
+		//Setup sound object
+		Sound playersound;
 
         // Run the main loop
         bool animating = 1;
@@ -238,7 +228,6 @@ int main(void){
 		int wait = 250;
 
 		
-		glm::vec3 temp = player->getPosition();
 		glm::mat4 applyWorld = glm::mat4(
 			1.0, 0.0, 0.0, 0.0,
 			0.0, 1.0, 0.0, 0.0,
@@ -247,10 +236,12 @@ int main(void){
 		);
 
 		applyWorld *= glm::vec4(player->getPosition(), 1);
-		
+		Controller* controller = new Controller(model);
+
+		controller->model->player = player;
+
         while (!glfwWindowShouldClose(window.getWindow())){
             // Clear background
-			temp = player->getPosition();
 			window.clear(viewport_background_color_g);
 
             // Select proper shader program to use
@@ -262,43 +253,39 @@ int main(void){
 			lastTime = currentTime;
 
 			
-			//Camera
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(temp.x, 640, 480, temp.y, 1, -1);
-			glMatrixMode(GL_MODELVIEW);
-
-			temp = player->getPosition();
-
 			
 
-			for (int i = 0; i < updateables.size(); i++) {
+			for (int i = 0; i < model->updateables.size(); i++) {
 				/*
 				calls render and update functions
 				*/
-				updateables[i]->update(deltaTime);
-				updateables[i]->render(shader);
+				model->updateables[i]->update(deltaTime);
+				model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
 			}
 
 
 			//Added Bullets update methods
-			for (int i = 0; i<AMMO_CAP; i++) ammo[i]->update(deltaTime);
+			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
 
+			controller->input(window.getWindow());
+			
 
+			/*
 			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-				player->setVelocity(0.001);
-				
+				player->setVelocity(1,0);
+			}
+			
+			
 
-				
-				//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
+							//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
 				if (glfwGetKey(window.getWindow(), GLFW_KEY_A) == GLFW_PRESS && player->getVelocity() > 0.3) {
-					player->setRotation(0.25);
+					player->setRotation(-0.25);
 				}
 
 				//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
 				if (glfwGetKey(window.getWindow(), GLFW_KEY_D) == GLFW_PRESS && player->getVelocity() > 0.3) {
-					player->setRotation(-0.25);
+					player->setRotation(0.25);
 				}
 			}
 
@@ -348,7 +335,7 @@ int main(void){
 				
 			}
 			
-
+			*/
 			
 			//Out of bounds check to make sure we only loop through the elements we want to use
 			if (anicounter == 6) {
@@ -372,37 +359,24 @@ int main(void){
 
 			//Added bullets render methods and where i check for collision detection
 			for (int i = 0; i < shot; i++) {
-				ammo[i]->render(shader); 
+				ammo[i]->render(shader, player->getPosition(), player->getRotation()); 
 				police->collision(*ammo[i]);
-				if (police->getIfHit()) {
-					//updateables.pop_back();
-				}
-
-				/*
-				enemy->collision(*ammo[i]);
-				enemy2->collision(*ammo[i]);
-				enemy3->collision(*ammo[i]);
-				enemy4->collision(*ammo[i]);
-				enemy5->collision(*ammo[i]);
-				enemy6->collision(*ammo[i]);
-				*/
 			}
 			
 			
-		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
+		    //	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 			
 			//shader.setUniformMat4();
-			glPushMatrix();
+			//glPushMatrix();
+			shader.setUniformMat4("shader.vert",applyWorld);
 			applyWorld = glm::rotate(applyWorld, player->getRotation(), glm::vec3(0, 0, 1));
 			applyWorld = glm::translate(applyWorld, player->getPosition());
-			glPopMatrix();
+			//glPopMatrix();
 			
-			shader.setUniformMat4("shader.frag", applyWorld);
+			shader.setUniformMat4("shader.vert", applyWorld);
 
             // Update other events like input handling
             glfwPollEvents();
-			
-			//camera
 			
 
             // Push buffer drawn in the background onto the display

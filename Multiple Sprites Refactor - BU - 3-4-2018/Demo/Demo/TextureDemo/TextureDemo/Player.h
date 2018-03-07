@@ -10,12 +10,14 @@ public:
 
 	void Player::setRotation(float increment);
 
-	void Player::setVelocity(float z);
+	void Player::moveTo(float x, float y);
+
+	void Player::moveTo(glm::vec3 inputVelocity);
 
 	float Player::getRotation();
 
-	float Player::getVelocity();
+	glm::vec3 Player::getVelocity();
 
 private:
-	float velocity;
+
 };
