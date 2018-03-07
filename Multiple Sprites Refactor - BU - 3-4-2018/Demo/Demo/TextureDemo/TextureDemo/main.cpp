@@ -239,6 +239,14 @@ int main(void){
 
 		
 		glm::vec3 temp = player->getPosition();
+		glm::mat4 applyWorld = glm::mat4(
+			1.0, 0.0, 0.0, 0.0,
+			0.0, 1.0, 0.0, 0.0,
+			0.0, 0.0, 1.0, 0.0,
+			0.0, 0.0, 0.0, 1.0
+		);
+
+		applyWorld *= glm::vec4(player->getPosition(), 1);
 		
         while (!glfwWindowShouldClose(window.getWindow())){
             // Clear background
@@ -261,6 +269,8 @@ int main(void){
 			glMatrixMode(GL_MODELVIEW);
 
 			temp = player->getPosition();
+
+			
 
 			for (int i = 0; i < updateables.size(); i++) {
 				/*
@@ -319,7 +329,7 @@ int main(void){
 			}
 
 			//if pasyer is moving play engine sound
-			playersound.playersound(player->getVelocity());
+			//playersound.playersound(player->getVelocity());
 
 			//Timer to keep track of when next shot can be fired
 			if (reload > 0) {
@@ -382,7 +392,12 @@ int main(void){
 		//	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
 			
 			//shader.setUniformMat4();
-
+			glPushMatrix();
+			applyWorld = glm::rotate(applyWorld, player->getRotation(), glm::vec3(0, 0, 1));
+			applyWorld = glm::translate(applyWorld, player->getPosition());
+			glPopMatrix();
+			
+			shader.setUniformMat4("shader.frag", applyWorld);
 
             // Update other events like input handling
             glfwPollEvents();
