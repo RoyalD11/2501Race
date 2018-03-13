@@ -179,7 +179,7 @@ int main(void){
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
-		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5, 5, 5), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
 		//Array that holds all the bullets
