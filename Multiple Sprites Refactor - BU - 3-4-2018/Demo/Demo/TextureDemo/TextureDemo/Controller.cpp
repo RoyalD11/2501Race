@@ -6,7 +6,15 @@ Controller::Controller(Model* m) {
 }
 
 void Controller::input(GLFWwindow* window) {
+	
+	//Checks player specific movement within function
+	playerMovement(window);
+	
+}
 
+
+
+void Controller::playerMovement(GLFWwindow* window) {
 	//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		//redo ALL controls here

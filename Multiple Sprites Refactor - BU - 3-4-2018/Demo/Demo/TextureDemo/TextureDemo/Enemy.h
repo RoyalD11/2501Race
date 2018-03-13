@@ -15,7 +15,7 @@ public:
 
 	//method added to the enemy class
 	void collision(Bullet bullet);
-
+	void rotateTo(float x, float y);
 	bool getIfHit();
 
 private:

@@ -7,22 +7,51 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	//variables added to help with implementation of methods below
 	bool check = true;
 	float calc = rotationAmount;
+	//Sets the initial position and velocity
+	position = glm::vec3(0, 0, 0);
+	targetPosition = glm::vec3(0, 0, 0);
+	velocity = glm::vec3(0, 0, 0);
+
+	maxSpeed = glm::vec3(1, 1, 0);
+
+	acceleration = glm::vec3(1, 1, 0);
+	max_accel = glm::vec3(2, 2, 0);
+
+	dVelocity = glm::vec3(0, 0, 0);
+	iVelocity = glm::vec3(0, 0, 0);
+	rotationAmount = -90;
 }
 
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
 void Enemy::update(double deltaTime) {
-	/*
-	position.x += calc*(float)deltaTime;
-	if (check) {
-		calc = 0.4;
-		if (position.x > 1) check = false;
+
+	targetPosition = player->getPosition();
+	rotateTo(player->getPosition().x, player->getPosition().y);
+
+	//dVelocity = (targetPosition - position);
+	dVelocity.x = (targetPosition.x - position.x) / deltaTime;
+	dVelocity.y = (targetPosition.y - position.y) / deltaTime;
+	targetPosition = position;
+	acceleration = (max_accel * (dVelocity - velocity));// / (glm::abs(dVelocity - velocity));
+
+	velocity.x += (acceleration.x * deltaTime);
+	velocity.y += (acceleration.y * deltaTime);
+
+
+	if (velocity.x > maxSpeed.x || velocity.x < (-1 * maxSpeed.x)) {
+		velocity.x = (maxSpeed.x*velocity.x) / (glm::abs(velocity.x));
 	}
-	else {
-		calc = -0.4;
-		if (position.x <= -1) check = true;
+	if (velocity.y > maxSpeed.y || velocity.y < (-1 * maxSpeed.y)) {
+		velocity.y = (maxSpeed.y*velocity.y) / (glm::abs(velocity.y));
 	}
-	*/
-	//rotationAmount++;
+
+	
+
+	position.x += velocity.x * deltaTime;
+	position.y += velocity.y * deltaTime;
+
+	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 }
 
 //Changes the sprite currently being displayed
@@ -42,4 +71,10 @@ void Enemy::collision(Bullet bullet) {
 
 bool Enemy::getIfHit() {
 	return hit;
+}
+
+void Enemy::rotateTo(float x, float y) {
+
+	rotationAmount = atan2(y, x) * (180 / 3.14);
+	rotationAmount *= -1;
 }

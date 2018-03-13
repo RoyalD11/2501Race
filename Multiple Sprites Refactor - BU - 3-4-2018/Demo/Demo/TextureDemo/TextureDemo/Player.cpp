@@ -70,15 +70,15 @@ void Player::setRotation(float increment) {
 }
 
 void Player::rotateToMouse(float xpos, float ypos) {
-	std::cout << xpos << "\n";
-	std::cout << ypos << "\n";
+	//std::cout << xpos << "\n";
+	//std::cout << ypos << "\n";
 	float newx = xpos - 400;
 	float newy = ypos - 300;
 
 	rotationAmount = atan2(newy, newx) * (180 / 3.14);
 	rotationAmount *= -1;
 
-	std::cout << "\n\n" << rotationAmount << "\n\n";
+	//std::cout << "\n\n" << rotationAmount << "\n\n";
 }
 
 float Player::getRotation() {

@@ -179,7 +179,7 @@ int main(void){
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
-		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(5, 5, 5), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
 		//Array that holds all the bullets
@@ -212,6 +212,7 @@ int main(void){
 		model->updateables.push_back(police);
 
 		model->updateables.push_back(test);
+		model->enemies.push_back(police);
 
 
 		//Setup sound object
@@ -259,7 +260,7 @@ int main(void){
 				model->updateables[i]->update(deltaTime);
 				model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
 			}
-			
+
 
 			//Added Bullets update methods
 			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
