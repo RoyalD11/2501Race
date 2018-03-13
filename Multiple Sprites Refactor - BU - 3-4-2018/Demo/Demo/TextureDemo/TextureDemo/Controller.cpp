@@ -18,25 +18,18 @@ void Controller::input(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 		//redo ALL controls here
 		//model->player->moveTo(0, 1);
-		model->player->moveTo(0, -1.5);
+		model->player->moveTo(0, -0.5);
 		//std::cout << "W Key Pressed \n";
 		//model->player->setVelocity(model->player->getPosition());
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		//redo ALL controls here
-		//model->player->moveTo(0, 1);
-		model->player->moveTo(-1.5, 0);
-		//std::cout << "W Key Pressed \n";
-		//model->player->setVelocity(model->player->getPosition());
-		//model->player->setRotation(0.5);
+		//model->player->moveTo(-1.5, 0);
+		model->player->setRotation(0.5);
+
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		//redo ALL controls here
-		//model->player->moveTo(0, 1);
-		model->player->moveTo(1.5,0);
-		//std::cout << "W Key Pressed \n";
-		//model->player->setVelocity(model->player->getPosition());
-		//model->player->setRotation(-0.5);
+		//model->player->moveTo(1.5,0);
+		model->player->setRotation(-0.5);
 	}
 
 
@@ -45,5 +38,5 @@ void Controller::input(GLFWwindow* window) {
 
 	glfwGetCursorPos(window, xpos, ypos);
 
-	model->player->rotateToMouse(*xpos, *ypos);
+	//model->player->rotateToMouse(*xpos, *ypos);
 }
