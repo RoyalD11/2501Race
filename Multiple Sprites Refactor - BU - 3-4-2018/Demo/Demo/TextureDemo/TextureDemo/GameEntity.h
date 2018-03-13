@@ -35,6 +35,7 @@ protected:
 	glm::vec3 acceleration;
 	glm::vec3 max_accel;
 
+	glm::vec3 iVelocity;
 	glm::vec3 targetPosition;
 	glm::vec3 dVelocity;
 

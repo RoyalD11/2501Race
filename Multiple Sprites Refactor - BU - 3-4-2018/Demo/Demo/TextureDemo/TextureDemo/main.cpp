@@ -235,7 +235,6 @@ int main(void){
 			0.0, 0.0, 0.0, 1.0
 		);
 
-		applyWorld *= glm::vec4(player->getPosition(), 1);
 		Controller* controller = new Controller(model);
 
 		controller->model->player = player;
@@ -262,7 +261,7 @@ int main(void){
 				model->updateables[i]->update(deltaTime);
 				model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
 			}
-
+			
 
 			//Added Bullets update methods
 			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
@@ -363,17 +362,6 @@ int main(void){
 				police->collision(*ammo[i]);
 			}
 			
-			
-		    //	glDrawArrays(GL_TRIANGLES, 0, 6); // if glDrawArrays be used, glDrawElements will be ignored 
-			
-			//shader.setUniformMat4();
-			//glPushMatrix();
-			shader.setUniformMat4("shader.vert",applyWorld);
-			applyWorld = glm::rotate(applyWorld, player->getRotation(), glm::vec3(0, 0, 1));
-			applyWorld = glm::translate(applyWorld, player->getPosition());
-			//glPopMatrix();
-			
-			shader.setUniformMat4("shader.vert", applyWorld);
 
             // Update other events like input handling
             glfwPollEvents();
