@@ -251,8 +251,6 @@ int main(void){
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
 
-			
-			
 
 			for (int i = 0; i < model->updateables.size(); i++) {
 				/*

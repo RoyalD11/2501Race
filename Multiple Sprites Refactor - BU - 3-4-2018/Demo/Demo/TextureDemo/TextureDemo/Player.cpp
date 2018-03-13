@@ -10,10 +10,10 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 	
-	maxSpeed = glm::vec3(7, 7, 0);
+	maxSpeed = glm::vec3(4, 4, 0);
 
-	acceleration = glm::vec3(3, 1, 0);
-	max_accel = glm::vec3(10, 10, 0);
+	acceleration = glm::vec3(0.005, 0.005, 0);
+	max_accel = glm::vec3(0.01, 0.01, 0);
 
 	dVelocity = glm::vec3(0, 0, 0);
 	iVelocity = glm::vec3(0, 0, 0);
@@ -24,28 +24,29 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Player::update(double deltaTime) {
 	
-	dVelocity = targetPosition - position;
-	//dVelocity = (velocity - iVelocity) / (float)deltaTime;
+	//dVelocity = (targetPosition - position);
+	dVelocity.x = (targetPosition.x - position.x) / deltaTime;
+	dVelocity.y = (targetPosition.y - position.y) / deltaTime;
 	targetPosition = position;
-	acceleration = (max_accel * (dVelocity - velocity));// / (glm::abs(dVelocity-velocity));
+	acceleration = (max_accel * (dVelocity - velocity));// / (glm::abs(dVelocity - velocity));
 
 	velocity.x += (acceleration.x * deltaTime);
 	velocity.y += (acceleration.y * deltaTime);
 	
-	/*
+	
 	if (velocity.x > maxSpeed.x || velocity.x < (-1 * maxSpeed.x)) {
 		velocity.x = (maxSpeed.x*velocity.x) / (glm::abs(velocity.x));
 	}
 	if (velocity.y > maxSpeed.y || velocity.y < (-1 * maxSpeed.y)) {
 		velocity.y = (maxSpeed.y*velocity.y) / (glm::abs(velocity.y));
 	}
-	*/
+	
 
-	position.x += velocity.x * deltaTime;
-	position.y += velocity.y * deltaTime;
+	//position.x += velocity.x * deltaTime;
+	//position.y += velocity.y * deltaTime;
 
-	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
-	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+	position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+	position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 }
 
 //Sets the ships velocity, and make sure the max speed is maintained and that it can slow to a stop if wanted
