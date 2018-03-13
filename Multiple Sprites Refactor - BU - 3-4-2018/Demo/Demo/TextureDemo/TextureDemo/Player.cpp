@@ -10,10 +10,10 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 	
-	maxSpeed = glm::vec3(3, 3, 0);
+	maxSpeed = glm::vec3(7, 7, 0);
 
-	acceleration = glm::vec3(0, 0, 0);
-	max_accel = glm::vec3(3, 3, 0);
+	acceleration = glm::vec3(3, 1, 0);
+	max_accel = glm::vec3(10, 10, 0);
 
 	dVelocity = glm::vec3(0, 0, 0);
 	iVelocity = glm::vec3(0, 0, 0);
