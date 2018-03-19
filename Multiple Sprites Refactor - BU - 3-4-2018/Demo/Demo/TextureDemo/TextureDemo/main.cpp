@@ -312,7 +312,7 @@ int main(void){
 				player->setVelocity(-0.005);
 
 			}
-
+			*/
 			//if pasyer is moving play engine sound
 			//playersound.playersound(player->getVelocity());
 
@@ -320,7 +320,7 @@ int main(void){
 			if (reload > 0) {
 				reload--;
 			}
-
+			
 			//Space is used to fire a blade, calls the fire method from the bullet class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
 				
@@ -333,7 +333,7 @@ int main(void){
 				
 			}
 			
-			*/
+			
 			
 			//Out of bounds check to make sure we only loop through the elements we want to use
 			if (anicounter == 6) {
