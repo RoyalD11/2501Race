@@ -65,11 +65,19 @@ glm::vec3 Player::getVelocity() {
 }
 
 float Player::getVelocityY() {
-	return velocity.x;
+	return velocity.y;
 }
 
 float Player::getVelocityX() {
-	return velocity.y;
+	return velocity.x;
+}
+
+void Player::setVelocityY(float change) {
+	velocity.x+=change;
+}
+
+void Player::setVelocityX(float change) {
+	velocity.y+=change;
 }
 
 //Sets the ships rotation based on the direction you inputed from main

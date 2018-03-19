@@ -25,24 +25,34 @@ void Controller::playerMovement(GLFWwindow* window) {
 	}
 
 	//Used to slow down to a stop when button not held
-	else if (model->player->getVelocityX() > 0 || model->player->getVelocityY() > 0)  {
+	else if (model->player->getVelocityX() < 0 && model->player->getVelocityY() < 0) {
+		model->player->moveTo(0, 0.5);
+	}
+	else if (model->player->getVelocityX() > 0 && model->player->getVelocityY() > 0) {
 		model->player->moveTo(0, -0.5);
 	}
-
+	else if (model->player->getVelocityX() > 0 && model->player->getVelocityY() < 0) {
+		model->player->moveTo(0, 0.5);
+	}
+	else if (model->player->getVelocityX() < 0 && model->player->getVelocityY() > 0) {
+		model->player->moveTo(0, -0.5);
+	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 		//redo ALL controls here
 		//model->player->moveTo(0, 1);
-		model->player->moveTo(0, -0.5);
+		model->player->moveTo(0, -1.5);
 		//std::cout << "W Key Pressed \n";
 		//model->player->setVelocity(model->player->getPosition());
 	}
 
-	//Used to slow down to a stop when button not held
-	else if (model->player->getVelocityX() < 0 || model->player->getVelocityY() < 0) {
-		model->player->moveTo(0, 0.5);
-	}
+	
 
+	
+
+	
+
+	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		//model->player->moveTo(-1.5, 0);
 		model->player->setRotation(0.5);
