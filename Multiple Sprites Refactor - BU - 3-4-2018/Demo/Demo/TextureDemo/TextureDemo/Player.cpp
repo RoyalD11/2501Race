@@ -64,6 +64,14 @@ glm::vec3 Player::getVelocity() {
 	return velocity;
 }
 
+float Player::getVelocityY() {
+	return velocity.x;
+}
+
+float Player::getVelocityX() {
+	return velocity.y;
+}
+
 //Sets the ships rotation based on the direction you inputed from main
 void Player::setRotation(float increment) {
 	rotationAmount += increment;

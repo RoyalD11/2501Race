@@ -20,6 +20,10 @@ public:
 
 	glm::vec3 Player::getVelocity();
 
+	float Player::getVelocityY();
+
+	float Player::getVelocityX();
+
 private:
 
 };
