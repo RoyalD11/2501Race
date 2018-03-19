@@ -20,9 +20,13 @@ public:
 
 	glm::vec3 Player::getVelocity();
 
+	float Player::getVelocityX();
+
 	float Player::getVelocityY();
 
-	float Player::getVelocityX();
+	void Player::setVelocityY(float change);
+
+	void Player::setVelocityX(float change);
 
 private:
 
