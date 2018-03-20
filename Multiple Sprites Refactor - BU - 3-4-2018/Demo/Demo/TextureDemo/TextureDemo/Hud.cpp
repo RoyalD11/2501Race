@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 #include <vector>
@@ -9,7 +23,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-#include "shader.h"
+#include "Shader.h"
 #include "texture.hpp"
 
 #include "Hud.h"
