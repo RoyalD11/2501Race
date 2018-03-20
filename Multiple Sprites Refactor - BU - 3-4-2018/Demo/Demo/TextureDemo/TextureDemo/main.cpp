@@ -19,7 +19,6 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Camera.h"
-#include "BgEntity.h"
 #include "Sound.h"
 #include "Background.h"
 #include "Model.h"
@@ -131,7 +130,16 @@ void setallTexture(void)
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
 
+//A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
+void RenderString(float x, float y, void *font, const char* string, RGB const& rgb)
+{
+	char *c;
 
+	glColor3f(rgb.r, rgb.g, rgb.b);
+	glRasterPos2f(x, y);
+
+	glutBitmapString(font, string);
+}
 
 // Main function that builds and runs the game
 int main(void){
