@@ -34,10 +34,6 @@ int GAMESTATE = 0;
 #define PrintException(exception_object)\
 	std::cerr << exception_object.what() << std::endl
 
-//Definition for RGB macro used for color when displaying text
-#define RGB(r,g,b)\
-	((COLORREF)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
-
 // Globals that define the OpenGL window and viewport
 const std::string window_title_g = "ZoomZoomGame";
 const unsigned int window_width_g = 800;
