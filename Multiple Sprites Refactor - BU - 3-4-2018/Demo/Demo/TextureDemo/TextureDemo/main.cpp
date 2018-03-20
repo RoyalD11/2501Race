@@ -132,14 +132,14 @@ void setallTexture(void)
 }
 
 //A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
-void RenderString(float x, float y, void *font, const unsigned char* string, float r, float b, float g)
+void RenderString(float x, float y, const unsigned char* string, float r, float b, float g)
 {
 	char *c;
 
 	glColor3f(r, g, b);
 	glRasterPos2f(x, y);
 
-	glutBitmapString(font, string);
+	glutBitmapString(GLUT_BITMAP_HELVETICA_18, string);
 }
 
 // Main function that builds and runs the game
