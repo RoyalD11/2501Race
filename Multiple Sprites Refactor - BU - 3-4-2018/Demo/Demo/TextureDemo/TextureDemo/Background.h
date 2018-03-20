@@ -1,12 +1,10 @@
 #pragma once
 
 #include "GameEntity.h"
-#include "Background.h"
+#include "BgEntity.h"
 #include <iostream>
 #include <fstream>
-
-//Extra library so I can hold all the bullets
-#include <list>
+#include <vector>
 
 class Background : public GameEntity {
 public:
@@ -14,9 +12,11 @@ public:
 
 	virtual void update(double deltaTime) override;
 
-
+	void subRender();
 	void setPosition(float change);
 	void loadFromText();
+
+	std::vector<BgEntity*> parts = std::vector<BgEntity*>();
 
 private:
 	int mapRows;
@@ -26,6 +26,7 @@ private:
 	int** map1;
 	int **mapData;
 
+	
 
 	glm::vec3 velocity;
 	float bulletRotate;

@@ -1,0 +1,26 @@
+#include "BgEntity.h"
+
+//Extra library so I can hold all the bullets
+#include <list>
+
+BgEntity::BgEntity(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, int type)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), type(type)
+{
+
+}
+
+//Updates the position of the bullet, also rotates the bullet as it moves through the air
+//The constant being multipled in the cos and sin function is used to convert from degrees to radians
+void BgEntity::update(double deltaTime) {
+	//loads rest of background images
+
+}
+
+
+void BgEntity::setPosition(float change) {
+	position.y = change;
+	position.x = change;
+	velocity.x = change;
+	velocity.y = change;
+
+}

@@ -19,6 +19,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Camera.h"
+#include "BgEntity.h"
 #include "Sound.h"
 #include "Background.h"
 #include "Model.h"
