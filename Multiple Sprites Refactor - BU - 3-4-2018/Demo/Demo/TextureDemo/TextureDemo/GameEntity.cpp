@@ -17,8 +17,8 @@ void GameEntity::render(Shader &shader, glm::vec3 cameraPos, float theta) {
 
 	//translationMatrix = glm::translate(glm::mat4(1.0f), position - cameraPos);
 
-	//ISROT based transformations
 
+	//ISROT based transformations
 	//Set Scale
 	scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 
@@ -32,6 +32,8 @@ void GameEntity::render(Shader &shader, glm::vec3 cameraPos, float theta) {
 	transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 	shader.setUniformMat4("x", transformationMatrix);
 
+	
 	// Draw the entity
 	glDrawElements(GL_TRIANGLES, numElements, GL_UNSIGNED_INT, 0);
+
 }

@@ -5,6 +5,10 @@ Model::Model() {
 	updateables = std::vector <GameEntity*>();
 }
 
-void Model::update(float deltaTime) {
+
+void Model::loadFromText() {
+	
 
 }
+
+

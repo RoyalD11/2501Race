@@ -3,6 +3,7 @@
 //Controller Class
 
 #include "GameEntity.h"
+#include "Background.h"
 #include "Player.h"
 #include "Shader.h"
 #include "Enemy.h"
@@ -13,11 +14,16 @@
 class Model {
 public:
 	Model();
-	void update(float deltaTime);
 
 	//All GameObjects in Game
 	std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
 	std::vector <Enemy*>      enemies = std::vector <Enemy*>();
+	std::vector <Background*> bgObjects = std::vector <Background*>();
+
+	void loadFromText();
+
+
+
 
 	//Specific Gameobject Pointers
 	Player* player;

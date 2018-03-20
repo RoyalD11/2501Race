@@ -26,7 +26,7 @@
 #include <vector>
 
 using namespace std;
-int GAMESTATE = 0;
+int GAMESTATE = 1;
 
 
 // Macro for printing exceptions
@@ -49,6 +49,7 @@ GLfloat lastY = HEI / 2.0;
 bool keys[1024];
 bool firstMouse = true;
 
+
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 
@@ -57,7 +58,7 @@ GLfloat lastFrame = 0.0f;
 const int AMMO_CAP = 10;
 
 // Global texture info
-GLuint tex[7];
+GLuint tex[10];
 
 // Create the geometry for a square (with two triangles)
 // Return the number of array elements that form the square
@@ -118,7 +119,7 @@ void setthisTexture(GLuint w, char *fname)
 void setallTexture(void)
 {
 	//Holds all textures/sprites used
-	glGenTextures(7, tex);
+	glGenTextures(10, tex);
 	setthisTexture(tex[0], "Sprites/Black_viper.png");
 	setthisTexture(tex[1], "Sprites/orb.png");
 	setthisTexture(tex[2], "Sprites/saw.png");
@@ -126,12 +127,60 @@ void setallTexture(void)
 	setthisTexture(tex[4], "Sprites/police3.png");
 	setthisTexture(tex[5], "Sprites/police1.png");
 	setthisTexture(tex[6], "Sprites/Background.png");
+	setthisTexture(tex[7], "Sprites/edge.png");
+	setthisTexture(tex[8], "Sprites/floor.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
 
+void initBackgrounds(Model* model, int size, GLuint tex[5]) {
+	std::ifstream fileHndl;
+
+
+	int mapRows;
+	int mapCols;
+	int **mapData;
+	int** map1;
+
+	fileHndl.open("Assets/map1.txt");
+	fileHndl >> mapRows;
+	fileHndl >> mapCols;
+
+	mapData = new int *[mapRows];
+	for (int i = 0; i < mapRows; i++) {
+		mapData[i] = new int[mapCols];
+	}
+
+	for (int i = 0; i < mapRows; i++) {
+		for (int j = 0; j < mapCols; j++) {
+			fileHndl >> mapData[i][j];
+		}
+	}
+
+	int row1 = mapRows;
+	int col1 = mapCols;
+	Background* temp;
+
+	for (int i = 0; i < row1; i++) {
+		for (int j = 0; j < col1; j++) {
+			std::cout << mapData[i][j];
+			if (mapData[i][j] == 1) {
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, tex[1], size);
+				model->bgObjects.push_back(temp);
+			}
+			else {
+				temp = new Background(glm::vec3(i-0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, tex[0], size);
+				model->bgObjects.push_back(temp);
+			}
+			model->updateables.push_back(temp);
+		}
+		std::cout << "\n";
+	}
+	std::cout << "Map Loaded";
+}
+
 //A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
-void RenderString(float x, float y, void *font, const char* string, RGB const& rgb)
+/*void RenderString(float x, float y, void *font, const char* string, RGB const& rgb)
 {
 	char *c;
 
@@ -139,7 +188,7 @@ void RenderString(float x, float y, void *font, const char* string, RGB const& r
 	glRasterPos2f(x, y);
 
 	glutBitmapString(font, string);
-}
+}*/
 
 // Main function that builds and runs the game
 int main(void){
@@ -191,8 +240,9 @@ int main(void){
 		Bullet* bullet9 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
+		GLuint temp[5] = { tex[7], tex[8] };
 
-		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
 
 
 		//Array that holds all the bullets
@@ -222,11 +272,15 @@ int main(void){
 		model->updateables.push_back(bullet9);
 		model->updateables.push_back(bullet10);
 
-		model->updateables.push_back(police);
+		initBackgrounds(model, size, temp);
 
+		model->updateables.push_back(police);
 		model->updateables.push_back(test);
+
 		model->enemies.push_back(police);
 
+
+		
 
 		//Setup sound object
 		Sound playersound;
@@ -274,7 +328,12 @@ int main(void){
 				calls render and update functions
 				*/
 				model->updateables[i]->update(deltaTime);
-				model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
+				if (!(model->updateables[i]->getPosition().x - model->player->getPosition().x > 2 ||
+					model->updateables[i]->getPosition().x - model->player->getPosition().x < -2 ||
+					model->updateables[i]->getPosition().y - model->player->getPosition().y > 2 ||
+					model->updateables[i]->getPosition().y - model->player->getPosition().y < -2)) {
+					model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
+				}
 			}
 
 
