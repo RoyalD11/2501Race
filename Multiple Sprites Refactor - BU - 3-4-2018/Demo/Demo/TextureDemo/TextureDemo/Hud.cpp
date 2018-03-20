@@ -1,3 +1,5 @@
+/*
+
 #include <vector>
 #include <cstring>
 
@@ -7,7 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 using namespace glm;
 
-#include "shader.hpp"
+#include "shader.h"
 #include "texture.hpp"
 
 #include "Hud.h"
@@ -122,3 +124,4 @@ void Hud::cleanupText2D(){
 	// Delete shader
 	glDeleteProgram(Text2DShaderID);
 }
+*/

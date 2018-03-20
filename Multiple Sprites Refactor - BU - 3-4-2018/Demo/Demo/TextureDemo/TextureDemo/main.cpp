@@ -268,51 +268,6 @@ int main(void){
 			controller->input(window.getWindow());
 			
 
-			/*
-			//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-				player->setVelocity(1,0);
-			}
-			
-			
-
-							//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_A) == GLFW_PRESS && player->getVelocity() > 0.3) {
-					player->setRotation(-0.25);
-				}
-
-				//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_D) == GLFW_PRESS && player->getVelocity() > 0.3) {
-					player->setRotation(0.25);
-				}
-			}
-
-			//Slows down car when W is not pressed, similar to letting off the gas
-			else{
-				
-				player->setVelocity(-0.001);
-
-				//Allows for turning when car is slowing down
-				if (player->getVelocity() > 0.8) {
-					//Q is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-					if (glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS) {
-						player->setRotation(0.25);
-					}
-
-					//E is used to rotate the ship in a positive direction, calls the setRotation method from the player class
-					if (glfwGetKey(window.getWindow(), GLFW_KEY_E) == GLFW_PRESS) {
-						player->setRotation(-0.25);
-					}
-				}
-
-			}
-
-			//Brake mechanic for the car, if S is pressed slows down quickly
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-				player->setVelocity(-0.005);
-
-			}
-			*/
 			//if pasyer is moving play engine sound
 			//playersound.playersound(player->getVelocity());
 
@@ -330,7 +285,6 @@ int main(void){
 					shot++;
 					reload = 500;
 				}
-				
 			}
 			
 			
