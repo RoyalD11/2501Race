@@ -34,6 +34,10 @@ int GAMESTATE = 0;
 #define PrintException(exception_object)\
 	std::cerr << exception_object.what() << std::endl
 
+//Definition for RGB macro used for color when displaying text
+#define RGB(r,g,b)\
+	((COLORREF)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
+
 // Globals that define the OpenGL window and viewport
 const std::string window_title_g = "ZoomZoomGame";
 const unsigned int window_width_g = 800;
@@ -132,11 +136,11 @@ void setallTexture(void)
 }
 
 //A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
-void RenderString(float x, float y, void *font, const char* string, RGB const& rgb)
+void RenderString(float x, float y, void *font, const unsigned char* string, float r, float b, float g)
 {
 	char *c;
 
-	glColor3f(rgb.r, rgb.g, rgb.b);
+	glColor3f(r, g, b);
 	glRasterPos2f(x, y);
 
 	glutBitmapString(font, string);
