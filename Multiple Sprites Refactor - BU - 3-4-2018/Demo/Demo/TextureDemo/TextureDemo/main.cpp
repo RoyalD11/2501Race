@@ -134,8 +134,6 @@ void setallTexture(void)
 //A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
 void RenderString(float x, float y, const unsigned char* string, float r, float b, float g)
 {
-	char *c;
-
 	glColor3f(r, g, b);
 	glRasterPos2f(x, y);
 
