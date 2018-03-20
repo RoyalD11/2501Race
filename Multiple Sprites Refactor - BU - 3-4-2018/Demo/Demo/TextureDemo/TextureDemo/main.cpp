@@ -4,6 +4,7 @@
 #include <string>
 #include <GL/glew.h> // window management library
 #include <GL/glfw3.h>
+#include <GL/glut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> //
 #include <SOIL/SOIL.h> // read image file
