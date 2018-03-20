@@ -12,6 +12,7 @@ Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entit
 //Updates the position of the bullet, also rotates the bullet as it moves through the air
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Background::update(double deltaTime) {
+	//loads rest of background images
 
 }
 
@@ -48,7 +49,13 @@ void Background::loadFromText() {
 	for (int i = 0; i < row1; i++) {
 		for (int j = 0; j < col1; j++) {
 			map1 = mapData;
+			std::cout << mapData[i][j];
 		}
+		std::cout << "\n";
 	}
 	std::cout << "Map Loaded";
+}
+
+void Background::subRender() {
+
 }
