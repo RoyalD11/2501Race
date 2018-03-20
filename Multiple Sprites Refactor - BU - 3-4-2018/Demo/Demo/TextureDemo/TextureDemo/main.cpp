@@ -4,7 +4,7 @@
 #include <string>
 #include <GL/glew.h> // window management library
 #include <GL/glfw3.h>
-#include <GL/freeglut.h>
+//#include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> //
 #include <SOIL/SOIL.h> // read image file
@@ -181,13 +181,14 @@ void initBackgrounds(Model* model, int size, GLuint tex[5]) {
 }
 
 //A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
-void RenderString(float x, float y, const unsigned char* string, float r, float b, float g)
+/*void RenderString(float x, float y, const unsigned char* string, float r, float b, float g)
 {
 	glColor3f(r, g, b);
 	glRasterPos2f(x, y);
 
 	glutBitmapString(GLUT_BITMAP_HELVETICA_18, string);
 }
+*/
 
 // Main function that builds and runs the game
 int main(void){
