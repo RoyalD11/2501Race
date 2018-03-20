@@ -130,6 +130,7 @@ void setallTexture(void)
 }
 
 
+
 // Main function that builds and runs the game
 int main(void){
     try {
@@ -278,7 +279,6 @@ int main(void){
 			
 			//Space is used to fire a blade, calls the fire method from the bullet class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-				
 				//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
 				if (shot < AMMO_CAP && reload <=0) {
 					ammo[shot]->fire(player->getPosition(), player->getRotation());
