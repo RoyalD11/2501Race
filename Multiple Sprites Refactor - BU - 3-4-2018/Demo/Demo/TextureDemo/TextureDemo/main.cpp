@@ -26,6 +26,7 @@
 #include <vector>
 
 using namespace std;
+int GAMESTATE = 0;
 
 
 // Macro for printing exceptions
@@ -133,13 +134,15 @@ void setallTexture(void)
 
 // Main function that builds and runs the game
 int main(void){
-    try {
+	try {
+
+
 		// Setup window
 		Window window(window_width_g, window_height_g, window_title_g);
 
-        // Set up z-buffer for rendering
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LESS);
+		// Set up z-buffer for rendering
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 
 		// Enable Alpha blending
 		glEnable(GL_BLEND);
@@ -147,9 +150,9 @@ int main(void){
 
 		// Create geometry of the square
 		int size = CreateSquare();
-		
-        // Set up shaders
-		Shader shader("shader.vert", "shader.frag"); 
+
+		// Set up shaders
+		Shader shader("shader.vert", "shader.frag");
 
 		setallTexture();
 
@@ -158,12 +161,12 @@ int main(void){
 
 		//Made arraylist updateables.
 		//std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
-		
+
 
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
-		Player* player=new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Enemy* enemy=new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);		
+		Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Enemy* enemy = new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
 
 		Enemy* police = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 
@@ -219,17 +222,17 @@ int main(void){
 		//Setup sound object
 		Sound playersound;
 
-        // Run the main loop
-        bool animating = 1;
+		// Run the main loop
+		bool animating = 1;
 		double lastTime = glfwGetTime();
-		
+
 		//Int I added to count the number of shots released, does not work as intended due to my frame rate shooting all the bullets at once. should shoot one at a time
 		int shot = 0;
 		int reload = 0;
 		int anicounter = 3;
 		int wait = 250;
 
-		
+
 		glm::mat4 applyWorld = glm::mat4(
 			1.0, 0.0, 0.0, 0.0,
 			0.0, 1.0, 0.0, 0.0,
@@ -240,14 +243,17 @@ int main(void){
 		Controller* controller = new Controller(model);
 
 		controller->model->player = player;
+		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
 
-        while (!glfwWindowShouldClose(window.getWindow())){
-            // Clear background
+		}
+
+		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
+			// Clear background
 			window.clear(viewport_background_color_g);
 
-            // Select proper shader program to use
+			// Select proper shader program to use
 			shader.enable();
-			
+
 			// Update entities, I added the bullet.update
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
@@ -267,7 +273,7 @@ int main(void){
 			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
 
 			controller->input(window.getWindow());
-			
+
 
 			//if pasyer is moving play engine sound
 			//playersound.playersound(player->getVelocity());
@@ -276,19 +282,19 @@ int main(void){
 			if (reload > 0) {
 				reload--;
 			}
-			
+
 			//Space is used to fire a blade, calls the fire method from the bullet class
 			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
 				//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-				if (shot < AMMO_CAP && reload <=0) {
+				if (shot < AMMO_CAP && reload <= 0) {
 					ammo[shot]->fire(player->getPosition(), player->getRotation());
 					shot++;
 					reload = 500;
 				}
 			}
-			
-			
-			
+
+
+
 			//Out of bounds check to make sure we only loop through the elements we want to use
 			if (anicounter == 6) {
 				anicounter = 3;
@@ -307,23 +313,24 @@ int main(void){
 				anicounter++;
 				wait = 150;
 			}
-			
+
 
 			//Added bullets render methods and where i check for collision detection
 			for (int i = 0; i < shot; i++) {
-				ammo[i]->render(shader, player->getPosition(), player->getRotation()); 
+				ammo[i]->render(shader, player->getPosition(), player->getRotation());
 				police->collision(*ammo[i]);
 			}
-			
 
-            // Update other events like input handling
-            glfwPollEvents();
-			
 
-            // Push buffer drawn in the background onto the display
-            glfwSwapBuffers(window.getWindow());
-        }
-    }
+			// Update other events like input handling
+			glfwPollEvents();
+
+
+			// Push buffer drawn in the background onto the display
+			glfwSwapBuffers(window.getWindow());
+		
+	}
+}
     catch (std::exception &e){
 		// print exception and sleep so error can be read
         PrintException(e);
