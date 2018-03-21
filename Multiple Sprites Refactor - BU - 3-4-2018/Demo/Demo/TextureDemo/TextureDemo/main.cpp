@@ -59,7 +59,7 @@ GLfloat lastFrame = 0.0f;
 const int AMMO_CAP = 10;
 
 // Global texture info
-GLuint tex[10];
+GLuint tex[15];
 
 // Create the geometry for a square (with two triangles)
 // Return the number of array elements that form the square
@@ -120,7 +120,7 @@ void setthisTexture(GLuint w, char *fname)
 void setallTexture(void)
 {
 	//Holds all textures/sprites used
-	glGenTextures(10, tex);
+	glGenTextures(15, tex);
 	setthisTexture(tex[0], "Sprites/Black_viper.png");
 	setthisTexture(tex[1], "Sprites/orb.png");
 	setthisTexture(tex[2], "Sprites/saw.png");
@@ -128,13 +128,20 @@ void setallTexture(void)
 	setthisTexture(tex[4], "Sprites/police3.png");
 	setthisTexture(tex[5], "Sprites/police1.png");
 	setthisTexture(tex[6], "Sprites/Background.png");
-	setthisTexture(tex[7], "Sprites/edge.png");
-	setthisTexture(tex[8], "Sprites/floor.png");
+
+	//track textures
+	setthisTexture(tex[7], "Sprites/side-to-up.png");
+	setthisTexture(tex[8], "Sprites/up-to-side.png");
+	setthisTexture(tex[9], "Sprites/side-to-up-i.png");
+	setthisTexture(tex[10], "Sprites/up-to-side-i.png");
+	setthisTexture(tex[11], "Sprites/str.png");
+	setthisTexture(tex[12], "Sprites/side.png");
+	setthisTexture(tex[13], "Sprites/edge.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
 
-void initBackgrounds(Model* model, int size, GLuint tex[5]) {
+void initBackgrounds(Model* model, int size, GLuint imports[7]) {
 	std::ifstream fileHndl;
 
 
@@ -143,7 +150,7 @@ void initBackgrounds(Model* model, int size, GLuint tex[5]) {
 	int **mapData;
 	int** map1;
 
-	fileHndl.open("Assets/map1.txt");
+	fileHndl.open("Assets/map2.txt");
 	fileHndl >> mapRows;
 	fileHndl >> mapCols;
 
@@ -161,18 +168,39 @@ void initBackgrounds(Model* model, int size, GLuint tex[5]) {
 	int row1 = mapRows;
 	int col1 = mapCols;
 	Background* temp;
-
+	//GLuint texture = imports[0];
 	for (int i = 0; i < row1; i++) {
 		for (int j = 0; j < col1; j++) {
 			std::cout << mapData[i][j];
-			if (mapData[i][j] == 1) {
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, tex[1], size);
-				model->bgObjects.push_back(temp);
+			if (mapData[i][j] == 0) {
+				//r-u
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[0], size);
 			}
-			else {
-				temp = new Background(glm::vec3(i-0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, tex[0], size);
-				model->bgObjects.push_back(temp);
+			else if (mapData[i][j] == 1) {
+				//d-r
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[1], size);
 			}
+			else if (mapData[i][j] == 2) {
+				//l-u
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[2], size);
+			}
+			else if (mapData[i][j] == 3) {
+				//d-l
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[3], size);
+			}
+			else if (mapData[i][j] == 4) {
+				//up
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[4], size);
+			}
+			else if (mapData[i][j] == 5) {
+				//side
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[5], size);
+			}
+			else if (mapData[i][j] == 6) {
+				//edge
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size);
+			}
+			model->bgObjects.push_back(temp);
 			model->updateables.push_back(temp);
 		}
 		std::cout << "\n";
@@ -240,9 +268,8 @@ int main(void){
 		Bullet* bullet9 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
-		GLuint temp[5] = { tex[7], tex[8] };
 
-		Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
+		//Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
 
 
 		//Array that holds all the bullets
@@ -272,13 +299,15 @@ int main(void){
 		model->updateables.push_back(bullet9);
 		model->updateables.push_back(bullet10);
 
-		initBackgrounds(model, size, temp);
 
 		model->updateables.push_back(police);
-		model->updateables.push_back(test);
+		//model->updateables.push_back(test);
 
 		model->enemies.push_back(police);
 
+
+		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13] };
+		initBackgrounds(model, size, temp);
 
 		
 
