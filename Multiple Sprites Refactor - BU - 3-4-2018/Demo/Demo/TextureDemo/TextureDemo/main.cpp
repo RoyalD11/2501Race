@@ -1,10 +1,10 @@
 #define GLEW_STATIC
+
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <GL/glew.h> // window management library
 #include <GL/glfw3.h>
-//#include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> //
 #include <SOIL/SOIL.h> // read image file
@@ -33,6 +33,8 @@ int GAMESTATE = 1;
 // Macro for printing exceptions
 #define PrintException(exception_object)\
 	std::cerr << exception_object.what() << std::endl
+
+
 
 // Globals that define the OpenGL window and viewport
 const std::string window_title_g = "ZoomZoomGame";
@@ -180,15 +182,7 @@ void initBackgrounds(Model* model, int size, GLuint tex[5]) {
 	std::cout << "Map Loaded";
 }
 
-//A FUNCTION TO RENDER TERXT ON SCREN FROM A GLUTBITMAP
-/*void RenderString(float x, float y, const unsigned char* string, float r, float b, float g)
-{
-	glColor3f(r, g, b);
-	glRasterPos2f(x, y);
 
-	glutBitmapString(GLUT_BITMAP_HELVETICA_18, string);
-}
-*/
 
 // Main function that builds and runs the game
 int main(void){
