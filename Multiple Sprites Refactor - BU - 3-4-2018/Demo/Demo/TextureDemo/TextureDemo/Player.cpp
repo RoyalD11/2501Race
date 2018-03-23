@@ -6,7 +6,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements)
 {
 	//Sets the initial position and velocity
-	position = glm::vec3(0, 0, 0);
+	position = glm::vec3(2, 2, 0);
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 	
@@ -18,12 +18,14 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	dVelocity = glm::vec3(0, 0, 0);
 	iVelocity = glm::vec3(0, 0, 0);
 	rotationAmount = -90;
+	hitWall = false;
 }
 
 //Updates the position of the spaceship based on how the ship has rotated and its current velocity
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Player::update(double deltaTime) {
-	
+	if (hitWall) { velocity *= glm::vec3(0.9, 0.9, 0); }
+
 	//dVelocity = (targetPosition - position);
 	dVelocity.x = (targetPosition.x - position.x) / deltaTime;
 	dVelocity.y = (targetPosition.y - position.y) / deltaTime;
@@ -80,6 +82,10 @@ void Player::setVelocityX(float change) {
 	velocity.y+=change;
 }
 
+void Player::setMaxAccel(glm::vec3 mod) {
+	max_accel = mod;
+}
+
 //Sets the ships rotation based on the direction you inputed from main
 void Player::setRotation(float increment) {
 	rotationAmount += increment;
@@ -100,4 +106,5 @@ void Player::rotateToMouse(float xpos, float ypos) {
 float Player::getRotation() {
 	return rotationAmount;
 }
+
 

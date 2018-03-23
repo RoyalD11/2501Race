@@ -176,31 +176,31 @@ void initBackgrounds(Model* model, int size, GLuint imports[7]) {
 			std::cout << mapData[i][j];
 			if (mapData[i][j] == 0) {
 				//r-u
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[0], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[0], size, 0);
 			}
 			else if (mapData[i][j] == 1) {
 				//d-r
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[1], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[1], size, 1);
 			}
 			else if (mapData[i][j] == 2) {
 				//l-u
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[2], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[2], size, 2);
 			}
 			else if (mapData[i][j] == 3) {
 				//d-l
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[3], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[3], size, 3);
 			}
 			else if (mapData[i][j] == 4) {
 				//up
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[4], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[4], size, 4);
 			}
 			else if (mapData[i][j] == 5) {
 				//side
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[5], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[5], size, 5);
 			}
 			else if (mapData[i][j] == 6) {
 				//edge
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size);
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size, 6);
 			}
 			model->bgObjects.push_back(temp);
 			model->updateables.push_back(temp);
@@ -355,8 +355,25 @@ int main(void){
 				if (!(model->updateables[i]->getPosition().x - model->player->getPosition().x > 2 ||
 					model->updateables[i]->getPosition().x - model->player->getPosition().x < -2 ||
 					model->updateables[i]->getPosition().y - model->player->getPosition().y > 2 ||
-					model->updateables[i]->getPosition().y - model->player->getPosition().y < -2)) {
+					model->updateables[i]->getPosition().y - model->player->getPosition().y < -2)) 
+				{
 					model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
+				}
+			}
+
+			for (int i = 0; i < model->bgObjects.size(); i++) {
+				if ((!(model->bgObjects[i]->getPosition().x - model->player->getPosition().x > 0.5 ||
+					model->bgObjects[i]->getPosition().x - model->player->getPosition().x < -0.5 ||
+					model->bgObjects[i]->getPosition().y - model->player->getPosition().y > 0.5 ||
+					model->bgObjects[i]->getPosition().y - model->player->getPosition().y < -0.5)) &&
+					model->bgObjects[i]->type==6)
+				{
+					model->player->hitWall = true;
+					cout << "a collision!";
+					break;
+				}
+				else {
+					model->player->hitWall = false;
 				}
 			}
 

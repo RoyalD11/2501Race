@@ -55,12 +55,12 @@ void Controller::playerMovement(GLFWwindow* window) {
 	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		//model->player->moveTo(-1.5, 0);
-		model->player->setRotation(0.5);
+		model->player->setRotation(0.7);
 
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		//model->player->moveTo(1.5,0);
-		model->player->setRotation(-0.5);
+		model->player->setRotation(-0.7);
 	}
 
 

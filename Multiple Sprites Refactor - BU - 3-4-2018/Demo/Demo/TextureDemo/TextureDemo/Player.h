@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameEntity.h"
+#include "Background.h"
 
 class Player : public GameEntity {
 public:
@@ -27,6 +28,10 @@ public:
 	void Player::setVelocityY(float change);
 
 	void Player::setVelocityX(float change);
+
+	void Player::setMaxAccel(glm::vec3 mod);
+
+	bool hitWall;
 
 private:
 
