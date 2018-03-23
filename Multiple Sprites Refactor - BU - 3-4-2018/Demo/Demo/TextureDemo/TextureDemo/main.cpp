@@ -274,13 +274,13 @@ int main(void){
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 		//menu items creation
-		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
 		//Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
@@ -356,17 +356,17 @@ int main(void){
 			// Select proper shader program to use
 			shader.enable();
 
-			title->setPosition(10, 0);
-			title->render(shader, title->getPosition(), 0); 
+			title->setPosition(0, 0.5);
+			title->staticRender(shader); 
 
 			storeprompt->setPosition(0,0);
-			storeprompt->render(shader, storeprompt->getPosition(), 0);
+			storeprompt->staticRender(shader);
 
 			startprompt->setPosition(-0.5,0);
-			startprompt->render(shader, startprompt->getPosition(), 0);
+			startprompt->staticRender(shader);
 
 			quitprompt->setPosition(0.5,0);
-			quitprompt->render(shader, quitprompt->getPosition(), 0);
+			quitprompt->staticRender(shader);
 
 			// Update other events like input handling
 			glfwPollEvents();
