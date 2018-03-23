@@ -25,9 +25,10 @@
 #include "Model.h"
 #include "Controller.h"
 #include <vector>
+#include "Menu.h"
 
 using namespace std;
-int GAMESTATE = 1;
+int GAMESTATE = 0;
 
 
 // Macro for printing exceptions
@@ -272,6 +273,15 @@ int main(void){
 		Bullet* bullet9 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
+		//menu items creation
+		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
+
 
 		//Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
 
@@ -340,7 +350,30 @@ int main(void){
 
 		controller->model->player = player;
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
+			// Clear background
+			window.clear(viewport_background_color_g);
 
+			// Select proper shader program to use
+			shader.enable();
+
+			title->setPosition(10, 0);
+			title->render(shader, title->getPosition(), 0); 
+
+			storeprompt->setPosition(0,0);
+			storeprompt->render(shader, storeprompt->getPosition(), 0);
+
+			startprompt->setPosition(-0.5,0);
+			startprompt->render(shader, startprompt->getPosition(), 0);
+
+			quitprompt->setPosition(0.5,0);
+			quitprompt->render(shader, quitprompt->getPosition(), 0);
+
+			// Update other events like input handling
+			glfwPollEvents();
+
+
+			// Push buffer drawn in the background onto the display
+			glfwSwapBuffers(window.getWindow());
 		}
 
 		police->setTarget(model->player->getPosition());
