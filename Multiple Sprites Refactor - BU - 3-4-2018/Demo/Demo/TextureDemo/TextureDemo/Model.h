@@ -22,8 +22,9 @@ public:
 
 	void loadFromText();
 
+	void update(double deltaTime, Shader shader);
 
-
+	int time;
 
 	//Specific Gameobject Pointers
 	Player* player;

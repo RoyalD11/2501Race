@@ -342,7 +342,9 @@ int main(void){
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
 
 		}
-		int time = 0;
+
+		police->setTarget(model->player->getPosition());
+
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
 			// Clear background
 			window.clear(viewport_background_color_g);
@@ -354,42 +356,11 @@ int main(void){
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
-			time++;
 
-			police->setTarget(model->player->getPosition());
-			for (int i = 0; i < model->updateables.size(); i++) {
-				/*
-				calls render and update functions
-				*/
-				model->updateables[i]->update(deltaTime);
-				if (!(model->updateables[i]->getPosition().x - model->player->getPosition().x > 2 ||
-					model->updateables[i]->getPosition().x - model->player->getPosition().x < -2 ||
-					model->updateables[i]->getPosition().y - model->player->getPosition().y > 2 ||
-					model->updateables[i]->getPosition().y - model->player->getPosition().y < -2)) 
-				{
-					model->updateables[i]->render(shader, model->player->getPosition(), model->player->getRotation());
-				}
-			}
+			
+			model->update(deltaTime, shader);
 
-			for (int i = 0; i < model->bgObjects.size(); i++) {
-				if ((!(model->bgObjects[i]->getPosition().x - model->player->getPosition().x > 0.5 ||
-					model->bgObjects[i]->getPosition().x - model->player->getPosition().x < -0.5 ||
-					model->bgObjects[i]->getPosition().y - model->player->getPosition().y > 0.5 ||
-					model->bgObjects[i]->getPosition().y - model->player->getPosition().y < -0.5)) &&
-					model->bgObjects[i]->type==6)
-				{
-					model->player->hitWall = true;
-					cout << "a collision!";
-					break;
-				}
-				else {
-					model->player->hitWall = false;
-				}
-			}
-
-			if (time % 100 == 0) {
-				police->setTarget(player->getPosition());
-			}
+			
 
 			//Added Bullets update methods
 			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
