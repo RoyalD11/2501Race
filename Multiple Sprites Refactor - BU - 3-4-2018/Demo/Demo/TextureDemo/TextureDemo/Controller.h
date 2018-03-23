@@ -15,7 +15,7 @@
 class Controller {
 public:
 	Controller(Model* m);
-	void input(GLFWwindow* window);
+	void input(GLFWwindow* window,int* state);
 	void playerMovement(GLFWwindow* window);
 	
 	Model* model;

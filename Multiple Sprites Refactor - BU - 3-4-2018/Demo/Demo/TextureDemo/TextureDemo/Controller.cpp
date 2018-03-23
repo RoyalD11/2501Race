@@ -5,8 +5,27 @@ Controller::Controller(Model* m) {
 	this->model = m;
 }
 
-void Controller::input(GLFWwindow* window) {
-	
+void Controller::input(GLFWwindow* window,int* state) {
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 1;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 2;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 8;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
+		if (*state == 2) {
+			*state = 0;
+		}
+	}
 	//Checks player specific movement within function
 	playerMovement(window);
 	

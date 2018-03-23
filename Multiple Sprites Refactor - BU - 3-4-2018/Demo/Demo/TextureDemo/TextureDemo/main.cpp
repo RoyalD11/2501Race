@@ -274,13 +274,13 @@ int main(void){
 		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 		//menu items creation
-		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
+		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
 		//Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
@@ -323,7 +323,7 @@ int main(void){
 		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13] };
 		initBackgrounds(model, size, temp);
 
-		
+
 
 		//Setup sound object
 		Sound playersound;
@@ -349,112 +349,133 @@ int main(void){
 		Controller* controller = new Controller(model);
 
 		controller->model->player = player;
-		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
-			// Clear background
-			window.clear(viewport_background_color_g);
+		while (!glfwWindowShouldClose(window.getWindow())) {
+			if (GAMESTATE == 0) {
+				// Clear background
+				window.clear(viewport_background_color_g);
 
-			// Select proper shader program to use
-			shader.enable();
+				// Select proper shader program to use
+				shader.enable();
 
-			title->setPosition(0, 0.5);
-			title->staticRender(shader); 
+				title->setPosition(0, 0.8);
+				title->staticRender(shader);
 
-			storeprompt->setPosition(0,0);
-			storeprompt->staticRender(shader);
+				startprompt->setPosition(0, 0.5);
+				startprompt->staticRender(shader);
 
-			startprompt->setPosition(-0.5,0);
-			startprompt->staticRender(shader);
+				storeprompt->setPosition(0, 0.1);
+				storeprompt->staticRender(shader);
 
-			quitprompt->setPosition(0.5,0);
-			quitprompt->staticRender(shader);
+				quitprompt->setPosition(0, -0.3);
+				quitprompt->staticRender(shader);
 
-			// Update other events like input handling
-			glfwPollEvents();
-
-
-			// Push buffer drawn in the background onto the display
-			glfwSwapBuffers(window.getWindow());
-		}
-
-		police->setTarget(model->player->getPosition());
-
-		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
-			// Clear background
-			window.clear(viewport_background_color_g);
-
-			// Select proper shader program to use
-			shader.enable();
-
-			// Update entities, I added the bullet.update
-			double currentTime = glfwGetTime();
-			double deltaTime = currentTime - lastTime;
-			lastTime = currentTime;
-
-			
-			model->update(deltaTime, shader);
-
-			
-
-			//Added Bullets update methods
-			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
-
-			controller->input(window.getWindow());
+				controller->input(window.getWindow(), &GAMESTATE);
+				// Update other events like input handling
+				glfwPollEvents();
 
 
-			//if pasyer is moving play engine sound
-			//playersound.playersound(player->getVelocity());
+				// Push buffer drawn in the background onto the display
+				glfwSwapBuffers(window.getWindow());
+			}
+			if(GAMESTATE == 2) {
+				// Clear background
+				window.clear(viewport_background_color_g);
 
-			//Timer to keep track of when next shot can be fired
-			if (reload > 0) {
-				reload--;
+				// Select proper shader program to use
+				shader.enable();
+
+				menuprompt->setPosition(0, 0);
+				menuprompt->staticRender(shader);
+
+				controller->input(window.getWindow(), &GAMESTATE);
+				// Update other events like input handling
+				glfwPollEvents();
+
+
+				// Push buffer drawn in the background onto the display
+				glfwSwapBuffers(window.getWindow());
 			}
 
-			//Space is used to fire a blade, calls the fire method from the bullet class
-			if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-				//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-				if (shot < AMMO_CAP && reload <= 0) {
-					ammo[shot]->fire(player->getPosition(), player->getRotation());
-					shot++;
-					reload = 500;
+			police->setTarget(model->player->getPosition());
+
+			if( GAMESTATE == 1) {
+				// Clear background
+				window.clear(viewport_background_color_g);
+
+				// Select proper shader program to use
+				shader.enable();
+
+				// Update entities, I added the bullet.update
+				double currentTime = glfwGetTime();
+				double deltaTime = currentTime - lastTime;
+				lastTime = currentTime;
+
+
+				model->update(deltaTime, shader);
+
+
+
+				//Added Bullets update methods
+				for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
+
+				controller->input(window.getWindow(), &GAMESTATE);
+
+
+				//if pasyer is moving play engine sound
+				//playersound.playersound(player->getVelocity());
+
+				//Timer to keep track of when next shot can be fired
+				if (reload > 0) {
+					reload--;
 				}
+
+				//Space is used to fire a blade, calls the fire method from the bullet class
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
+					//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
+					if (shot < AMMO_CAP && reload <= 0) {
+						ammo[shot]->fire(player->getPosition(), player->getRotation());
+						shot++;
+						reload = 500;
+					}
+				}
+
+
+
+				//Out of bounds check to make sure we only loop through the elements we want to use
+				if (anicounter == 6) {
+					anicounter = 3;
+				}
+
+				//Calls animate to change the texture of the police car
+				police->animate(tex[anicounter]);
+
+				//Timer that slows the speed of the animation
+				if (wait > 0) {
+					wait--;
+				}
+
+				//If timer has finished increment to the next texture to be displayed and reset the timer
+				if (wait == 0) {
+					anicounter++;
+					wait = 150;
+				}
+
+
+				//Added bullets render methods and where i check for collision detection
+				for (int i = 0; i < shot; i++) {
+					ammo[i]->render(shader, player->getPosition(), player->getRotation());
+					police->collision(*ammo[i]);
+				}
+
+
+				// Update other events like input handling
+				glfwPollEvents();
+
+
+				// Push buffer drawn in the background onto the display
+				glfwSwapBuffers(window.getWindow());
+
 			}
-
-
-
-			//Out of bounds check to make sure we only loop through the elements we want to use
-			if (anicounter == 6) {
-				anicounter = 3;
-			}
-
-			//Calls animate to change the texture of the police car
-			police->animate(tex[anicounter]);
-
-			//Timer that slows the speed of the animation
-			if (wait > 0) {
-				wait--;
-			}
-
-			//If timer has finished increment to the next texture to be displayed and reset the timer
-			if (wait == 0) {
-				anicounter++;
-				wait = 150;
-			}
-
-
-			//Added bullets render methods and where i check for collision detection
-			for (int i = 0; i < shot; i++) {
-				ammo[i]->render(shader, player->getPosition(), player->getRotation());
-				police->collision(*ammo[i]);
-			}
-
-
-			// Update other events like input handling
-			glfwPollEvents();
-
-
-			// Push buffer drawn in the background onto the display
-			glfwSwapBuffers(window.getWindow());
-		
 	}
 }
     catch (std::exception &e){
