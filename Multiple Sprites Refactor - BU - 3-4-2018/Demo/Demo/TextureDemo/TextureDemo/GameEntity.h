@@ -21,6 +21,7 @@ public:
 	virtual void update(double deltaTime) = 0;
 	//virtual void camera(glm::vec3 &entityPos) = 0;
 	void render(Shader &shader, glm::vec3 cameraPos, float theta);
+	void staticRender(Shader &shader);
 
 	inline glm::vec3 getPosition() { return position; }
 
