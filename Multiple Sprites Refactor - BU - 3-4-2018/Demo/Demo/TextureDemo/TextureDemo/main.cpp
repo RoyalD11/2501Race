@@ -152,7 +152,7 @@ void initBackgrounds(Model* model, int size, GLuint imports[7]) {
 	int **mapData;
 	int** map1;
 
-	fileHndl.open("Assets/map2.txt");
+	fileHndl.open("Assets/map3.txt");
 	fileHndl >> mapRows;
 	fileHndl >> mapCols;
 
@@ -332,7 +332,7 @@ int main(void){
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
 
 		}
-
+		int time = 0;
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
 			// Clear background
 			window.clear(viewport_background_color_g);
@@ -344,8 +344,9 @@ int main(void){
 			double currentTime = glfwGetTime();
 			double deltaTime = currentTime - lastTime;
 			lastTime = currentTime;
+			time++;
 
-
+			police->setTarget(model->player->getPosition());
 			for (int i = 0; i < model->updateables.size(); i++) {
 				/*
 				calls render and update functions
@@ -359,6 +360,9 @@ int main(void){
 				}
 			}
 
+			if (time % 100 == 0) {
+				police->setTarget(player->getPosition());
+			}
 
 			//Added Bullets update methods
 			for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);

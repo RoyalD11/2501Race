@@ -17,6 +17,7 @@ public:
 	void collision(Bullet bullet);
 	void rotateTo(float x, float y);
 	bool getIfHit();
+	void setTarget(glm::vec3 pos);
 
 private:
 	Player *player;

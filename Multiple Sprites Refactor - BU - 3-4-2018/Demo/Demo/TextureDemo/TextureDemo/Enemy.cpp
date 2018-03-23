@@ -25,7 +25,7 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
 void Enemy::update(double deltaTime) {
 
-	targetPosition = player->getPosition();
+	//targetPosition = player->getPosition();
 	rotateTo(player->getPosition().x, player->getPosition().y);
 
 	//dVelocity = (targetPosition - position);
@@ -77,4 +77,8 @@ void Enemy::rotateTo(float x, float y) {
 
 	rotationAmount = atan2(y, x) * (180 / 3.14);
 	rotationAmount *= -1;
+}
+
+void Enemy::setTarget(glm::vec3 pos) {
+	targetPosition = pos;
 }
