@@ -4,8 +4,11 @@ Menu::Menu(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmo
 	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements) {
 
 }
+void Menu::update(double deltaTime) {
 
+}
 
-void Menu::setPosition(float change) {
-
+void Menu::setPosition(float x, float y) {
+	position.x = x;
+	position.y = y;
 }
