@@ -258,7 +258,7 @@ int main(void){
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		
+
 		Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 		Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 		Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
@@ -357,17 +357,15 @@ int main(void){
 
 		Controller* controller = new Controller(model);
 		controller->model->player = player;
-<<<<<<< HEAD
+
+
+		for (int i = 0; i < model->enemies.size(); i++) {
+			model->enemies[i]->setTarget(model->player->getPosition());
+		}
 		while (!glfwWindowShouldClose(window.getWindow())) {
 			if (GAMESTATE == 0) {
 				// Clear background
 				window.clear(viewport_background_color_g);
-=======
-		
-		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
-			// Clear background
-			window.clear(viewport_background_color_g);
->>>>>>> 4b8b572dd65a4fb8f5a2a275623b1f56b4cf98bd
 
 				// Select proper shader program to use
 				shader.enable();
@@ -392,40 +390,18 @@ int main(void){
 				// Push buffer drawn in the background onto the display
 				glfwSwapBuffers(window.getWindow());
 			}
-			if(GAMESTATE == 2) {
+			if (GAMESTATE == 2) {
 				// Clear background
 				window.clear(viewport_background_color_g);
 
-<<<<<<< HEAD
 				// Select proper shader program to use
 				shader.enable();
 
 				menuprompt->setPosition(0, 0);
 				menuprompt->staticRender(shader);
-=======
-		for (int i = 0; i < model->enemies.size(); i++) {
-			model->enemies[i]->setTarget(model->player->getPosition());
-		}
-
-
-		
-		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
-			// Clear background
-			window.clear(viewport_background_color_g);
->>>>>>> 4b8b572dd65a4fb8f5a2a275623b1f56b4cf98bd
-
-				controller->input(window.getWindow(), &GAMESTATE);
-				// Update other events like input handling
-				glfwPollEvents();
-
-
-				// Push buffer drawn in the background onto the display
-				glfwSwapBuffers(window.getWindow());
 			}
 
-			police->setTarget(model->player->getPosition());
-
-			if( GAMESTATE == 1) {
+			if (GAMESTATE == 1) {
 				// Clear background
 				window.clear(viewport_background_color_g);
 
@@ -468,25 +444,15 @@ int main(void){
 
 
 
-<<<<<<< HEAD
 				//Out of bounds check to make sure we only loop through the elements we want to use
 				if (anicounter == 6) {
 					anicounter = 3;
 				}
 
 				//Calls animate to change the texture of the police car
-				police->animate(tex[anicounter]);
-=======
-			//Calls animate to change the texture of the police car
-			for (int i = 0; i < model->enemies.size(); i++) {
-				model->enemies[i]->animate(tex[anicounter]);
-			}
-			//Timer that slows the speed of the animation
-			if (wait > 0) {
-				wait--;
-			}
->>>>>>> 4b8b572dd65a4fb8f5a2a275623b1f56b4cf98bd
-
+				for (int i = 0; i < model->enemies.size(); i++) {
+					model->enemies[i]->animate(tex[anicounter]);
+				}
 				//Timer that slows the speed of the animation
 				if (wait > 0) {
 					wait--;
@@ -502,19 +468,10 @@ int main(void){
 				//Added bullets render methods and where i check for collision detection
 				for (int i = 0; i < shot; i++) {
 					ammo[i]->render(shader, player->getPosition(), player->getRotation());
-					police->collision(*ammo[i]);
+					for (int i = 0; i < model->enemies.size(); i++) {
+						model->enemies[i]->collision(*ammo[i]);
+					}
 				}
-
-<<<<<<< HEAD
-=======
-			//Added bullets render methods and where i check for collision detection
-			for (int i = 0; i < shot; i++) {
-				ammo[i]->render(shader, player->getPosition(), player->getRotation());
-				for (int i = 0; i < model->enemies.size(); i++) {
-					model->enemies[i]->collision(*ammo[i]);
-				}
-			}
->>>>>>> 4b8b572dd65a4fb8f5a2a275623b1f56b4cf98bd
 
 				// Update other events like input handling
 				glfwPollEvents();
@@ -522,10 +479,9 @@ int main(void){
 
 				// Push buffer drawn in the background onto the display
 				glfwSwapBuffers(window.getWindow());
-
 			}
+		}
 	}
-}
     catch (std::exception &e){
 		// print exception and sleep so error can be read
         PrintException(e);
