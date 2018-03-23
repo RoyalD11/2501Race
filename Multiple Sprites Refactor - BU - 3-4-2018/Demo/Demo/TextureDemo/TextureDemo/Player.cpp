@@ -6,7 +6,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements)
 {
 	//Sets the initial position and velocity
-	position = glm::vec3(2, 2, 0);
+	position = glm::vec3(2.2, 3, 0);
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 	

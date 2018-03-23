@@ -247,7 +247,8 @@ int main(void){
 
 		setallTexture();
 
-		Model* model = new Model();
+		Model* model = new Model(window.getWindow());
+		model->tex = tex;
 		//Controller* controller = new Controller(model);
 
 		//Made arraylist updateables.
@@ -257,9 +258,11 @@ int main(void){
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Enemy* enemy = new Enemy(glm::vec3(0.3f, 0.8f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[1], size, player);
-
-		Enemy* police = new Enemy(glm::vec3(0.2f, 0.2f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
+		
+		Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
+		Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
+		Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
+		Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
 
 		//Bullet constructor
 		Bullet* bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -314,10 +317,16 @@ int main(void){
 		model->updateables.push_back(bullet10);
 
 
-		model->updateables.push_back(police);
+		model->updateables.push_back(police1);
+		model->updateables.push_back(police2);
+		model->updateables.push_back(police3);
+		model->updateables.push_back(police4);
 		//model->updateables.push_back(test);
 
-		model->enemies.push_back(police);
+		model->enemies.push_back(police1);
+		model->enemies.push_back(police2);
+		model->enemies.push_back(police3);
+		model->enemies.push_back(police4);
 
 
 		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13] };
@@ -347,8 +356,8 @@ int main(void){
 		);
 
 		Controller* controller = new Controller(model);
-
 		controller->model->player = player;
+		
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE == 0) {
 			// Clear background
 			window.clear(viewport_background_color_g);
@@ -376,8 +385,12 @@ int main(void){
 			glfwSwapBuffers(window.getWindow());
 		}
 
-		police->setTarget(model->player->getPosition());
+		for (int i = 0; i < model->enemies.size(); i++) {
+			model->enemies[i]->setTarget(model->player->getPosition());
+		}
 
+
+		
 		while (!glfwWindowShouldClose(window.getWindow()) && GAMESTATE==1) {
 			// Clear background
 			window.clear(viewport_background_color_g);
@@ -427,8 +440,9 @@ int main(void){
 			}
 
 			//Calls animate to change the texture of the police car
-			police->animate(tex[anicounter]);
-
+			for (int i = 0; i < model->enemies.size(); i++) {
+				model->enemies[i]->animate(tex[anicounter]);
+			}
 			//Timer that slows the speed of the animation
 			if (wait > 0) {
 				wait--;
@@ -444,7 +458,9 @@ int main(void){
 			//Added bullets render methods and where i check for collision detection
 			for (int i = 0; i < shot; i++) {
 				ammo[i]->render(shader, player->getPosition(), player->getRotation());
-				police->collision(*ammo[i]);
+				for (int i = 0; i < model->enemies.size(); i++) {
+					model->enemies[i]->collision(*ammo[i]);
+				}
 			}
 
 

@@ -1,9 +1,10 @@
 #include "Model.h"
 
 
-Model::Model() {
+Model::Model(GLFWwindow* window) {
 	updateables = std::vector <GameEntity*>();
 	time = 0;
+	this->window = window;
 }
 
 
@@ -11,12 +12,14 @@ void Model::loadFromText() {
 	
 
 }
+
+
+//Full game function!
 void Model::update(double deltaTime, Shader shader) {
 	time++;
 	for (int i = 0; i < updateables.size(); i++) {
-		/*
-		calls render and update functions
-		*/
+		
+		//calls render and update functions		
 		updateables[i]->update(deltaTime);
 		if (!(updateables[i]->getPosition().x - player->getPosition().x > 2 ||
 			updateables[i]->getPosition().x - player->getPosition().x < -2 ||

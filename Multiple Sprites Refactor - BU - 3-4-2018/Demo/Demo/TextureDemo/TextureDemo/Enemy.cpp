@@ -8,11 +8,10 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	bool check = true;
 	float calc = rotationAmount;
 	//Sets the initial position and velocity
-	position = glm::vec3(0, 0, 0);
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 
-	maxSpeed = glm::vec3(1, 1, 0);
+	maxSpeed = glm::vec3(2, 2, 0);
 
 	acceleration = glm::vec3(1, 1, 0);
 	max_accel = glm::vec3(2, 2, 0);
