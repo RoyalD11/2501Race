@@ -169,7 +169,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
-    <ClCompile Include="BgEntity.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -187,7 +186,6 @@
     <ClInclude Include="..\..\Libraries\include\GL\glew.h" />
     <ClInclude Include="..\..\Libraries\include\GL\glfw3.h" />
     <ClInclude Include="Background.h" />
-    <ClInclude Include="BgEntity.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemy.h" />
