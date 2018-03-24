@@ -71,7 +71,7 @@ void Controller::playerMovement(GLFWwindow* window) {
 	if (model->reload > 0) {
 		model->reload--;
 	}
-
+	/*
 	//Space is used to fire a blade, calls the fire method from the bullet class
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
@@ -83,7 +83,7 @@ void Controller::playerMovement(GLFWwindow* window) {
 			std::cout << "FIRE \n \n";
 		}
 	}
-
+	*/
 	
 
 	//A and D are used to rotate the player

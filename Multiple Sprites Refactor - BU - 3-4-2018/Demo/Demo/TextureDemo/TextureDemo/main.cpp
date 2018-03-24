@@ -263,10 +263,10 @@ int main(void){
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
-		Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
-		Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
-		Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
-		Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player);
+		Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0));
+		Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
+		Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2,2, 0));
+		Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0));
 
 		//Bullet constructor
 		Bullet* bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -433,7 +433,20 @@ int main(void){
 				//if pasyer is moving play engine sound
 				//playersound.playersound(player->getVelocity());
 
-				
+				//Timer to keep track of when next shot can be fired
+				if (reload > 0) {
+					reload--;
+				}
+
+				//Space is used to fire a blade, calls the fire method from the bullet class
+				if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
+					//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
+					if (shot < AMMO_CAP && reload <= 0) {
+						ammo[shot]->fire(player->getPosition(), player->getRotation());
+						shot++;
+						reload = 500;
+					}
+				}
 
 
 

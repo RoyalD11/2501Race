@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, Player *playerEntity)
+Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, Player *playerEntity, glm::vec3 maxSpeed, glm::vec3 acceleration)
 	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), player(playerEntity)
 {
 	//variables added to help with implementation of methods below
@@ -11,9 +11,9 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 
-	maxSpeed = glm::vec3(2, 2, 0);
+	this->maxSpeed = maxSpeed;//glm::vec3(2, 2, 0);
 
-	acceleration = glm::vec3(1, 1, 0);
+	this->acceleration = acceleration;// glm::vec3(1, 1, 0);
 	max_accel = glm::vec3(2, 2, 0);
 
 	dVelocity = glm::vec3(0, 0, 0);
