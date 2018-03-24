@@ -140,6 +140,7 @@ void setallTexture(void)
 	setthisTexture(tex[11], "Sprites/str.png");
 	setthisTexture(tex[12], "Sprites/side.png");
 	setthisTexture(tex[13], "Sprites/edge.png");
+	setthisTexture(tex[21], "Sprites/start-v.png");
 
 	//text prompts for menus
 	setthisTexture(tex[14], "Sprites/gametitle.png");
@@ -213,6 +214,10 @@ void initBackgrounds(Model* model, int size, GLuint imports[7]) {
 				//edge
 				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size, 6);
 			}
+			else if (mapData[i][j] == 7) {
+				//edge
+				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[7], size, 7);
+			}
 			model->bgObjects.push_back(temp);
 			model->updateables.push_back(temp);
 		}
@@ -248,7 +253,6 @@ int main(void){
 		setallTexture();
 
 		Model* model = new Model(window.getWindow());
-		model->tex = tex;
 		//Controller* controller = new Controller(model);
 
 		//Made arraylist updateables.
@@ -329,7 +333,7 @@ int main(void){
 		model->enemies.push_back(police4);
 
 
-		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13] };
+		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13], tex[21] };
 		initBackgrounds(model, size, temp);
 
 
@@ -356,7 +360,9 @@ int main(void){
 		);
 
 		Controller* controller = new Controller(model);
-		controller->model->player = player;
+		controller->model->player=player;
+		controller->model->texture = tex;
+		controller->model->size = size;
 
 
 		for (int i = 0; i < model->enemies.size(); i++) {
@@ -427,20 +433,7 @@ int main(void){
 				//if pasyer is moving play engine sound
 				//playersound.playersound(player->getVelocity());
 
-				//Timer to keep track of when next shot can be fired
-				if (reload > 0) {
-					reload--;
-				}
-
-				//Space is used to fire a blade, calls the fire method from the bullet class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-					//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-					if (shot < AMMO_CAP && reload <= 0) {
-						ammo[shot]->fire(player->getPosition(), player->getRotation());
-						shot++;
-						reload = 500;
-					}
-				}
+				
 
 
 

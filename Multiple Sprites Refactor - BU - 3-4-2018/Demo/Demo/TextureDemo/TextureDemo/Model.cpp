@@ -5,6 +5,8 @@ Model::Model(GLFWwindow* window) {
 	updateables = std::vector <GameEntity*>();
 	time = 0;
 	this->window = window;
+	reload = 50;
+	
 }
 
 
@@ -31,19 +33,25 @@ void Model::update(double deltaTime, Shader shader) {
 	}
 
 	for (int i = 0; i < bgObjects.size(); i++) {
-		if ((!(bgObjects[i]->getPosition().x - player->getPosition().x > 0.5 ||
+		if (!(bgObjects[i]->getPosition().x - player->getPosition().x > 0.5 ||
 			bgObjects[i]->getPosition().x - player->getPosition().x < -0.5 ||
 			bgObjects[i]->getPosition().y - player->getPosition().y > 0.5 ||
-			bgObjects[i]->getPosition().y - player->getPosition().y < -0.5)) &&
-			bgObjects[i]->type == 6)
+			bgObjects[i]->getPosition().y - player->getPosition().y < -0.5))
 		{
-			player->hitWall = true;
-			std::cout << "a collision!";
-			break;
+			if (bgObjects[i]->type == 6) {
+				player->hitWall = true;
+				//std::cout << "a collision!";
+				break;
+			}
+			else{ player->hitWall = false; }
+			
+			if (bgObjects[i]->type == 7) {
+				std::cout << "Passed start!";
+				player->ammo.push_back(new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f)));
+			}
+			
 		}
-		else {
-			player->hitWall = false;
-		}
+			
 	}
 
 	for (int i = 0; i < enemies.size(); i++) {

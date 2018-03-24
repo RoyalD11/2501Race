@@ -25,10 +25,16 @@ public:
 
 	void update(double deltaTime, Shader shader);
 
+	
+
 	int time;
 	GLFWwindow* window;
-	GLuint* tex;
 
-	//Specific Gameobject Pointers
+	GLuint* texture;
+	int size;
+	int reload;
+	
 	Player* player;
+
+	
 };

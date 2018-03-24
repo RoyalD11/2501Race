@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameEntity.h"
+#include "Bullet.h"
 #include "Background.h"
 
 class Player : public GameEntity {
@@ -32,6 +33,8 @@ public:
 	void Player::setMaxAccel(glm::vec3 mod);
 
 	bool hitWall;
+
+	std::vector<Bullet*> ammo = std::vector<Bullet*>();
 
 private:
 
