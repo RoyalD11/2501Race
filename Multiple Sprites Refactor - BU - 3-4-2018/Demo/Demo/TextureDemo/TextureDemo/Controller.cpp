@@ -78,8 +78,7 @@ void Controller::playerMovement(GLFWwindow* window) {
 		if (model->player->ammo.size() > 0 && model->reload <=0) {
 			Bullet* b = new Bullet(model->player->getPosition(), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, model->texture[2], model->size, glm::vec3(0.0f, 0.0f, 0.0f));
 			model->updateables.push_back(b);
-			//model->player->ammo[0]
-			b->fire(model->player->getPosition(), model->player->getRotation());
+			//model->player->ammo[0]->fire(model->player->getPosition(), model->player->getRotation());
 			model->reload = 500;
 			std::cout << "FIRE \n \n";
 		}
