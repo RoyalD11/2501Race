@@ -38,29 +38,29 @@ void Controller::playerMovement(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		//redo ALL controls here
 		//model->player->moveTo(0, 1);
-		model->player->moveTo(0, 1.5);
+		model->player->moveTo(0, 0.5);
 		//std::cout << "W Key Pressed \n";
 		//model->player->setVelocity(model->player->getPosition());
 	}
 
 	//Used to slow down to a stop when button not held
 	else if (model->player->getVelocityX() < 0 && model->player->getVelocityY() < 0) {
-		model->player->moveTo(0, 0.5);
+		model->player->moveTo(0, 0.25);
 	}
 	else if (model->player->getVelocityX() > 0 && model->player->getVelocityY() > 0) {
-		model->player->moveTo(0, -0.5);
+		model->player->moveTo(0, -0.25);
 	}
 	else if (model->player->getVelocityX() > 0 && model->player->getVelocityY() < 0) {
-		model->player->moveTo(0, 0.5);
+		model->player->moveTo(0, 0.25);
 	}
 	else if (model->player->getVelocityX() < 0 && model->player->getVelocityY() > 0) {
-		model->player->moveTo(0, -0.5);
+		model->player->moveTo(0, -0.25);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
 		//redo ALL controls here
 		//model->player->moveTo(0, 1);
-		model->player->moveTo(0, -1.5);
+		model->player->moveTo(0, -0.5);
 		//std::cout << "W Key Pressed \n";
 		//model->player->setVelocity(model->player->getPosition());
 	}
