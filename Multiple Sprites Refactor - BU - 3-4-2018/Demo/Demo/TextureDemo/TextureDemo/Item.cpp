@@ -21,8 +21,9 @@ void Item::collision(Player player) {
 		currentItem = randomItem();
 		hit = true;
 
-		//Make item box disapear for a little while and then return
-
+		//Temp solution, just moves it way off screen
+		//To be changed later, 
+		position.y = 100000000;
 
 	}
 }
@@ -34,6 +35,13 @@ int Item::getCurrentItem() {
 //Returns a random number between 0 and 4
 int Item::randomItem() {
 	return rand() % 5;
+}
+
+//Will be used to reset the item box to the screen a set time after collision has happened
+//We should pass is the initial position of the box
+void Item::resetBox(float x, float y) {
+	position.x = x;
+	position.y = y;
 }
 
 

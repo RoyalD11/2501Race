@@ -6,13 +6,15 @@ class Item : public GameEntity {
 public:
 	Item(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLuint entityNumElements);
 
+	void animate(GLuint t);
+
 	void collision(Player player);
+
+	int getCurrentItem();
 
 	int randomItem();
 
-	void animate(GLuint t);
-
-	int getCurrentItem();
+	void resetBox(float x, float y);
 
 private:
 	int currentItem;
