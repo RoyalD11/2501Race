@@ -6,6 +6,7 @@
 class Sound {
 public:
 	void playersound(float x);
+	void playSound(int state);
 
 private:
 

@@ -9,3 +9,19 @@ void Sound::playersound(float playerspeed) {
 	}
 
 }
+
+void Sound::playSound(int state) {
+
+
+	switch (state) {
+	case 0:
+		PlaySound(TEXT("Sounds/MenuMusic.wav"), NULL, SND_FILENAME | SND_NOSTOP | SND_ASYNC);
+		break;
+	case 1:
+		PlaySound(NULL, NULL, 0);
+		break;
+	case 2:
+		break;
+	}
+	
+}

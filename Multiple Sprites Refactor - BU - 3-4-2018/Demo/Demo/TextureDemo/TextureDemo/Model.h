@@ -11,6 +11,9 @@
 #include "Window.h"
 #include <vector>
 
+#define AMMO_CAP 10
+
+
 class Model {
 public:
 	Model(GLFWwindow* window);
@@ -25,6 +28,8 @@ public:
 
 	void update(double deltaTime, Shader shader);
 
+	void loadGameObjects();
+	void removeGameObjects();
 	
 
 	int time;

@@ -1,4 +1,5 @@
 #define GLEW_STATIC
+#define AMMO_CAP 10
 
 #include <iostream>
 #include <stdexcept>
@@ -59,7 +60,7 @@ GLfloat lastFrame = 0.0f;
 
 
 //Const I added for Bullet Detection
-const int AMMO_CAP = 10;
+//const int AMMO_CAP = 10;
 
 // Global texture info
 GLuint tex[25];
@@ -252,34 +253,18 @@ int main(void){
 
 		setallTexture();
 
+		//Sets Model and controller objects
 		Model* model = new Model(window.getWindow());
-		//Controller* controller = new Controller(model);
+		Controller* controller = new Controller(model);
 
-		//Made arraylist updateables.
-		//std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
+		model->texture = tex;
+		model->size = size;
+		controller->current_state = GAMESTATE;
 
+		model->loadGameObjects();
 
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
-		Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
-		Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0));
-		Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
-		Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2,2, 0));
-		Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, tex[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0));
-
-		//Bullet constructor
-		Bullet* bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet2 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet3 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet4 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet5 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet6 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet7 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet8 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet9 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, tex[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
 		//menu items creation
 		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -290,49 +275,6 @@ int main(void){
 		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 
-		//Background* test = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(10, 10, 10), 0.0f, tex[6], size);
-
-
-		//Array that holds all the bullets
-		Bullet* ammo[AMMO_CAP];
-		ammo[0] = bullet;
-		ammo[1] = bullet2;
-		ammo[2] = bullet3;
-		ammo[3] = bullet4;
-		ammo[4] = bullet5;
-		ammo[5] = bullet6;
-		ammo[6] = bullet7;
-		ammo[7] = bullet8;
-		ammo[8] = bullet9;
-		ammo[9] = bullet10;
-
-		//push back objects
-		model->updateables.push_back(player);
-
-		model->updateables.push_back(bullet);
-		model->updateables.push_back(bullet2);
-		model->updateables.push_back(bullet3);
-		model->updateables.push_back(bullet4);
-		model->updateables.push_back(bullet5);
-		model->updateables.push_back(bullet6);
-		model->updateables.push_back(bullet7);
-		model->updateables.push_back(bullet8);
-		model->updateables.push_back(bullet9);
-		model->updateables.push_back(bullet10);
-
-
-		model->updateables.push_back(police1);
-		model->updateables.push_back(police2);
-		model->updateables.push_back(police3);
-		model->updateables.push_back(police4);
-		//model->updateables.push_back(test);
-
-		model->enemies.push_back(police1);
-		model->enemies.push_back(police2);
-		model->enemies.push_back(police3);
-		model->enemies.push_back(police4);
-
-
 		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13], tex[21] };
 		initBackgrounds(model, size, temp);
 
@@ -340,6 +282,7 @@ int main(void){
 
 		//Setup sound object
 		Sound playersound;
+		Sound audio;
 
 		// Run the main loop
 		bool animating = 1;
@@ -359,20 +302,19 @@ int main(void){
 			0.0, 0.0, 0.0, 1.0
 		);
 
-		Controller* controller = new Controller(model);
-		controller->model->player=player;
-		controller->model->texture = tex;
-		controller->model->size = size;
+		
 
 
 		for (int i = 0; i < model->enemies.size(); i++) {
 			model->enemies[i]->setTarget(model->player->getPosition());
 		}
 		while (!glfwWindowShouldClose(window.getWindow())) {
+			audio.playSound(GAMESTATE);
 			if (GAMESTATE == 0) {
 				// Clear background
 				window.clear(viewport_background_color_g);
 
+				
 				// Select proper shader program to use
 				shader.enable();
 
@@ -421,17 +363,18 @@ int main(void){
 
 
 				model->update(deltaTime, shader);
+				controller->input(window.getWindow(), &GAMESTATE);
+
+				//if pasyer is moving play engine sound
+				//playersound.playersound(player->getVelocity());
 
 
+				/*
 
 				//Added Bullets update methods
 				for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
 
-				controller->input(window.getWindow(), &GAMESTATE);
-
-
-				//if pasyer is moving play engine sound
-				//playersound.playersound(player->getVelocity());
+				
 
 				//Timer to keep track of when next shot can be fired
 				if (reload > 0) {
@@ -442,13 +385,13 @@ int main(void){
 				if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
 					//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
 					if (shot < AMMO_CAP && reload <= 0) {
-						ammo[shot]->fire(player->getPosition(), player->getRotation());
+						ammo[shot]->fire(model->player->getPosition(), model->player->getRotation());
 						shot++;
 						reload = 500;
 					}
 				}
 
-
+				*/
 
 				//Out of bounds check to make sure we only loop through the elements we want to use
 				if (anicounter == 6) {
@@ -470,7 +413,7 @@ int main(void){
 					wait = 150;
 				}
 
-
+				/*
 				//Added bullets render methods and where i check for collision detection
 				for (int i = 0; i < shot; i++) {
 					ammo[i]->render(shader, player->getPosition(), player->getRotation());
@@ -478,6 +421,7 @@ int main(void){
 						model->enemies[i]->collision(*ammo[i]);
 					}
 				}
+				*/
 
 				// Update other events like input handling
 				glfwPollEvents();

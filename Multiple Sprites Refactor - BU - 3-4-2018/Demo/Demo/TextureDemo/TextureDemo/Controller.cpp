@@ -5,42 +5,41 @@ Controller::Controller(Model* m) {
 	this->model = m;
 }
 
-void Controller::input(GLFWwindow* window,int* state) {
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		if (*state == 0) {
-			*state = 1;
-		}
-	}
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		if (*state == 0) {
-			*state = 2;
-		}
-	}
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-		if (*state == 0) {
-			*state = 8;
-		}
-	}
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
-		if (*state == 2) {
-			*state = 0;
-		}
-	}
-	//Checks player specific movement within function
-	playerMovement(window);
+void Controller::input(GLFWwindow* window, int* state) {
+
 	
+
+	switch (*state) {
+	case 0: 
+		std::cout << "\n Menu State \n";
+		menuController(window, state);
+		break;
+	case 1: 
+		//Checks player specific movement within function
+		playerMovement(window, state);
+		std::cout << "\n Play State \n";
+		break;
+	case 2: 
+		std::cout << "\n Store State \n";
+		break;
+	case 3: 
+		std::cout << "1";
+		break;
+	}
+
+	
+	
+
 }
 
 
 
-void Controller::playerMovement(GLFWwindow* window) {
+void Controller::playerMovement(GLFWwindow* window, int* state) {
 	//Key bindings, W and S toggle speeding up and slowing down, calls the setVelocity method from the player class
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		//redo ALL controls here
 		//model->player->moveTo(0, 1);
 		model->player->moveTo(0, 0.5);
-		//std::cout << "W Key Pressed \n";
-		//model->player->setVelocity(model->player->getPosition());
 	}
 
 	//Used to slow down to a stop when button not held
@@ -92,9 +91,15 @@ void Controller::playerMovement(GLFWwindow* window) {
 		model->player->setRotation(0.7);
 
 	}
+
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		//model->player->moveTo(1.5,0);
 		model->player->setRotation(-0.7);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		model->removeGameObjects();
+		*state = 0;
 	}
 
 
@@ -104,4 +109,31 @@ void Controller::playerMovement(GLFWwindow* window) {
 	glfwGetCursorPos(window, xpos, ypos);
 
 	//model->player->rotateToMouse(*xpos, *ypos);
+}
+
+void Controller::menuController(GLFWwindow* window, int* state) {
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 1;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 2;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		if (*state == 0) {
+			*state = 8;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
+		if (*state == 2) {
+			*state = 0;
+		}
+	}
+}
+
+void Controller::storeController(GLFWwindow* window, int* state) {
+
 }
