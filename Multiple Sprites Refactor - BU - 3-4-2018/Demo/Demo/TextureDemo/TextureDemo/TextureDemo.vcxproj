@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Andrew\Documents\Class\Homework\Year 5\Winter\Comp2501\RacingGame\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Andrew\Documents\Class\Homework\Year 5\Winter\Comp2501\RacingGame\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Andrew\Documents\Class\Homework\Year 5\Winter\Comp2501\RacingGame\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Andrew\Documents\Class\Homework\Year 5\Winter\Comp2501\RacingGame\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;C:\Users\jerbyz\source\repos\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;C:\Users\Theo\Documents\GitHub\2501Race\Multiple Sprites Refactor - BU - 3-4-2018\Demo\Demo\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
