@@ -47,7 +47,7 @@ void Model::update(double deltaTime, Shader shader) {
 
 			if (bgObjects[i]->type == 7) {
 				std::cout << "Passed start! \n";
-				player->ammo.push_back(new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f)));
+				if (player->ammo.size() < ammo_cap ) player->ammo.push_back(new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f)));
 				break;
 			}
 		}
@@ -79,54 +79,15 @@ void Model::loadGameObjects() {
 	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
 	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
 	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0), tempTextures);
-	
-
-
-	//Bullet constructor
-	Bullet* bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet2 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet3 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet4 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet5 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet6 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet7 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet8 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet9 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-	Bullet* bullet10 = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
 
 
 
 	this->player = player;
 
 
-	//Array that holds all the bullets
-	Bullet* ammo[AMMO_CAP];
-	ammo[0] = bullet;
-	ammo[1] = bullet2;
-	ammo[2] = bullet3;
-	ammo[3] = bullet4;
-	ammo[4] = bullet5;
-	ammo[5] = bullet6;
-	ammo[6] = bullet7;
-	ammo[7] = bullet8;
-	ammo[8] = bullet9;
-	ammo[9] = bullet10;
 
 	//push back objects
 	updateables.push_back(player);
-
-	updateables.insert(updateables.begin(), bullet10);
-	updateables.insert(updateables.begin(), bullet9);
-	updateables.insert(updateables.begin(), bullet8);
-	updateables.insert(updateables.begin(), bullet7);
-	updateables.insert(updateables.begin(), bullet6);
-	updateables.insert(updateables.begin(), bullet5);
-	updateables.insert(updateables.begin(), bullet4);
-	updateables.insert(updateables.begin(), bullet3);
-	updateables.insert(updateables.begin(), bullet2);
-	updateables.insert(updateables.begin(), bullet);
-
 
 	updateables.push_back(police1);
 	updateables.push_back(police2);

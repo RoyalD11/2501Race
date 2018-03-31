@@ -71,7 +71,7 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 	//Space is used to fire a blade, calls the fire method from the bullet class
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-		if (model->player->ammo.size() > 0 && model->reload <=0) {
+		if (shot < model->ammo_cap && model->reload <=0) {
 			model->player->ammo[shot]->fire(model->player->getPosition(), model->player->getRotation());
 			model->updateables.insert(model->updateables.begin(), model->player->ammo[shot]);
 			shot++;

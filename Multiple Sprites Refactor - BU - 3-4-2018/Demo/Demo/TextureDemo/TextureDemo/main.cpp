@@ -1,5 +1,5 @@
 #define GLEW_STATIC
-#define AMMO_CAP 10
+
 
 #include <iostream>
 #include <stdexcept>
