@@ -20,7 +20,7 @@ public:
 	//Gamestate controllers
 	void playerMovement(GLFWwindow* window, int* state);
 	void menuController(GLFWwindow* window, int* state);
-	void storeController(GLFWwindow* window, int* state);
+	void storeController(GLFWwindow* window, int* state,Player*p);
 
 	int current_state;
 	int shot = 0;
