@@ -120,6 +120,7 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
 		if (*state == 0) {
 			*state = 8;
 		}
