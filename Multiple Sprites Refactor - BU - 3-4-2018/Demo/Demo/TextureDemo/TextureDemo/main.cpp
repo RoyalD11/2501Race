@@ -344,6 +344,7 @@ int main(void){
 
 				menuprompt->setPosition(0, 0);
 				menuprompt->staticRender(shader);
+				controller->menuController(window.getWindow(), &GAMESTATE);
 			}
 
 			if (GAMESTATE == 1) {
