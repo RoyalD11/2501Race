@@ -1,6 +1,7 @@
 #include "Controller.h"
 
 
+
 Controller::Controller(Model* m) {
 	this->model = m;
 }
@@ -130,6 +131,18 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 	}
 }
 
-void Controller::storeController(GLFWwindow* window, int* state) {
+void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		*state = 0;
+	}
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		//player upgrade top speed
+	}
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		//player upgrade buff handling
+	}
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
+		//player upgrade 
+	}
 
 }
