@@ -26,6 +26,7 @@ void Enemy::update(double deltaTime) {
 
 	//targetPosition = player->getPosition();
 	rotateTo(player->getPosition().x, player->getPosition().y);
+	//rotateTo(targetPosition.x,targetPosition.y);
 
 	//dVelocity = (targetPosition - position);
 	dVelocity.x = (targetPosition.x - position.x) / deltaTime;

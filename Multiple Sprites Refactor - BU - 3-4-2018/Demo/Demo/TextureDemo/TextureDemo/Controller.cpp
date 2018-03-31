@@ -11,19 +11,15 @@ void Controller::input(GLFWwindow* window, int* state) {
 
 	switch (*state) {
 	case 0: 
-		std::cout << "\n Menu State \n";
 		menuController(window, state);
 		break;
 	case 1: 
 		//Checks player specific movement within function
 		playerMovement(window, state);
-		std::cout << "\n Play State \n";
 		break;
 	case 2: 
-		std::cout << "\n Store State \n";
 		break;
 	case 3: 
-		std::cout << "1";
 		break;
 	}
 

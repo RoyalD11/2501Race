@@ -186,7 +186,7 @@ void initBackgrounds(Model* model, int size, GLuint imports[7]) {
 	//GLuint texture = imports[0];
 	for (int i = 0; i < row1; i++) {
 		for (int j = 0; j < col1; j++) {
-			std::cout << mapData[i][j];
+			std::cout << mapData[i][j] << " ";
 			if (mapData[i][j] == 0) {
 				//r-u
 				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[0], size, 0);
@@ -308,15 +308,20 @@ int main(void){
 		for (int i = 0; i < model->enemies.size(); i++) {
 			model->enemies[i]->setTarget(model->player->getPosition());
 		}
-		while (!glfwWindowShouldClose(window.getWindow())) {
-			audio.playSound(GAMESTATE);
-			if (GAMESTATE == 0) {
-				// Clear background
-				window.clear(viewport_background_color_g);
 
-				
-				// Select proper shader program to use
-				shader.enable();
+
+		while (!glfwWindowShouldClose(window.getWindow())) {
+
+			// Clear background
+			window.clear(viewport_background_color_g);
+
+			// Select proper shader program to use
+			shader.enable();
+
+			audio.playSound(GAMESTATE);
+			controller->input(window.getWindow(), &GAMESTATE);
+			
+			if (GAMESTATE == 0) {
 
 				title->setPosition(0, 0.8);
 				title->staticRender(shader);
@@ -330,31 +335,14 @@ int main(void){
 				quitprompt->setPosition(0, -0.3);
 				quitprompt->staticRender(shader);
 
-				controller->input(window.getWindow(), &GAMESTATE);
-				// Update other events like input handling
-				glfwPollEvents();
-
-
-				// Push buffer drawn in the background onto the display
-				glfwSwapBuffers(window.getWindow());
 			}
 			if (GAMESTATE == 2) {
-				// Clear background
-				window.clear(viewport_background_color_g);
-
-				// Select proper shader program to use
-				shader.enable();
 
 				menuprompt->setPosition(0, 0);
 				menuprompt->staticRender(shader);
 			}
 
 			if (GAMESTATE == 1) {
-				// Clear background
-				window.clear(viewport_background_color_g);
-
-				// Select proper shader program to use
-				shader.enable();
 
 				// Update entities, I added the bullet.update
 				double currentTime = glfwGetTime();
@@ -363,7 +351,6 @@ int main(void){
 
 
 				model->update(deltaTime, shader);
-				controller->input(window.getWindow(), &GAMESTATE);
 
 				//if pasyer is moving play engine sound
 				//playersound.playersound(player->getVelocity());
@@ -393,25 +380,6 @@ int main(void){
 
 				*/
 
-				//Out of bounds check to make sure we only loop through the elements we want to use
-				if (anicounter == 6) {
-					anicounter = 3;
-				}
-
-				//Calls animate to change the texture of the police car
-				for (int i = 0; i < model->enemies.size(); i++) {
-					model->enemies[i]->animate(tex[anicounter]);
-				}
-				//Timer that slows the speed of the animation
-				if (wait > 0) {
-					wait--;
-				}
-
-				//If timer has finished increment to the next texture to be displayed and reset the timer
-				if (wait == 0) {
-					anicounter++;
-					wait = 150;
-				}
 
 				/*
 				//Added bullets render methods and where i check for collision detection
@@ -421,15 +389,15 @@ int main(void){
 						model->enemies[i]->collision(*ammo[i]);
 					}
 				}
-				*/
-
-				// Update other events like input handling
-				glfwPollEvents();
-
-
-				// Push buffer drawn in the background onto the display
-				glfwSwapBuffers(window.getWindow());
+				*/				
 			}
+
+			// Update other events like input handling
+			glfwPollEvents();
+
+
+			// Push buffer drawn in the background onto the display
+			glfwSwapBuffers(window.getWindow());
 		}
 	}
     catch (std::exception &e){

@@ -34,6 +34,7 @@ public:
 
 	bool hitWall;
 
+
 	std::vector<Bullet*> ammo = std::vector<Bullet*>();
 
 private:

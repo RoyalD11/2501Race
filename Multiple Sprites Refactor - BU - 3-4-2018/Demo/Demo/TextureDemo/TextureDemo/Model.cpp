@@ -6,7 +6,7 @@ Model::Model(GLFWwindow* window) {
 	time = 0;
 	this->window = window;
 	reload = 50;
-	
+	spriteCount = 3;
 }
 
 
@@ -18,7 +18,6 @@ void Model::loadFromText() {
 
 //Full game function!
 void Model::update(double deltaTime, Shader shader) {
-	time++;
 	for (int i = 0; i < updateables.size(); i++) {
 		
 		//calls render and update functions		
@@ -46,20 +45,28 @@ void Model::update(double deltaTime, Shader shader) {
 			else{ player->hitWall = false; }
 			
 			if (bgObjects[i]->type == 7) {
-				//std::cout << "Passed start! \n";
+				std::cout << "Passed start! \n";
 				player->ammo.push_back(new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f)));
 				break;
 			}
-			
 		}
 			
 	}
 
-	for (int i = 0; i < enemies.size(); i++) {
-		if (time % 100 == 0) {
-			enemies[i]->setTarget(player->getPosition());
-		}
+	if (spriteCount == 6) {
+		spriteCount = 3;
 	}
+
+	if (time <= 0) {
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies[i]->setTarget(player->getPosition());
+			enemies[i]->animate(texture[spriteCount]);
+		}
+		time = 100;
+		spriteCount++;
+	}
+
+	time--;
 }
 
 
@@ -70,6 +77,7 @@ void Model::loadGameObjects() {
 	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
 	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0));
 	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0));
+
 
 	//Bullet constructor
 	Bullet* bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, texture[2], size, glm::vec3(0.0f, 0.0f, 0.0f));

@@ -38,7 +38,7 @@ public:
 	GLuint* texture;
 	int size;
 	int reload;
-	
+	int spriteCount;
 	Player* player;
 
 	
