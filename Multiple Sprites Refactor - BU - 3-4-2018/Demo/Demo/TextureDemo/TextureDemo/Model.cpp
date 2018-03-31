@@ -118,16 +118,16 @@ void Model::loadGameObjects() {
 	//push back objects
 	updateables.push_back(player);
 
-	updateables.push_back(bullet);
-	updateables.push_back(bullet2);
-	updateables.push_back(bullet3);
-	updateables.push_back(bullet4);
-	updateables.push_back(bullet5);
-	updateables.push_back(bullet6);
-	updateables.push_back(bullet7);
-	updateables.push_back(bullet8);
-	updateables.push_back(bullet9);
-	updateables.push_back(bullet10);
+	updateables.insert(updateables.begin(), bullet10);
+	updateables.insert(updateables.begin(), bullet9);
+	updateables.insert(updateables.begin(), bullet8);
+	updateables.insert(updateables.begin(), bullet7);
+	updateables.insert(updateables.begin(), bullet6);
+	updateables.insert(updateables.begin(), bullet5);
+	updateables.insert(updateables.begin(), bullet4);
+	updateables.insert(updateables.begin(), bullet3);
+	updateables.insert(updateables.begin(), bullet2);
+	updateables.insert(updateables.begin(), bullet);
 
 
 	updateables.push_back(police1);
