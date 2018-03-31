@@ -55,21 +55,13 @@ void Model::update(double deltaTime, Shader shader) {
 			
 	}
 
-	if (spriteCount == 6) {
-		spriteCount = 3;
-	}
-
-	
 
 	if (time <= 0) {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies[i]->setTarget(player->getPosition());
-			//enemies[i]->animate(texture[spriteCount]);
 		}
 		time = 100;
-		spriteCount++;
 	}
-
 	time--;
 }
 
