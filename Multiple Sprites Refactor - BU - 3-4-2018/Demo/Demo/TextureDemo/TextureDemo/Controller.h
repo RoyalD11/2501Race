@@ -23,6 +23,7 @@ public:
 	void storeController(GLFWwindow* window, int* state);
 
 	int current_state;
+	int shot = 0;
 	
 	Model* model;
 };
