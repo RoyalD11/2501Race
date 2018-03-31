@@ -19,6 +19,9 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	dVelocity = glm::vec3(0, 0, 0);
 	iVelocity = glm::vec3(0, 0, 0);
 	rotationAmount = -90;
+
+	spriteCount = 0;
+	time = 100;
 }
 
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
@@ -52,11 +55,23 @@ void Enemy::update(double deltaTime) {
 
 	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+
+	animate();
 }
 
 //Changes the sprite currently being displayed
-void Enemy::animate(GLuint t) {
-	texture = t;
+void Enemy::animate() {
+	if (spriteCount == tex.size()) {
+		spriteCount = 0;
+	}
+
+	if (time <= 0) {
+		texture = tex[spriteCount];
+		time = 100;
+		spriteCount++;
+	}
+
+	time--;
 }
 
 //method added to check collision, if the bullet radius is within the enemy radius then the enemy is removed from the screen

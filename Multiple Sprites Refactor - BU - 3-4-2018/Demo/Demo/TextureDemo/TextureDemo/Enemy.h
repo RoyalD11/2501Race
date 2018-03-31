@@ -11,17 +11,20 @@ public:
 
 	virtual void update(double deltaTime) override;
 
-	void animate(GLuint t);
+	void animate();
 
 	//method added to the enemy class
 	void collision(Bullet bullet);
 	void rotateTo(float x, float y);
 	bool getIfHit();
 	void setTarget(glm::vec3 pos);
+	std::vector<GLuint> tex;
 
 private:
 	Player *player;
 	bool check;
 	float calc;
 	bool hit;
+	int time = 0;
+	int spriteCount;
 };
