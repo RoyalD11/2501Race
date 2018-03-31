@@ -19,6 +19,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	iVelocity = glm::vec3(0, 0, 0);
 	rotationAmount = -90;
 	hitWall = false;
+	coins = 0;
 }
 
 //Updates the position of the spaceship based on how the ship has rotated and its current velocity
@@ -84,6 +85,10 @@ void Player::setVelocityX(float change) {
 
 void Player::setMaxAccel(glm::vec3 mod) {
 	max_accel = mod;
+}
+
+void Player::setTopSpeed(glm::vec3 mod) {
+	maxSpeed = mod;
 }
 
 //Sets the ships rotation based on the direction you inputed from main

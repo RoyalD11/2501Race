@@ -32,7 +32,13 @@ public:
 
 	void Player::setMaxAccel(glm::vec3 mod);
 
+	void Player::setTopSpeed(glm::vec3 mod);
+
 	bool hitWall;
+
+	int coins;
+
+	int turningBuff;
 
 
 	std::vector<Bullet*> ammo = std::vector<Bullet*>();

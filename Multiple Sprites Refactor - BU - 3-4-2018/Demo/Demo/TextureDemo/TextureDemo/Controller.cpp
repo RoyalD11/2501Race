@@ -138,12 +138,32 @@ void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
 		//player upgrade top speed
+		if (p->coins < 1) {
+			p->setTopSpeed(glm::vec3(3, 3, 0));
+			p->coins--;
+		}
+		else {
+			//nothing
+		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
 		//player upgrade buff handling
+		if (p->coins < 5) {
+			p->turningBuff++;
+			p->coins -= 5;
+		}
+		else {
+			//nothing
+		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
-		//player upgrade 
+		//player upgrade ammo cap
+		if (p->coins < 10) {
+
+		}
+		else {
+
+		}
 	}
 
 }
