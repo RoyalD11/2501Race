@@ -69,10 +69,16 @@ void Model::update(double deltaTime, Shader shader) {
 void Model::loadGameObjects() {
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
-	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0));
-	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
-	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0));
-	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0));
+	std::vector<GLuint> tempTextures;
+	tempTextures.push_back(texture[3]);
+	tempTextures.push_back(texture[4]);
+	tempTextures.push_back(texture[5]);
+
+
+	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0), tempTextures);
+	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
+	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
+	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0), tempTextures);
 	
 
 
@@ -133,12 +139,6 @@ void Model::loadGameObjects() {
 	enemies.push_back(police3);
 	enemies.push_back(police4);
 
-	for (int i = 0; i < 4; i++) {
-		enemies[i]->tex.push_back(texture[3]);
-		enemies[i]->tex.push_back(texture[4]);
-		enemies[i]->tex.push_back(texture[5]);
-	}
-	
 }
 
 void Model::removeGameObjects() {
