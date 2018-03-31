@@ -11,7 +11,7 @@
 #include "Window.h"
 #include <vector>
 
-#define AMMO_CAP 10
+
 
 
 class Model {
@@ -39,6 +39,7 @@ public:
 	int size;
 	int reload;
 	int spriteCount;
+	int ammo_cap = 5;
 	Player* player;
 
 	

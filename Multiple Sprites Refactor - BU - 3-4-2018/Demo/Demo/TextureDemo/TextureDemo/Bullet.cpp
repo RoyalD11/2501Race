@@ -21,8 +21,8 @@ void Bullet::update(double deltaTime) {
 
 //Fires the bullet based on the position of the player
 void Bullet::fire(glm::vec3 playerPos, float playerRotation) {
-	velocity.x = 2.5;
-	velocity.y = 2.5;
+	velocity.x = 3;
+	velocity.y = 3;
 	position.x = playerPos.x;
 	position.y = playerPos.y;
 	bulletRotate = playerRotation;
