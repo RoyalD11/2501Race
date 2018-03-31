@@ -7,6 +7,7 @@ Model::Model(GLFWwindow* window) {
 	this->window = window;
 	reload = 50;
 	spriteCount = 3;
+	ambulanceCount = 22;
 }
 
 
@@ -56,11 +57,17 @@ void Model::update(double deltaTime, Shader shader) {
 	if (spriteCount == 6) {
 		spriteCount = 3;
 	}
+	if (ambulanceCount == 25) {
+		ambulanceCount = 22;
+	}
+
+	
 
 	if (time <= 0) {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies[i]->setTarget(player->getPosition());
-			enemies[i]->animate(texture[spriteCount]);
+			if (i != 1) enemies[i]->animate(texture[spriteCount]);
+			else if(i == 1) enemies[i]->animate(texture[ambulanceCount]);
 		}
 		time = 100;
 		spriteCount++;
@@ -74,7 +81,7 @@ void Model::loadGameObjects() {
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 
 	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0));
-	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
+	Enemy* Ambulance = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[22], size, player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0));
 	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0));
 	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0));
 
@@ -128,13 +135,13 @@ void Model::loadGameObjects() {
 	updateables.push_back(police1);
 	updateables.push_back(police2);
 	updateables.push_back(police3);
-	updateables.push_back(police4);
+	updateables.push_back(Ambulance);
 	//updateables.push_back(test);
 
 	enemies.push_back(police1);
 	enemies.push_back(police2);
 	enemies.push_back(police3);
-	enemies.push_back(police4);
+	enemies.push_back(Ambulance);
 }
 
 void Model::removeGameObjects() {
