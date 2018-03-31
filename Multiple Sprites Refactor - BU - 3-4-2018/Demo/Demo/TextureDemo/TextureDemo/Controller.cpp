@@ -120,6 +120,7 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
 		if (*state == 0) {
 			*state = 8;
 		}
@@ -133,7 +134,8 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 
 void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-		*state = 0;
+		//*state = 0;
+		
 	}
 	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
 		//player upgrade top speed
