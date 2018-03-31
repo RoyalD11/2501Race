@@ -39,7 +39,6 @@ public:
 	int size;
 	int reload;
 	int spriteCount;
-	int ambulanceCount;
 	Player* player;
 
 	
