@@ -71,6 +71,7 @@ void Model::update(double deltaTime, Shader shader) {
 		}
 		time = 100;
 		spriteCount++;
+		ambulanceCount++;
 	}
 
 	time--;
