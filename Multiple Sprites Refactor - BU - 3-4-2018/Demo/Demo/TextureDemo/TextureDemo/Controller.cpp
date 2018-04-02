@@ -84,8 +84,8 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 		model->player->setRotation(-0.7);
 	}
 
-	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-		model->removeGameObjects();
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
+		model->unmountGame();
 		*state = 0;
 	}
 

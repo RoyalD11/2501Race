@@ -131,7 +131,6 @@ void Model::loadGameObjects() {
 	updateables.push_back(police2);
 	updateables.push_back(police3);
 	updateables.push_back(police4);
-	//updateables.push_back(test);
 
 	enemies.push_back(police1);
 	enemies.push_back(police2);
