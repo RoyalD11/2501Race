@@ -229,7 +229,8 @@ void Model::initBackgrounds(int size, GLuint imports[10]) {
 	int **mapData;
 	int** map1;
 
-	fileHndl.open("Assets/map3.txt");
+	//fileHndl.open("Assets/map3.txt");
+	fileHndl.open("Assets/" + map);
 	fileHndl >> mapRows;
 	fileHndl >> mapCols;
 

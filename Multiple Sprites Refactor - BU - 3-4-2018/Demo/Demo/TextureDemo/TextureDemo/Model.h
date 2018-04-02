@@ -49,6 +49,9 @@ public:
 	int* state;
 	GLuint* texture;
 
+	//char* map = "map3.txt";
+	std::string map = "map3.txt";
+
 	int size;
 	int reload;
 	int spriteCount;

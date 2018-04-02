@@ -26,7 +26,12 @@ void Controller::input(GLFWwindow* window, int* state) {
 	}
 
 	
-	
+	if (glfwGetKey(window, GLFW_KEY_SLASH) == GLFW_PRESS) {
+		model->map = "map2.txt";
+	}
+	if (glfwGetKey(window, GLFW_KEY_PERIOD) == GLFW_PRESS) {
+		model->map = "map3.txt";
+	}
 
 }
 
