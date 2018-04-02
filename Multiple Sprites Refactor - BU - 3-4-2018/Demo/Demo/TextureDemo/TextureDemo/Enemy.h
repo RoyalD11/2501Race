@@ -19,6 +19,7 @@ public:
 	bool getIfHit();
 	void setTarget(glm::vec3 pos);
 	std::vector<GLuint> tex;
+	void checkPlayerDeath();
 
 private:
 	Player *player;

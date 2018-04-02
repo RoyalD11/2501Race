@@ -16,31 +16,48 @@
 
 class Model {
 public:
-	Model(GLFWwindow* window);
+	Model(GLFWwindow* window, int* state);
 
 	//All GameObjects in Game
 	std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
 	std::vector <Enemy*>      enemies = std::vector <Enemy*>();
 	std::vector <Background*> bgObjects = std::vector <Background*>();
 	
-
-	void loadFromText();
+	
 
 	void update(double deltaTime, Shader shader);
 
 	void loadGameObjects();
 	void removeGameObjects();
+	void startCountDown();
+	void firePlayerBullets();
+	void loadPlayerBullets();
+	void checkLap();
+	void printStats();
+	void initBackgrounds(int size, GLuint imports[10]);
+
+	void endGame(bool winloss);
+
+	//Used for re-loading game
+	void unmountGame();
 	
 
 	int time;
-	GLFWwindow* window;
 
+	GLFWwindow* window;
+	int* state;
 	GLuint* texture;
+
 	int size;
 	int reload;
 	int spriteCount;
-	int ammo_cap = 5;
-	Player* player;
+	int lap;
+	bool startRace;
 
+	/*Constant player specific variables*/
+	Player* player;
+	int player_wins;
+	int player_deaths;
+	int player_points;
 	
 };

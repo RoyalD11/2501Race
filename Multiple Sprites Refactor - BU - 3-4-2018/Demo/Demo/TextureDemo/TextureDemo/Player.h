@@ -36,13 +36,20 @@ public:
 
 	bool hitWall;
 
-	int coins;
+	int points;
 
 	int turningBuff;
+	int shot;
+	int ammo_cap;
 
+	bool death;
+	int death_counter;
+
+	bool checkSwitch();
+	void lapCheckpoint(bool in);
 
 	std::vector<Bullet*> ammo = std::vector<Bullet*>();
 
 private:
-
+	bool checkpoint;
 };

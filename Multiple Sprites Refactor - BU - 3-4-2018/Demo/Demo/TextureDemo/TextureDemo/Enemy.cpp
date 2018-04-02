@@ -8,7 +8,7 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	bool check = true;
 	float calc = rotationAmount;
 	//Sets the initial position and velocity
-	targetPosition = glm::vec3(0, 0, 0);
+	//targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 
 	this->maxSpeed = maxSpeed;//glm::vec3(2, 2, 0);
@@ -22,6 +22,7 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 
 	spriteCount = 0;
 	time = 100;
+
 }
 
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
@@ -56,6 +57,7 @@ void Enemy::update(double deltaTime) {
 	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 
+	checkPlayerDeath();
 	animate();
 }
 
@@ -96,4 +98,15 @@ void Enemy::rotateTo(float x, float y) {
 
 void Enemy::setTarget(glm::vec3 pos) {
 	targetPosition = pos;
+}
+
+void Enemy::checkPlayerDeath() {
+	if (!(getPosition().x - player->getPosition().x > 0.5 ||
+		getPosition().x - player->getPosition().x < -0.5 ||
+		getPosition().y - player->getPosition().y > 0.5 ||
+		getPosition().y - player->getPosition().y < -0.5))
+	{
+		player->death_counter++;
+	}
+
 }

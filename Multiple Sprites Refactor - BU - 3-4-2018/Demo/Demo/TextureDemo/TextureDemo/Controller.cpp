@@ -63,25 +63,14 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 
 	
 
-	//Timer to keep track of when next shot can be fired
-	if (model->reload > 0) {
-		model->reload--;
-	}
+	
 	
 	//Space is used to fire a blade, calls the fire method from the bullet class
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-		if (shot < model->ammo_cap && model->reload <=0) {
-			model->player->ammo[shot]->fire(model->player->getPosition(), model->player->getRotation());
-			model->updateables.insert(model->updateables.begin(), model->player->ammo[shot]);
-			shot++;
-			model->reload = 500;
-			std::cout << "FIRE \n \n";
-		}
+		model->firePlayerBullets();
+		
 	}
-	
-	
-
 	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		//model->player->moveTo(-1.5, 0);
@@ -99,6 +88,16 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 		*state = 0;
 	}
 
+	//Prints current stats to console
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) {
+		model->printStats();
+	}
+
+	//Lap Cheat
+	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+		model->lap = 4;
+	}
+
 
 	double* xpos = new double[1];
 	double* ypos = new double[1];
@@ -112,6 +111,10 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
 		if (*state == 0) {
 			*state = 1;
+
+			//Loads the GAME
+			model->loadGameObjects();
+			model->loadPlayerBullets();
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
@@ -138,9 +141,9 @@ void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
 		//player upgrade top speed
-		if (p->coins < 1) {
+		if (p->points < 1) {
 			p->setTopSpeed(glm::vec3(3, 3, 0));
-			p->coins--;
+			p->points--;
 		}
 		else {
 			//nothing
@@ -148,9 +151,9 @@ void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
 		//player upgrade buff handling
-		if (p->coins < 5) {
+		if (p->points < 5) {
 			p->turningBuff++;
-			p->coins -= 5;
+			p->points -= 5;
 		}
 		else {
 			//nothing
@@ -158,7 +161,7 @@ void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 	}
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
 		//player upgrade ammo cap
-		if (p->coins < 10) {
+		if (p->points < 10) {
 
 		}
 		else {

@@ -18,14 +18,23 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	dVelocity = glm::vec3(0, 0, 0);
 	iVelocity = glm::vec3(0, 0, 0);
 	rotationAmount = -90;
+
 	hitWall = false;
-	coins = 0;
+	
+	points = 0;
+	shot = 0;
+	ammo_cap = 5;
+	
+	checkpoint = false;
+
+	death_counter = 0;
 }
 
 //Updates the position of the spaceship based on how the ship has rotated and its current velocity
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Player::update(double deltaTime) {
 	if (hitWall) { velocity *= glm::vec3(0.9, 0.9, 0); }
+	if (death_counter > 10000) { death = true; }
 
 	//dVelocity = (targetPosition - position);
 	dVelocity.x = (targetPosition.x - position.x) / deltaTime;
@@ -89,6 +98,14 @@ void Player::setMaxAccel(glm::vec3 mod) {
 
 void Player::setTopSpeed(glm::vec3 mod) {
 	maxSpeed = mod;
+}
+
+bool Player::checkSwitch() {
+	return checkpoint;
+}
+
+void Player::lapCheckpoint(bool in) {
+	checkpoint = in;
 }
 
 //Sets the ships rotation based on the direction you inputed from main

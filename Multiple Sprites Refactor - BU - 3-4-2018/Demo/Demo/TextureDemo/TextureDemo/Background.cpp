@@ -9,6 +9,7 @@ Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entit
 
 }
 
+
 //Updates the position of the bullet, also rotates the bullet as it moves through the air
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Background::update(double deltaTime) {

@@ -140,8 +140,10 @@ void setallTexture(void)
 	setthisTexture(tex[10], "Sprites/up-to-side-i.png");
 	setthisTexture(tex[11], "Sprites/str.png");
 	setthisTexture(tex[12], "Sprites/side.png");
-	setthisTexture(tex[13], "Sprites/edge.png");
+	setthisTexture(tex[13], "Sprites/edge2.png");
 	setthisTexture(tex[21], "Sprites/start-v.png");
+	setthisTexture(tex[25], "Sprites/side-coin.png");
+	setthisTexture(tex[26], "Sprites/up-coin.png");
 
 	//text prompts for menus
 	setthisTexture(tex[14], "Sprites/gametitle.png");
@@ -160,76 +162,6 @@ void setallTexture(void)
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
 
-void initBackgrounds(Model* model, int size, GLuint imports[7]) {
-	std::ifstream fileHndl;
-
-
-	int mapRows;
-	int mapCols;
-	int **mapData;
-	int** map1;
-
-	fileHndl.open("Assets/map3.txt");
-	fileHndl >> mapRows;
-	fileHndl >> mapCols;
-
-	mapData = new int *[mapRows];
-	for (int i = 0; i < mapRows; i++) {
-		mapData[i] = new int[mapCols];
-	}
-
-	for (int i = 0; i < mapRows; i++) {
-		for (int j = 0; j < mapCols; j++) {
-			fileHndl >> mapData[i][j];
-		}
-	}
-
-	int row1 = mapRows;
-	int col1 = mapCols;
-	Background* temp;
-	//GLuint texture = imports[0];
-	for (int i = 0; i < row1; i++) {
-		for (int j = 0; j < col1; j++) {
-			std::cout << mapData[i][j] << " ";
-			if (mapData[i][j] == 0) {
-				//r-u
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[0], size, 0);
-			}
-			else if (mapData[i][j] == 1) {
-				//d-r
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[1], size, 1);
-			}
-			else if (mapData[i][j] == 2) {
-				//l-u
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[2], size, 2);
-			}
-			else if (mapData[i][j] == 3) {
-				//d-l
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[3], size, 3);
-			}
-			else if (mapData[i][j] == 4) {
-				//up
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[4], size, 4);
-			}
-			else if (mapData[i][j] == 5) {
-				//side
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[5], size, 5);
-			}
-			else if (mapData[i][j] == 6) {
-				//edge
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size, 6);
-			}
-			else if (mapData[i][j] == 7) {
-				//edge
-				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[7], size, 7);
-			}
-			model->bgObjects.push_back(temp);
-			model->updateables.push_back(temp);
-		}
-		std::cout << "\n";
-	}
-	std::cout << "Map Loaded";
-}
 
 
 
@@ -258,14 +190,15 @@ int main(void){
 		setallTexture();
 
 		//Sets Model and controller objects
-		Model* model = new Model(window.getWindow());
+		Model* model = new Model(window.getWindow(), &GAMESTATE);
 		Controller* controller = new Controller(model);
 
 		model->texture = tex;
 		model->size = size;
 		controller->current_state = GAMESTATE;
 
-		model->loadGameObjects();
+		//model->loadGameObjects();
+		//model->loadPlayerBullets();
 
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
@@ -277,11 +210,6 @@ int main(void){
 		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
 		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
-
-		GLuint temp[8] = { tex[7], tex[8], tex[9], tex[10], tex[11], tex[12], tex[13], tex[21] };
-		initBackgrounds(model, size, temp);
-
 
 
 		//Setup sound object
@@ -316,14 +244,17 @@ int main(void){
 
 		while (!glfwWindowShouldClose(window.getWindow())) {
 
+			audio.playSound(GAMESTATE);
+			controller->input(window.getWindow(), &GAMESTATE);
+
+
 			// Clear background
 			window.clear(viewport_background_color_g);
 
 			// Select proper shader program to use
 			shader.enable();
 
-			audio.playSound(GAMESTATE);
-			controller->input(window.getWindow(), &GAMESTATE);
+
 			
 			if (GAMESTATE == 0) {
 
@@ -345,6 +276,7 @@ int main(void){
 				menuprompt->setPosition(0, 0);
 				menuprompt->staticRender(shader);
 				controller->menuController(window.getWindow(), &GAMESTATE);
+				model->unmountGame();
 			}
 
 			if (GAMESTATE == 1) {
@@ -356,45 +288,7 @@ int main(void){
 
 
 				model->update(deltaTime, shader);
-
-				//if pasyer is moving play engine sound
-				//playersound.playersound(player->getVelocity());
-
-
-				/*
-
-				//Added Bullets update methods
-				for (int i = 0; i < AMMO_CAP; i++) ammo[i]->update(deltaTime);
-
-				
-
-				//Timer to keep track of when next shot can be fired
-				if (reload > 0) {
-					reload--;
-				}
-
-				//Space is used to fire a blade, calls the fire method from the bullet class
-				if (glfwGetKey(window.getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-					//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
-					if (shot < AMMO_CAP && reload <= 0) {
-						ammo[shot]->fire(model->player->getPosition(), model->player->getRotation());
-						shot++;
-						reload = 500;
-					}
-				}
-
-				*/
-
-
-				/*
-				//Added bullets render methods and where i check for collision detection
-				for (int i = 0; i < shot; i++) {
-					ammo[i]->render(shader, player->getPosition(), player->getRotation());
-					for (int i = 0; i < model->enemies.size(); i++) {
-						model->enemies[i]->collision(*ammo[i]);
-					}
-				}
-				*/				
+				model->checkLap();
 			}
 
 			// Update other events like input handling
