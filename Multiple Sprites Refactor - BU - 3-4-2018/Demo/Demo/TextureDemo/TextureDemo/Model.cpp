@@ -13,6 +13,7 @@ Model::Model(GLFWwindow* window, int* state) {
 	player_deaths = 0;
 	player_points = 0;
 	player_wins = 0;
+	player_ammo_cap = 5;
 }
 
 
@@ -94,6 +95,7 @@ void Model::update(double deltaTime, Shader shader) {
 
 void Model::loadGameObjects() {
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
+	player->ammo_cap = player_ammo_cap;
 
 	std::vector<GLuint> tempTextures;
 	tempTextures.push_back(texture[3]);

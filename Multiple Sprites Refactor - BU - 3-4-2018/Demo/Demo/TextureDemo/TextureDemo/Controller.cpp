@@ -19,6 +19,7 @@ void Controller::input(GLFWwindow* window, int* state) {
 		playerMovement(window, state);
 		break;
 	case 2: 
+		storeController(window, state);
 		break;
 	case 3: 
 		break;
@@ -93,9 +94,18 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 		model->printStats();
 	}
 
+	/*
+	  ================CHEATS========================
+	*/
+
 	//Lap Cheat
 	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
 		model->lap = 4;
+	}
+
+	//Point Cheat
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) {
+		model->player->points += 100;
 	}
 
 
@@ -128,28 +138,25 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 			*state = 8;
 		}
 	}
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
-		if (*state == 2) {
-			*state = 0;
-		}
-	}
+	
 }
 
-void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
+void Controller::storeController(GLFWwindow* window,int* state) {
 	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
 		*state = 0;
 	}
 	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
 		//player upgrade top speed
-		if (p->points < 1) {
-			p->setTopSpeed(glm::vec3(3, 3, 0));
-			p->points--;
+		if (model->player_points >= 500) {
+			model->player->setTopSpeed(glm::vec3(3, 3, 0));
+			model->player_points -= 500;
 		}
 		else {
 			//nothing
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		/*
 		//player upgrade buff handling
 		if (p->points < 5) {
 			p->turningBuff++;
@@ -158,14 +165,19 @@ void Controller::storeController(GLFWwindow* window,int* state, Player* p) {
 		else {
 			//nothing
 		}
+		*/
 	}
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
-		//player upgrade ammo cap
-		if (p->points < 10) {
 
+		//player upgrade ammo cap
+		if (model->player_points >= 1000) {
+			model->player_ammo_cap += 5;
+			model->player_points -= 1000;
+			std::cout << "Ammo Upgarde bought. \n";
+			std::cout << "Current Ammo per Lap Cap:" << model->player_ammo_cap << "\n";
 		}
 		else {
-
+			//nothing
 		}
 	}
 

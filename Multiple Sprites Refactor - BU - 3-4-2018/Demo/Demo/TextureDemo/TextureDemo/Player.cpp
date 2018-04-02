@@ -34,7 +34,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 //The constant being multipled in the cos and sin function is used to convert from degrees to radians
 void Player::update(double deltaTime) {
 	if (hitWall) { velocity *= glm::vec3(0.9, 0.9, 0); }
-	if (death_counter > 10000) { death = true; }
+	if (death_counter > 3000) { death = true; }
 
 	//dVelocity = (targetPosition - position);
 	dVelocity.x = (targetPosition.x - position.x) / deltaTime;

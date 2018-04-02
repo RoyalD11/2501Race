@@ -57,6 +57,7 @@ public:
 	/*Constant player specific variables*/
 	Player* player;
 	int player_wins;
+	int player_ammo_cap;
 	int player_deaths;
 	int player_points;
 	
