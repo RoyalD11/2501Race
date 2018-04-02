@@ -119,7 +119,7 @@ void Player::setActiveBullet(Bullet* b) {
 
 //Sets the ships rotation based on the direction you inputed from main
 void Player::setRotation(float increment) {
-	rotationAmount += increment;
+	rotationAmount += increment + turningBuff;
 }
 
 void Player::rotateToMouse(float xpos, float ypos) {

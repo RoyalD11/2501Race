@@ -73,6 +73,8 @@ void Model::update(double deltaTime, Shader shader) {
 					loadPlayerBullets();
 					player->lapCheckpoint(false);
 					lap++;
+
+					//add new enemy each succesful lap
 					std::vector<GLuint> tempTextures;
 					tempTextures.push_back(texture[22]);
 					tempTextures.push_back(texture[23]);
@@ -83,6 +85,7 @@ void Model::update(double deltaTime, Shader shader) {
 						glm::vec3(3, 3, 0), tempTextures);
 					updateables.insert(updateables.begin(), p);
 					enemies.push_back(p);
+
 					std::cout << "Lap: " << lap << "\n";
 				}
 			}

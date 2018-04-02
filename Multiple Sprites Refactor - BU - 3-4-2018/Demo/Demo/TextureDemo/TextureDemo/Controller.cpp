@@ -33,6 +33,7 @@ void Controller::input(GLFWwindow* window, int* state) {
 		model->map = "map3.txt";
 	}
 
+
 }
 
 
@@ -94,13 +95,14 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 		*state = 0;
 	}
 
+
 	//Prints current stats to console
 	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) {
 		model->printStats();
 	}
 
 	/*
-	  ================CHEATS========================
+	================CHEATS========================
 	*/
 
 	//Lap Cheat
@@ -161,16 +163,15 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
-		/*
 		//player upgrade buff handling
-		if (p->points < 5) {
-			p->turningBuff++;
-			p->points -= 5;
+		if (model->player_points < 500) {
+			model->player->turningBuff++;
+			model->player_points -= 500;
 		}
 		else {
 			//nothing
 		}
-		*/
+
 	}
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
 
