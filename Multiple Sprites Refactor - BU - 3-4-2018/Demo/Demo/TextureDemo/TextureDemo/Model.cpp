@@ -73,6 +73,16 @@ void Model::update(double deltaTime, Shader shader) {
 					loadPlayerBullets();
 					player->lapCheckpoint(false);
 					lap++;
+					std::vector<GLuint> tempTextures;
+					tempTextures.push_back(texture[22]);
+					tempTextures.push_back(texture[23]);
+					tempTextures.push_back(texture[24]);
+					Enemy* p = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f),
+						0.0f, texture[4], size, player,
+						glm::vec3(3, 3, 0),
+						glm::vec3(3, 3, 0), tempTextures);
+					updateables.insert(updateables.begin(), p);
+					enemies.push_back(p);
 					std::cout << "Lap: " << lap << "\n";
 				}
 			}
@@ -209,10 +219,12 @@ void Model::endGame(bool winloss) {
 }
 
 void Model::printStats() {
-	std::cout << "\n \n";
+	std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	std::cout << "Player Race Balance: " << player->points << "\n";
 	std::cout << "Current Lap:         " << lap << "\n";
 	std::cout << "Player Ammo:         " << player->ammo.size() << "\n";
+	std::cout << "Player Heat:         " << player->death_counter << " / 5000   \n";
+	std::cout << "=====================================================\n";
 	std::cout << "Player Total Points: " << player_points << "\n";
 	std::cout << "Player Total Wins:   " << player_wins << "\n";
 	std::cout << "Player Total Deaths: " << player_deaths << "\n";

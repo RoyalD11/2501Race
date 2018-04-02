@@ -41,6 +41,7 @@ public:
 	bool hitWall;
 
 	int points;
+	int current_lap = 1;
 
 	int turningBuff;
 	int shot;

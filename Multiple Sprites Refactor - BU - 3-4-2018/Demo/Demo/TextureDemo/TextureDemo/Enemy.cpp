@@ -114,7 +114,7 @@ void Enemy::checkPlayerDeath() {
 		getPosition().y - player->getPosition().y > 0.5 ||
 		getPosition().y - player->getPosition().y < -0.5))
 	{
-		player->death_counter++;
+		player->death_counter+=player->current_lap;
 	}
 
 }
