@@ -28,6 +28,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	checkpoint = false;
 
 	death_counter = 0;
+
 }
 
 //Updates the position of the spaceship based on how the ship has rotated and its current velocity
@@ -106,6 +107,14 @@ bool Player::checkSwitch() {
 
 void Player::lapCheckpoint(bool in) {
 	checkpoint = in;
+}
+
+void Player::initActiveBullet(GLuint t, int s) {
+	current_active_bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, t, s, glm::vec3(0.0f, 0.0f, 0.0f));
+}
+
+void Player::setActiveBullet(Bullet* b) {
+	current_active_bullet = b;
 }
 
 //Sets the ships rotation based on the direction you inputed from main

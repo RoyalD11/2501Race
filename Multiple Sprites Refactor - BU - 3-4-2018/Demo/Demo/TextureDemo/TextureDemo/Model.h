@@ -10,6 +10,7 @@
 
 #include "Window.h"
 #include <vector>
+#include <algorithm>
 
 
 

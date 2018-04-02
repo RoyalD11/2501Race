@@ -17,6 +17,8 @@ void Bullet::update(double deltaTime) {
 	position.x += velocity.x * (float)deltaTime * cos(bulletRotate * 0.01745333);
 	position.y += velocity.y * (float)deltaTime * sin(bulletRotate * 0.01745333);
 	rotationAmount++;
+
+	
 }
 
 //Fires the bullet based on the position of the player
@@ -37,3 +39,12 @@ void Bullet::setPosition(float change) {
 
 }
 
+bool Bullet::outOfBounds() {
+	if (position.x > 20 ||
+		position.x < -20 ||
+		position.y > 20 ||
+		position.y < -20) {
+		return true;
+	}
+	return false;
+}

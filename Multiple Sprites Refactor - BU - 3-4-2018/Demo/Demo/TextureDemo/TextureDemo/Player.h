@@ -34,6 +34,10 @@ public:
 
 	void Player::setTopSpeed(glm::vec3 mod);
 
+	void Player::initActiveBullet(GLuint t, int s);
+
+	void setActiveBullet(Bullet* b);
+
 	bool hitWall;
 
 	int points;
@@ -49,6 +53,8 @@ public:
 	void lapCheckpoint(bool in);
 
 	std::vector<Bullet*> ammo = std::vector<Bullet*>();
+
+	Bullet* current_active_bullet;
 
 private:
 	bool checkpoint;

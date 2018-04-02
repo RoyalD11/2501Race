@@ -77,13 +77,21 @@ void Enemy::animate() {
 }
 
 //method added to check collision, if the bullet radius is within the enemy radius then the enemy is removed from the screen
-void Enemy::collision(Bullet bullet) {
-	float colDetect = pow((bullet.getPosition().x - position.x), 2) + pow((bullet.getPosition().y - position.y), 2);
-	if (pow(colDetect, 0.5) <= scale.x) {
-		bullet.setPosition(10000.0); 
-		position.y = 10000;
-		hit = true;
+bool Enemy::collision(Bullet bullet) {
+	if (!(getPosition().x - bullet.getPosition().x > 0.5 ||
+		getPosition().x - bullet.getPosition().x < -0.5 ||
+		getPosition().y - bullet.getPosition().y > 0.5 ||
+		getPosition().y - bullet.getPosition().y < -0.5))
+	{
+		//position.x = 100;
+		//position.y = 100;
+		//velocity = glm::vec3(0,0,0);
+		//maxSpeed = glm::vec3(0, 0, 0);
+		//position.y = 10000;
+		std::cout << "Hit! *explosion noises* \n";
+		return true;
 	}
+	return false;
 }
 
 bool Enemy::getIfHit() {

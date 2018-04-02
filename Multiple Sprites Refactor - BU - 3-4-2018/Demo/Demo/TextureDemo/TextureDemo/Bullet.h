@@ -16,6 +16,7 @@ public:
 	void fire(glm::vec3 playerPos, float playerRotation);
 
 	void Bullet::setPosition(float change);
+	bool outOfBounds();
 
 private:
 	glm::vec3 velocity;

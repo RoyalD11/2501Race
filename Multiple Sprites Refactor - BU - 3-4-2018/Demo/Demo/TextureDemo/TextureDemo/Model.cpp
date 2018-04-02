@@ -25,8 +25,17 @@ void Model::update(double deltaTime, Shader shader) {
 	//if (startRace) { startCountDown(); }
 	if (player->death) { endGame(false); }
 
+	int a = 0;
 	for (int i = 0; i < updateables.size(); i++) {
-		
+		if (a < enemies.size()) {
+			if (enemies[a]->collision(*player->current_active_bullet)) {
+				updateables.erase(std::remove(updateables.begin(), updateables.end(), enemies[a]), updateables.end());
+				enemies.erase(enemies.begin() + a);
+			}
+			else {
+				a++;
+			}
+		}
 		//calls render and update functions		
 		updateables[i]->update(deltaTime);
 		if (!(updateables[i]->getPosition().x - player->getPosition().x > 2 ||
@@ -96,6 +105,7 @@ void Model::update(double deltaTime, Shader shader) {
 void Model::loadGameObjects() {
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, glm::vec3(0.0f, 0.0f, 0.0f));
 	player->ammo_cap = player_ammo_cap;
+	player->initActiveBullet(texture[2], size);
 
 	std::vector<GLuint> tempTextures;
 	tempTextures.push_back(texture[3]);
@@ -154,6 +164,7 @@ void Model::firePlayerBullets() {
 		if (player->shot < player->ammo_cap && player->ammo.size() != 0) {
 			player->ammo[player->shot]->fire(player->getPosition(), player->getRotation());
 			updateables.insert(updateables.begin(), player->ammo[player->shot]);
+			player->setActiveBullet(player->ammo[player->shot]);
 			player->shot++;
 			reload = 500;
 			std::cout << "FIRE \n";

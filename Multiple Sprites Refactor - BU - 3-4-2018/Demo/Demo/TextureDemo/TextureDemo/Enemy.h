@@ -14,7 +14,7 @@ public:
 	void animate();
 
 	//method added to the enemy class
-	void collision(Bullet bullet);
+	bool collision(Bullet bullet);
 	void rotateTo(float x, float y);
 	bool getIfHit();
 	void setTarget(glm::vec3 pos);
