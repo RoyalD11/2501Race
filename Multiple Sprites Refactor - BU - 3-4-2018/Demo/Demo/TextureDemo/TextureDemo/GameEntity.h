@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include <stdlib.h>
+#include <vector>
 
 #include "Shader.h"
 
@@ -28,8 +29,10 @@ public:
 	inline glm::vec3 getVelocity() { return velocity; }
 	inline glm::vec3 getScale() { return scale; }
 	inline std::string getType() { return type; }
-	inline void setPosition(glm::vec3 p) { position = p; }
+	inline void setPosition(glm::vec3 p) { position += p; }
 	inline void setVelocity(glm::vec3 v) { velocity = v; }
+
+	std::vector<GameEntity*> collidables;
 
 protected:
 

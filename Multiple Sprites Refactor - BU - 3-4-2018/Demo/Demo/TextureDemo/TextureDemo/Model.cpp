@@ -41,42 +41,6 @@ void Model::update(double deltaTime, Shader shader) {
 		}
 
 
-
-		//Car Collsion detection, for elastic collision ect
-		int status = 0;
-		for (int j = 0; j < cars.size(); j++) {
-			//simpleCarBounce(2, 2, 0.5,
-				//updateables[i]->getPosition(), updateables[i]->getVelocity(),
-				//cars[j]->getPosition(), cars[j]->getVelocity());
-			if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
-				double alpha = 0;
-				double x1 = updateables[i]->getPosition().x;
-				double y1 = updateables[i]->getPosition().y;
-				double x2 = cars[j]->getPosition().x;
-				double y2 = cars[j]->getPosition().y;
-
-				double vx1 = updateables[i]->getVelocity().x;
-				double vy1 = updateables[i]->getVelocity().y;
-				double vx2 = cars[j]->getVelocity().x;
-				double vy2 = cars[j]->getVelocity().y;
-
-				basicCollision('s', alpha, 0.3, 10.0, 10.0, 0.05, 0.05,
-					x1, y1, x2, y2,
-					vx1, vy1, vx2, vy2, status);
-				//std::cout << status << "\n";
-				//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
-				updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
-
-				//cars[j]->setPosition(glm::vec3(x2, y2, 0));
-				cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
-				
-			}
-		}
-
-		
-
-
-
 		//Updates all GameEntitys positions	
 		updateables[i]->update(deltaTime);
 
@@ -89,16 +53,44 @@ void Model::update(double deltaTime, Shader shader) {
 		{
 			updateables[i]->render(shader, player->getPosition(), player->getRotation());
 		}
+
+		//Car Collsion detection, for elastic collision ect
+		int status = 0;
+		for (int j = 0; j < cars.size(); j++) {
+			if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
+				double alpha = 0;
+				double x1 = updateables[i]->getPosition().x;
+				double y1 = updateables[i]->getPosition().y;
+				double x2 = cars[j]->getPosition().x;
+				double y2 = cars[j]->getPosition().y;
+
+				double vx1 = updateables[i]->getVelocity().x;
+				double vy1 = updateables[i]->getVelocity().y;
+				double vx2 = cars[j]->getVelocity().x;
+				double vy2 = cars[j]->getVelocity().y;
+
+				basicCollision('s', alpha, 0.3, 3.0, 3.0, 0.01, 0.01,
+					x1, y1, x2, y2,
+					vx1, vy1, vx2, vy2, status);
+				//std::cout << status << "\n";
+				//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
+				updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
+
+				//cars[j]->setPosition(glm::vec3(x2, y2, 0));
+				cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
+
+			}
+		}
+
+
+
 		
 
 	}
 
-	//Blank Background used for placeholder
-	//Background* currentTile = new Background(glm::vec3(0,0,0), glm::vec3(0, 0, 0), 0.0f, texture[0], size, "bg", 0);
+	//     ** Background Smart rendering and tile detection **
 
 	for (int i = 0; i < bgObjects.size(); i++) {
-
-		
 
 		if (!(bgObjects[i]->getPosition().x - player->getPosition().x > 0.5 * bgObjects[i]->getScale().x ||
 			bgObjects[i]->getPosition().x - player->getPosition().x < -0.5 * bgObjects[i]->getScale().x ||
@@ -161,7 +153,7 @@ void Model::update(double deltaTime, Shader shader) {
 	}
 	
 	
-
+	
 	if (time <= 0) {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies[i]->setTarget(player->getPosition());
@@ -531,8 +523,10 @@ void Model::basicCollision(char mode, double alpha, double R,
 	double& vx1, double& vy1, double& vx2, double& vy2,
 	int& error) {
 
-		double  r12, m21, d, gammav, gammaxy, dgamma, dr, dc, sqs, t,
-			dvx2, a, x21, y21, vx21, vy21, pi2, vx_cm, vy_cm;
+		double  r12, m21, d, gammav, gammaxy, 
+			dgamma, dr, dc, sqs, t,
+			dvx2, a, x21, y21, vx21, 
+			vy21, pi2, vx_cm, vy_cm;
 
 		//     ***initialize some variables ****
 		pi2 = 2 * acos(-1.0E0);
