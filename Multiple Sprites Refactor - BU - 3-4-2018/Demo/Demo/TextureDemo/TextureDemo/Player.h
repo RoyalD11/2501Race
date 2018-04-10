@@ -6,7 +6,7 @@
 
 class Player : public GameEntity {
 public:
-	Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &playerVelocity);
+	Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity);
 
 	virtual void update(double deltaTime) override;
 
@@ -19,8 +19,6 @@ public:
 	void Player::moveTo(glm::vec3 inputVelocity);
 
 	float Player::getRotation();
-
-	glm::vec3 Player::getVelocity();
 
 	float Player::getVelocityX();
 

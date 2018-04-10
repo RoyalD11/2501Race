@@ -7,7 +7,7 @@
 
 class Enemy : public GameEntity {
 public:
-	Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, Player *playerEntity, glm::vec3 maxSpeed, glm::vec3 accel, std::vector<GLuint> tex);
+	Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, Player *playerEntity, glm::vec3 maxSpeed, glm::vec3 accel, std::vector<GLuint> tex);
 
 	virtual void update(double deltaTime) override;
 

@@ -23,7 +23,7 @@ public:
 	std::vector <GameEntity*> updateables = std::vector <GameEntity*>();
 	std::vector <Enemy*>      enemies = std::vector <Enemy*>();
 	std::vector <Background*> bgObjects = std::vector <Background*>();
-	
+	std::vector <GameEntity*> cars = std::vector <GameEntity*>();
 	
 
 	void update(double deltaTime, Shader shader);
@@ -36,6 +36,16 @@ public:
 	void checkLap();
 	void printStats();
 	void initBackgrounds(int size, GLuint imports[10]);
+
+	void simpleCarBounce(float m1, float m2, float R,
+		glm::vec3 p1, glm::vec3 &v1,
+		glm::vec3 p2, glm::vec3 &v2 );
+
+	void collision2D(char mode, float alpha, float R,
+		float m1, float m2, float r1, float r2,
+		glm::vec3 &p1, glm::vec3 &v1, 
+		glm::vec3 &p2, glm::vec3 &v2,
+		int& error);
 
 	void endGame(bool winloss);
 
@@ -57,6 +67,8 @@ public:
 	int spriteCount;
 	int lap;
 	bool startRace;
+
+	Background* currentTile;
 
 	/*Constant player specific variables*/
 	Player* player;

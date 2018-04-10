@@ -3,8 +3,8 @@
 //Extra library so I can hold all the bullets
 #include <list>
 
-Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, int type)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), type(type)
+Background::Background(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, int bgType)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type), bgType(bgType)
 {
 
 }

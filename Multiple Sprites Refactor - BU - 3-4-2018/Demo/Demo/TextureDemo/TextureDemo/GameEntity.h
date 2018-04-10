@@ -17,7 +17,7 @@
 
 class GameEntity {
 public:
-	GameEntity(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements);
+	GameEntity(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string &entityType);
 
 	virtual void update(double deltaTime) = 0;
 	//virtual void camera(glm::vec3 &entityPos) = 0;
@@ -25,6 +25,9 @@ public:
 	void staticRender(Shader &shader);
 
 	inline glm::vec3 getPosition() { return position; }
+	inline glm::vec3 getVelocity() { return velocity; }
+	inline glm::vec3 getScale() { return scale; }
+	inline std::string getType() { return type; }
 
 protected:
 
@@ -41,6 +44,7 @@ protected:
 	glm::vec3 targetPosition;
 	glm::vec3 dVelocity;
 
+	std::string type;
 
 	//Display/Render Variables
 	glm::vec3 scale;

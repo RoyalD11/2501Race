@@ -3,11 +3,11 @@
 //Extra library so I can hold all the bullets
 #include <list>
 
-Bullet::Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &bulletVelocity)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), velocity(bulletVelocity)
+Bullet::Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &bulletVelocity)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type)
 {
 	bulletRotate = rotationAmount;
-
+	velocity = bulletVelocity;
 }
 
 //Updates the position of the bullet, also rotates the bullet as it moves through the air

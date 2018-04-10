@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <iostream>
 
-Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &playerVelocity)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements)
+Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type)
 {
 	//Sets the initial position and velocity
 	position = glm::vec3(2.2, 3, 0);
@@ -73,9 +73,6 @@ void Player::moveTo(glm::vec3 inputVelocity) {
 	targetPosition.y += inputVelocity.y;
 }
 
-glm::vec3 Player::getVelocity() {
-	return velocity;
-}
 
 float Player::getVelocityY() {
 	return velocity.y;
@@ -110,7 +107,7 @@ void Player::lapCheckpoint(bool in) {
 }
 
 void Player::initActiveBullet(GLuint t, int s) {
-	current_active_bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, t, s, glm::vec3(0.0f, 0.0f, 0.0f));
+	current_active_bullet = new Bullet(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(0.2f, 0.2f, 0.2f), 0.0f, t, s, "bullet", glm::vec3(0.0f, 0.0f, 0.0f));
 }
 
 void Player::setActiveBullet(Bullet* b) {

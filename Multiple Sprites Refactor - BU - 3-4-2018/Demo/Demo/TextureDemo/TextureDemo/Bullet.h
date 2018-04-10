@@ -7,7 +7,7 @@
 
 class Bullet : public GameEntity {
 public:
-	Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, glm::vec3 &bulletVelocity);
+	Bullet(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &bulletVelocity);
 
 	virtual void update(double deltaTime) override;
 	//virtual void camera(glm::vec3 &entityPos) override;
@@ -19,6 +19,6 @@ public:
 	bool outOfBounds();
 
 private:
-	glm::vec3 velocity;
+	//glm::vec3 velocity;
 	float bulletRotate;
 };

@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, Player *playerEntity, glm::vec3 maxSpeed, glm::vec3 acceleration, std::vector<GLuint> tex)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements), player(playerEntity), tex(tex)
+Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, Player *playerEntity, glm::vec3 maxSpeed, glm::vec3 acceleration, std::vector<GLuint> tex)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type), player(playerEntity), tex(tex)
 {
 	//variables added to help with implementation of methods below
 	bool check = true;
@@ -29,8 +29,8 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 void Enemy::update(double deltaTime) {
 
 	//targetPosition = player->getPosition();
-	rotateTo(player->getPosition().x, player->getPosition().y);
-	//rotateTo(targetPosition.x,targetPosition.y);
+	//rotateTo(player->getPosition().x, player->getPosition().y);
+	
 
 	//dVelocity = (targetPosition - position);
 	dVelocity.x = (targetPosition.x - position.x) / deltaTime;
@@ -56,6 +56,10 @@ void Enemy::update(double deltaTime) {
 
 	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+
+	//rotationAmount++;
+	rotationAmount = atan2(position.y, position.x) * (180 / 3.14);
+	rotationAmount *= -1;
 
 	checkPlayerDeath();
 	animate();
