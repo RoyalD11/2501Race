@@ -125,7 +125,7 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 }
 
 void Controller::menuController(GLFWwindow* window, int* state) {
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
 		if (*state == 0) {
 			*state = 1;
 

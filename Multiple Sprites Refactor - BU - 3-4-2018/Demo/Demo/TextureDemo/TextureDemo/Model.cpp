@@ -41,25 +41,36 @@ void Model::update(double deltaTime, Shader shader) {
 		}
 
 
-		/*
-			void simpleCarBounce(float m1, float m2, float R,
-			glm::vec3 p1, glm::vec3 &v1,
-			glm::vec3 p2, glm::vec3 &v2 );
-
-			void collision2D(char mode, float alpha, float R,
-			float m1, float m2, float r1, float r2,
-			glm::vec3 &p1, glm::vec3 &v1,
-			glm::vec3 &p2, glm::vec3 &v2,
-			int& error);
-		*/
-
 
 		//Car Collsion detection, for elastic collision ect
 		int status = 0;
 		for (int j = 0; j < cars.size(); j++) {
-			simpleCarBounce(2, 2, 0.5,
-				updateables[i]->getPosition(), updateables[i]->getVelocity(),
-				cars[j]->getPosition(), cars[j]->getVelocity());
+			//simpleCarBounce(2, 2, 0.5,
+				//updateables[i]->getPosition(), updateables[i]->getVelocity(),
+				//cars[j]->getPosition(), cars[j]->getVelocity());
+			if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
+				double alpha = 0;
+				double x1 = updateables[i]->getPosition().x;
+				double y1 = updateables[i]->getPosition().y;
+				double x2 = cars[j]->getPosition().x;
+				double y2 = cars[j]->getPosition().y;
+
+				double vx1 = updateables[i]->getVelocity().x;
+				double vy1 = updateables[i]->getVelocity().y;
+				double vx2 = cars[j]->getVelocity().x;
+				double vy2 = cars[j]->getVelocity().y;
+
+				basicCollision('s', alpha, 0.3, 10.0, 10.0, 0.05, 0.05,
+					x1, y1, x2, y2,
+					vx1, vy1, vx2, vy2, status);
+				//std::cout << status << "\n";
+				//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
+				updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
+
+				//cars[j]->setPosition(glm::vec3(x2, y2, 0));
+				cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
+				
+			}
 		}
 
 		
@@ -514,60 +525,102 @@ void Model::collision2D(char mode, float alpha, float R,
 		return;
 }
 
+void Model::basicCollision(char mode, double alpha, double R,
+	double m1, double m2, double r1, double r2,
+	double& x1, double& y1, double& x2, double& y2,
+	double& vx1, double& vy1, double& vx2, double& vy2,
+	int& error) {
 
-void Model::simpleCarBounce(float m1, float m2, float R,
-	glm::vec3 p1, glm::vec3 &v1,
-	glm::vec3 p2, glm::vec3 &v2) {
+		double  r12, m21, d, gammav, gammaxy, dgamma, dr, dc, sqs, t,
+			dvx2, a, x21, y21, vx21, vy21, pi2, vx_cm, vy_cm;
 
-		double  m21, dvx2, a, x21, y21, vx21, vy21, fy21, sign, vx_cm, vy_cm;
-
-
+		//     ***initialize some variables ****
+		pi2 = 2 * acos(-1.0E0);
+		error = 0;
+		r12 = r1 + r2;
 		m21 = m2 / m1;
-		x21 = p2.x - p1.x;
-		y21 = p2.y - p1.y;
-		vx21 = v2.x - v1.x;
-		vy21 = v2.y - v1.y;
+		x21 = x2 - x1;
+		y21 = y2 - y1;
+		vx21 = vx2 - vx1;
+		vy21 = vy2 - vy1;
 
-		vx_cm = (m1*v1.x + m2 * v2.x) / (m1 + m2);
-		vy_cm = (m1*v1.y + m2 * v2.y) / (m1 + m2);
+		vx_cm = (m1*vx1 + m2 * vx2) / (m1 + m2);
+		vy_cm = (m1*vy1 + m2 * vy2) / (m1 + m2);
+
+		//     ****  return old positions and velocities if relative velocity =0 ****
+		if (vx21 == 0 && vy21 == 0) { error = 1; return; }
 
 
-		//     *** return old velocities if balls are not approaching ***
-		if ((vx21*x21 + vy21 * y21) >= 0) { 
-			return;
+		//     *** calculate relative velocity angle             
+		gammav = atan2(-vy21, -vx21);
+
+
+
+
+		//******** this block only if initial positions are given *********
+
+		if (mode != 'f') {
+
+
+			d = sqrt(x21*x21 + y21 * y21);
+
+			//     **** return if distance between balls smaller than sum of radii ***
+			if (d<r12) { error = 2; return; }
+
+			//     *** calculate relative position angle and normalized impact parameter ***
+			gammaxy = atan2(y21, x21);
+			dgamma = gammaxy - gammav;
+			if (dgamma>pi2) { dgamma = dgamma - pi2; }
+			else if (dgamma<-pi2) { dgamma = dgamma + pi2; }
+			dr = d * sin(dgamma) / r12;
+
+			//     **** return old positions and velocities if balls do not collide ***
+			if ((fabs(dgamma)>pi2 / 4 && fabs(dgamma)<0.75*pi2) || fabs(dr)>1)
+			{
+				error = 1; return;
+			}
+
+
+			//     **** calculate impact angle if balls do collide ***
+			alpha = asin(dr);
+
+
+			//     **** calculate time to collision ***
+			dc = d * cos(dgamma);
+			if (dc>0) { sqs = 1.0; }
+			else { sqs = -1.0; }
+			t = (dc - sqs * r12*sqrt(1 - dr * dr)) / sqrt(vx21*vx21 + vy21 * vy21);
+			//    **** update positions ***
+			x1 = x1 + vx1 * t;
+			y1 = y1 + vy1 * t;
+			x2 = x2 + vx2 * t;
+			y2 = y2 + vy2 * t;
+
+
 		}
 
+		//******** END 'this block only if initial positions are given' *********
 
-		//     *** I have inserted the following statements to avoid a zero divide; 
-		//         (for single precision calculations, 
-		//          1.0E-12 should be replaced by a larger value). **************  
 
-		fy21 = 1.0E-12 * fabs(y21);
-		if (fabs(x21)<fy21) {
-			if (x21<0) {
-				sign = -1; 
-			}
-			else {
-				sign = 1;
-			}
-			x21 = fy21 * sign;
-		}
 
 		//     ***  update velocities ***
-		a = y21 / x21;
+
+		a = tan(gammav + alpha);
+
 		dvx2 = -2 * (vx21 + a * vy21) / ((1 + a * a)*(1 + m21));
 
-
-		v2.x = v2.x + dvx2;
-		v2.y = v2.y + a * dvx2;
-		v1.x = v1.x - m21 * dvx2;
-		v1.y = v1.y - a * m21*dvx2;
+		vx2 = vx2 + dvx2;
+		vy2 = vy2 + a * dvx2;
+		vx1 = vx1 - m21 * dvx2;
+		vy1 = vy1 - a * m21*dvx2;
 
 		//     ***  velocity correction for inelastic collisions ***
-		v1.x = (v1.x - vx_cm)*R + vx_cm;
-		v1.y = (v1.y - vy_cm)*R + vy_cm;
-		v2.x = (v2.x - vx_cm)*R + vx_cm;
-		v2.y = (v2.y - vy_cm)*R + vy_cm;
+
+		vx1 = (vx1 - vx_cm)*R + vx_cm;
+		vy1 = (vy1 - vy_cm)*R + vy_cm;
+		vx2 = (vx2 - vx_cm)*R + vx_cm;
+		vy2 = (vy2 - vy_cm)*R + vy_cm;
+
 
 		return;
 }

@@ -82,10 +82,10 @@ void Enemy::animate() {
 
 //method added to check collision, if the bullet radius is within the enemy radius then the enemy is removed from the screen
 bool Enemy::collision(Bullet bullet) {
-	if (!(getPosition().x - bullet.getPosition().x > 0.5 ||
-		getPosition().x - bullet.getPosition().x < -0.5 ||
-		getPosition().y - bullet.getPosition().y > 0.5 ||
-		getPosition().y - bullet.getPosition().y < -0.5))
+	if (!(getPosition().x - bullet.getPosition().x > 0.2 ||
+		getPosition().x - bullet.getPosition().x < -0.2 ||
+		getPosition().y - bullet.getPosition().y > 0.2 ||
+		getPosition().y - bullet.getPosition().y < -0.2))
 	{
 		//position.x = 100;
 		//position.y = 100;
