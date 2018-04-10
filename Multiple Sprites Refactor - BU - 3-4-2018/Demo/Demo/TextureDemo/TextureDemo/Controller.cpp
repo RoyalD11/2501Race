@@ -22,6 +22,7 @@ void Controller::input(GLFWwindow* window, int* state) {
 		storeController(window, state);
 		break;
 	case 3: 
+		mapController(window, state);
 		break;
 	}
 
@@ -127,11 +128,11 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 void Controller::menuController(GLFWwindow* window, int* state) {
 	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) {
 		if (*state == 0) {
-			*state = 1;
+			*state = 3;
 
 			//Loads the GAME
-			model->loadGameObjects();
-			model->loadPlayerBullets();
+			//model->loadGameObjects();
+			//model->loadPlayerBullets();
 		}
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
@@ -187,4 +188,25 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 		}
 	}
 
+}
+
+void Controller::mapController(GLFWwindow* window, int* state) {
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+		model->map = "map3.txt";
+		*state = 1;
+		model->loadGameObjects();
+		model->loadPlayerBullets();
+	}
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+		model->map = "map2.txt";
+		*state = 1;
+		model->loadGameObjects();
+		model->loadPlayerBullets();
+	}
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+		model->map = "map1.txt";
+		*state = 1;
+		model->loadGameObjects();
+		model->loadPlayerBullets();
+	}
 }
