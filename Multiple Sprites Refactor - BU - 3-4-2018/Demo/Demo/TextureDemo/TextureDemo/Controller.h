@@ -21,6 +21,8 @@ public:
 	void playerMovement(GLFWwindow* window, int* state);
 	void menuController(GLFWwindow* window, int* state);
 	void storeController(GLFWwindow* window, int* state);
+	void mapController(GLFWwindow* window, int* state);
+
 
 	int current_state;
 	int shot = 0;

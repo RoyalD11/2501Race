@@ -146,9 +146,9 @@ void setallTexture(void)
 	setthisTexture(tex[26], "Sprites/up-coin.png");
 
 	//text prompts for menus
-	setthisTexture(tex[14], "Sprites/gametitle.png");
-	setthisTexture(tex[15], "Sprites/storeprompt.png");
-	setthisTexture(tex[16], "Sprites/startprompt.png");
+	setthisTexture(tex[14], "Sprites/MAINTITLE.png");
+	setthisTexture(tex[15], "Sprites/STORE.png");
+	setthisTexture(tex[16], "Sprites/MAPSELECT.png");
 	setthisTexture(tex[17], "Sprites/ingamemenuprompt.png");
 	setthisTexture(tex[18], "Sprites/ingamemenu.png");
 	setthisTexture(tex[19], "Sprites/quitprompt.png");
@@ -203,14 +203,10 @@ int main(void){
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		//menu items creation
-		Menu* title = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[14], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* quitprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[19], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* menuprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[20], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* startprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[16], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* storeprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[15], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* ingamelist = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[18], size, glm::vec3(0.0f, 0.0f, 0.0f));
-		Menu* escprompt = new Menu(glm::vec3(6.0f, 0.0f, 0.0f), glm::vec3(1, 0.4f, 0.5f), 0.0f, tex[17], size, glm::vec3(0.0f, 0.0f, 0.0f));
-
+		Menu* title     = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[14], size, glm::vec3(0, 0, 0));
+		Menu* store     = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[15], size, glm::vec3(0, 0, 0));
+		Menu* mapselect = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[16], size, glm::vec3(0, 0, 0));
+		
 
 		//Setup sound object
 		Sound playersound;
@@ -258,23 +254,18 @@ int main(void){
 			
 			if (GAMESTATE == 0) {
 
-				title->setPosition(0, 0.8);
+				title->setPosition(0, 0);
 				title->staticRender(shader);
-
-				startprompt->setPosition(0, 0.5);
-				startprompt->staticRender(shader);
-
-				storeprompt->setPosition(0, 0.1);
-				storeprompt->staticRender(shader);
-
-				quitprompt->setPosition(0, -0.3);
-				quitprompt->staticRender(shader);
-
 			}
 			if (GAMESTATE == 2) {
 
-				menuprompt->setPosition(0, 0);
-				menuprompt->staticRender(shader);
+				store->setPosition(0, 0);
+				store->staticRender(shader);
+			}
+			if (GAMESTATE == 3) {
+
+				mapselect->setPosition(0, 0);
+				mapselect->staticRender(shader);
 			}
 
 			if (GAMESTATE == 1) {
