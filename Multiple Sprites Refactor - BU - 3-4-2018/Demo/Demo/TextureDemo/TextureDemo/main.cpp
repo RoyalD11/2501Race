@@ -203,9 +203,9 @@ int main(void){
 		// Setup game objects
 		//Background* bg = new Background(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, tex[6], size);
 		//menu items creation
-		Menu* title     = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[14], size, glm::vec3(0, 0, 0));
-		Menu* store     = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[15], size, glm::vec3(0, 0, 0));
-		Menu* mapselect = new Menu(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 0.0f, tex[16], size, glm::vec3(0, 0, 0));
+		Menu* title     = new Menu(glm::vec3(0, 0, 0), glm::vec3(2, 2, 2), 0.0f, tex[14], size, glm::vec3(0, 0, 0));
+		Menu* store     = new Menu(glm::vec3(0, 0, 0), glm::vec3(2, 2, 2), 0.0f, tex[15], size, glm::vec3(0, 0, 0));
+		Menu* mapselect = new Menu(glm::vec3(0, 0, 0), glm::vec3(2, 2, 2), 0.0f, tex[16], size, glm::vec3(0, 0, 0));
 		
 
 		//Setup sound object
