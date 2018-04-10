@@ -76,7 +76,7 @@ void Model::update(double deltaTime, Shader shader) {
 				//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
 				updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
 
-				//cars[j]->setPosition(glm::vec3(x2, y2, 0));
+				//cars[j]->setPosition(glm::vec3(x2, y2, 0)); 
 				cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
 
 			}
@@ -136,7 +136,7 @@ void Model::update(double deltaTime, Shader shader) {
 
 			//Checks for coin tile
 			if (bgObjects[i]->bgType == 9) {
-				player->points++;
+				player->points+=100;
 			}
 			
 		}

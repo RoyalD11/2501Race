@@ -134,14 +134,14 @@ void setallTexture(void)
 	setthisTexture(tex[6], "Sprites/Background.png");
 
 	//track textures
-	setthisTexture(tex[7], "Sprites/side-to-up.png");
-	setthisTexture(tex[8], "Sprites/up-to-side.png");
-	setthisTexture(tex[9], "Sprites/side-to-up-i.png");
-	setthisTexture(tex[10], "Sprites/up-to-side-i.png");
-	setthisTexture(tex[11], "Sprites/str.png");
-	setthisTexture(tex[12], "Sprites/side.png");
-	setthisTexture(tex[13], "Sprites/edge2.png");
-	setthisTexture(tex[21], "Sprites/start-v.png");
+	setthisTexture(tex[7], "Sprites/new/side-to-up.png");
+	setthisTexture(tex[8], "Sprites/new/up-to-side.png");
+	setthisTexture(tex[9], "Sprites/new/side-to-up-i.png");
+	setthisTexture(tex[10], "Sprites/new/up-to-side-i.png");
+	setthisTexture(tex[11], "Sprites/new/str.png");
+	setthisTexture(tex[12], "Sprites/new/side2.png");
+	setthisTexture(tex[13], "Sprites/new/grass.png");
+	setthisTexture(tex[21], "Sprites/new/start-v.png");
 	setthisTexture(tex[25], "Sprites/side-coin.png");
 	setthisTexture(tex[26], "Sprites/up-coin.png");
 
@@ -216,11 +216,6 @@ int main(void){
 		bool animating = 1;
 		double lastTime = glfwGetTime();
 
-		//Int I added to count the number of shots released, does not work as intended due to my frame rate shooting all the bullets at once. should shoot one at a time
-		int shot = 0;
-		int reload = 0;
-		int anicounter = 3;
-		int wait = 250;
 
 
 		glm::mat4 applyWorld = glm::mat4(
