@@ -38,6 +38,10 @@ public:
 	void initBackgrounds(int size, GLuint imports[10]);
 
 
+	void boxCollision(GameEntity* a, GameEntity* b);
+
+
+
 
 	void collision2D(char mode, float alpha, float R,
 		float m1, float m2, float r1, float r2,

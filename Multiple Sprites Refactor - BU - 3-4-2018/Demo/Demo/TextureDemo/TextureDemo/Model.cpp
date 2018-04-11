@@ -40,7 +40,6 @@ void Model::update(double deltaTime, Shader shader) {
 			}
 		}
 
-
 		//Updates all GameEntitys positions	
 		updateables[i]->update(deltaTime);
 
@@ -54,37 +53,44 @@ void Model::update(double deltaTime, Shader shader) {
 			updateables[i]->render(shader, player->getPosition(), player->getRotation());
 		}
 
+		
+
 		//Car Collsion detection, for elastic collision ect
-		int status = 0;
-		for (int j = 0; j < cars.size(); j++) {
-			if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
-				double alpha = 0;
-				double x1 = updateables[i]->getPosition().x;
-				double y1 = updateables[i]->getPosition().y;
-				double x2 = cars[j]->getPosition().x;
-				double y2 = cars[j]->getPosition().y;
+		if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
+			int status = 0;
+			for (int j = 0; j < cars.size(); j++) {
+				if (updateables[i] != cars[j]) {
+					
+					double alpha = 0;
+					double x1 = updateables[i]->getPosition().x;
+					double y1 = updateables[i]->getPosition().y;
+					double x2 = cars[j]->getPosition().x;
+					double y2 = cars[j]->getPosition().y;
 
-				double vx1 = updateables[i]->getVelocity().x;
-				double vy1 = updateables[i]->getVelocity().y;
-				double vx2 = cars[j]->getVelocity().x;
-				double vy2 = cars[j]->getVelocity().y;
+					double vx1 = updateables[i]->getVelocity().x;
+					double vy1 = updateables[i]->getVelocity().y;
+					double vx2 = cars[j]->getVelocity().x;
+					double vy2 = cars[j]->getVelocity().y;
 
-				basicCollision('s', alpha, 0.3, 3.0, 3.0, 0.01, 0.01,
-					x1, y1, x2, y2,
-					vx1, vy1, vx2, vy2, status);
-				//std::cout << status << "\n";
-				//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
-				updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
+					basicCollision('s', alpha, 0, 1, 10, 0.01, 0.01,
+						x1, y1, x2, y2,
+						vx1, vy1, vx2, vy2, status);
 
-				//cars[j]->setPosition(glm::vec3(x2, y2, 0)); 
-				cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
+					if (status == 0) {
+						std::cout << updateables[i]->getPosition().x << " , " << updateables[i]->getPosition().y << "          " << cars[j]->getPosition().x << " , " << cars[j]->getPosition().y << "\n";
+						std::cout << updateables[i]->getType() << " collided  with " << cars[j]->getType() << "Positions: \n";
+						std::cout << updateables[i]->getPosition().x << " , " << updateables[i]->getPosition().y << "          " << cars[j]->getPosition().x << " , " << cars[j]->getPosition().y << "\n \n";
+					}
 
+					//updateables[i]->setPosition(glm::vec3(x1, y1, 0));
+					//cars[j]->setPosition(glm::vec3(x2, y2, 0));
+					updateables[i]->setVelocity(glm::vec3(vx1, vy1, 0));
+					cars[j]->setVelocity(glm::vec3(vx2, vy2, 0));
+					
+					//boxCollision(updateables[i], cars[j]);
+				}
 			}
 		}
-
-
-
-		
 
 	}
 
@@ -147,13 +153,14 @@ void Model::update(double deltaTime, Shader shader) {
 			bgObjects[i]->getPosition().y - player->getPosition().y > 2 ||
 			bgObjects[i]->getPosition().y - player->getPosition().y < -2))
 		{
-			bgObjects[i]->render(shader, player->getPosition(), player->getRotation());
+			//bgObjects[i]->render(shader, player->getPosition(), player->getRotation());
 		}
 
 	}
 	
 	
 	
+
 	if (time <= 0) {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies[i]->setTarget(player->getPosition());
@@ -181,11 +188,11 @@ void Model::loadGameObjects() {
 	
 	//Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0), tempTextures);
 
-	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(0.4, 0.4, 0), glm::vec3(3, 3, 0), tempTextures);
+	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(0.4, 0.4, 0), glm::vec3(3, 3, 0), tempTextures);
 	
-	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
-	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
-	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0), tempTextures);
+	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
+	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
+	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0), tempTextures);
 	
 
 
@@ -617,4 +624,46 @@ void Model::basicCollision(char mode, double alpha, double R,
 
 
 		return;
+}
+
+void Model::boxCollision(GameEntity* a, GameEntity* b) {
+	//float w = 0.5 * (a.width() + b.width());
+	//float h = 0.5 * (a.height() + b.height());
+	float w = 0.5 * (0.01);
+	float h = 0.5 * (0.02);
+	float dx = a->getPosition().x -b->getPosition().x;
+	float dy = a->getPosition().y - b->getPosition().y;
+
+	if (abs(dx) <= w && abs(dy) <= h)
+	{
+		/* collision! */
+		float wy = w * dy;
+		float hx = h * dx;
+		std::cout << "( " << a->getPosition().x << " , " << a->getPosition().y << " )\n";
+
+		if (wy > hx) {
+			if (wy > -hx) {
+				/* collision at the top */
+				a->setPosition(glm::vec3(a->getPosition().x, a->getPosition().y - 0.1, 0));
+
+			}
+			else {
+				a->setPosition(glm::vec3(a->getPosition().x + 0.1, a->getPosition().y, 0));
+			}
+			/* on the left */
+		}
+		else {
+			if (wy > -hx) {
+				a->setPosition(glm::vec3(a->getPosition().x - 0.1, a->getPosition().y, 0));
+				/* on the right */
+			}
+			else {
+				/* at the bottom */
+				a->setPosition(glm::vec3(a->getPosition().x, a->getPosition().y + 0.1, 0));
+			}
+			
+		}
+		std::cout << "( " << a->getPosition().x << " , " << a->getPosition().y << " )\n \n \n";
+
+	}
 }

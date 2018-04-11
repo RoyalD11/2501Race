@@ -49,17 +49,20 @@ void Enemy::update(double deltaTime) {
 		velocity.y = (maxSpeed.y*velocity.y) / (glm::abs(velocity.y));
 	}
 
-	
+	float x = position.x;
+	float y = position.y;
+
+	//rotateTo(targetPosition.x, targetPosition.y);
 
 	position.x += velocity.x * deltaTime;
 	position.y += velocity.y * deltaTime;
 
-	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+	
+
+	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.x;
 	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 
-	//rotationAmount++;
-	rotationAmount = atan2(position.y, position.x) * (180 / 3.14);
-	rotationAmount *= -1;
+	
 
 	checkPlayerDeath();
 	animate();
@@ -104,7 +107,7 @@ bool Enemy::getIfHit() {
 
 void Enemy::rotateTo(float x, float y) {
 
-	rotationAmount = atan2(y, x) * (180 / 3.14);
+	rotationAmount  = atan2(y, x) * (180 / 3.14);
 	rotationAmount *= -1;
 }
 

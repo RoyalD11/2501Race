@@ -128,9 +128,9 @@ void setallTexture(void)
 	setthisTexture(tex[0], "Sprites/Black_viper.png");
 	setthisTexture(tex[1], "Sprites/orb.png");
 	setthisTexture(tex[2], "Sprites/saw.png");
-	setthisTexture(tex[3], "Sprites/police2.png");
-	setthisTexture(tex[4], "Sprites/police3.png");
-	setthisTexture(tex[5], "Sprites/police1.png");
+	setthisTexture(tex[3], "Sprites/cop1.png");
+	setthisTexture(tex[4], "Sprites/cop2.png");
+	setthisTexture(tex[5], "Sprites/cop1.png");
 	setthisTexture(tex[6], "Sprites/Background.png");
 
 	//track textures
