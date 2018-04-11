@@ -23,7 +23,18 @@ Model::Model(GLFWwindow* window, int* state) {
 //Full game function!
 void Model::update(double deltaTime, Shader shader) {
 
-	
+	if (player->points / 100 > 0) {
+		std::cout << "FUCK \n";
+	}
+
+	//std::cout << player->points % 100 << "\n";
+	for (int i = 0; i < player->points / 100; i++) {
+		hundred[i]->staticRender(shader);
+	}
+	for (int i = 0; i < player->points / 1000; i++) {
+		thousand[i]->staticRender(shader);
+	}
+
 	//if (startRace) { startCountDown(); }
 	if (player->death) { endGame(false); }
 
@@ -39,6 +50,7 @@ void Model::update(double deltaTime, Shader shader) {
 				a++;
 			}
 		}
+
 
 		//Updates all GameEntitys positions	
 		updateables[i]->update(deltaTime);
@@ -126,7 +138,7 @@ void Model::update(double deltaTime, Shader shader) {
 					tempTextures.push_back(texture[22]);
 					tempTextures.push_back(texture[23]);
 					tempTextures.push_back(texture[24]);
-					Enemy* p = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f),
+					Enemy* p = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35f, 0.2f, 0.5f),
 						0.0f, texture[4], size, "enemy", player,
 						glm::vec3(3, 3, 0),
 						glm::vec3(3, 3, 0), tempTextures);
@@ -173,6 +185,9 @@ void Model::update(double deltaTime, Shader shader) {
 		reload--;
 	}
 	time--;
+
+
+	
 }
 
 
@@ -189,7 +204,7 @@ void Model::loadGameObjects() {
 	
 	//Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0), tempTextures);
 
-	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(0.4, 0.4, 0), glm::vec3(3, 3, 0), tempTextures);
+	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.8, 1.8, 0), glm::vec3(3, 3, 0), tempTextures);
 	
 	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
 	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
@@ -228,6 +243,8 @@ void Model::loadGameObjects() {
 
 	GLuint temp[10] = { texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[21], texture[25], texture[26] };
 	initBackgrounds(size, temp);
+
+	initHud();
 }
 
 void Model::removeGameObjects() {
@@ -551,5 +568,18 @@ void Model::boxCollision(GameEntity* a, GameEntity* b) {
 		}
 		std::cout << "( " << a->getPosition().x << " , " << a->getPosition().y << " )\n \n \n";
 
+	}
+}
+
+void Model::initHud() {
+	
+	for (int i = 0; i < 10; i++) {
+		Menu* coin;
+		Menu* bill;
+		coin = new Menu(glm::vec3(i*-0.1, -0.8, 0), glm::vec3(2, 2, 2), 0.0f, texture[14], size, glm::vec3(0, 0, 0));
+		hundred.push_back(coin);
+
+		bill = new Menu(glm::vec3(i*-0.1, -0.7, 0), glm::vec3(2, 2, 2), 0.0f, texture[14], size, glm::vec3(0, 0, 0));
+		thousand.push_back(bill);
 	}
 }

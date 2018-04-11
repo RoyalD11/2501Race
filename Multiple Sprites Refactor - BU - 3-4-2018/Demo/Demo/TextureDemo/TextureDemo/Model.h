@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Shader.h"
 #include "Enemy.h"
+#include "Menu.h"
 
 #include "Window.h"
 #include <vector>
@@ -36,6 +37,7 @@ public:
 	void checkLap();
 	void printStats();
 	void initBackgrounds(int size, GLuint imports[10]);
+	void initHud();
 
 
 	void boxCollision(GameEntity* a, GameEntity* b);
@@ -81,5 +83,9 @@ public:
 	int player_ammo_cap;
 	int player_deaths;
 	int player_points;
+
+private:
+	std::vector<Menu*> hundred;
+	std::vector<Menu*> thousand;
 	
 };

@@ -11,7 +11,6 @@ Menu::Menu(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmo
 }
 
 void Menu::update(double deltaTime) {
-
 }
 
 void Menu::setPosition(float x, float y) {
