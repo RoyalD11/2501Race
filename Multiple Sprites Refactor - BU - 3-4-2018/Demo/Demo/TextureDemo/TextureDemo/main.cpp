@@ -155,9 +155,9 @@ void setallTexture(void)
 	setthisTexture(tex[20], "Sprites/mainmenuprompt.png");
 
 	//Other Cars
-	setthisTexture(tex[22], "Sprites/Ambulance2.png");
-	setthisTexture(tex[23], "Sprites/Ambulance3.png");
-	setthisTexture(tex[24], "Sprites/Ambulance1.png");
+	setthisTexture(tex[22], "Sprites/swat1.png");
+	setthisTexture(tex[23], "Sprites/swat2.png");
+	setthisTexture(tex[24], "Sprites/swat1.png");
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
