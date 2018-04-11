@@ -43,12 +43,6 @@ public:
 
 
 
-	void collision2D(char mode, float alpha, float R,
-		float m1, float m2, float r1, float r2,
-		glm::vec3 &p1, glm::vec3 &v1, 
-		glm::vec3 &p2, glm::vec3 &v2,
-		int& error);
-
 	//Override function
 	void basicCollision(char mode, double alpha, double R,
 		double m1, double m2, double r1, double r2,

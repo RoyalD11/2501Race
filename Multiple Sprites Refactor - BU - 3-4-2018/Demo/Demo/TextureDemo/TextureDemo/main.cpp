@@ -142,7 +142,7 @@ void setallTexture(void)
 	setthisTexture(tex[12], "Sprites/new/side2.png");
 	setthisTexture(tex[13], "Sprites/new/grass.png");
 	setthisTexture(tex[21], "Sprites/new/start-v.png");
-	setthisTexture(tex[25], "Sprites/side-coin.png");
+	setthisTexture(tex[25], "Sprites/new/side-coin.png");
 	setthisTexture(tex[26], "Sprites/up-coin.png");
 
 	//text prompts for menus

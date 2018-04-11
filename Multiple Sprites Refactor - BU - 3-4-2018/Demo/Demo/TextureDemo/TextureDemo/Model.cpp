@@ -56,6 +56,7 @@ void Model::update(double deltaTime, Shader shader) {
 		
 
 		//Car Collsion detection, for elastic collision ect
+		/*
 		if (updateables[i]->getType() == "enemy" || updateables[i]->getType() == "player") {
 			int status = 0;
 			for (int j = 0; j < cars.size(); j++) {
@@ -91,7 +92,7 @@ void Model::update(double deltaTime, Shader shader) {
 				}
 			}
 		}
-
+		*/
 	}
 
 	//     ** Background Smart rendering and tile detection **
@@ -153,7 +154,7 @@ void Model::update(double deltaTime, Shader shader) {
 			bgObjects[i]->getPosition().y - player->getPosition().y > 2 ||
 			bgObjects[i]->getPosition().y - player->getPosition().y < -2))
 		{
-			//bgObjects[i]->render(shader, player->getPosition(), player->getRotation());
+			bgObjects[i]->render(shader, player->getPosition(), player->getRotation());
 		}
 
 	}
@@ -407,121 +408,6 @@ void Model::unmountGame() {
 	spriteCount = 3;
 	startRace = true;
 	lap = 1;
-}
-
-void Model::collision2D(char mode, float alpha, float R,
-	float m1, float m2, float r1, float r2,
-	glm::vec3 &p1, glm::vec3 &v1,
-	glm::vec3 &p2, glm::vec3 &v2,
-	int& error) {
-
-		float  r12, m21, d, gammav, gammaxy, dgamma, dr, dc, sqs, t,
-			dvx2, a, x21, y21, vx21, vy21, pi2, vx_cm, vy_cm;
-
-		//     ***initialize some variables ****
-		pi2 = 2 * acos(-1.0E0);
-		error = 0;
-		r12 = r1 + r2;
-		m21 = m2 / m1;
-		x21 = p2.x - p1.x;
-		y21 = p2.y - p1.y;
-		vx21 = v2.x - v1.x;
-		vy21 = v2.y - v1.y;
-
-		vx_cm = (m1*v1.x + m2 * v2.x) / (m1 + m2);
-		vy_cm = (m1*v1.y + m2 * v2.y) / (m1 + m2);
-
-		//     ****  return old positions and velocities if relative velocity =0 ****
-		if (vx21 == 0 && vy21 == 0) {
-			error = 1; 
-			return; 
-		}
-
-
-		//     *** calculate relative velocity angle             
-		gammav = atan2(-vy21, -vx21);
-
-
-
-
-		//******** this block only if initial positions are given *********
-
-		if (mode != 'f') {
-
-
-			d = sqrt(x21*x21 + y21 * y21);
-
-			//     **** return if distance between balls smaller than sum of radii ***
-			if (d<r12) { error = 2; return; }
-
-			//     *** calculate relative position angle and normalized impact parameter ***
-			gammaxy = atan2(y21, x21);
-			dgamma = gammaxy - gammav;
-
-			if (dgamma>pi2) { 
-				dgamma = dgamma - pi2; 
-			}
-			else if (dgamma<-pi2) { 
-				dgamma = dgamma + pi2;
-			}
-
-			dr = d * sin(dgamma) / r12;
-
-			//     **** return old positions and velocities if balls do not collide ***
-			if ((fabs(dgamma)>pi2 / 4 && fabs(dgamma)<0.75*pi2) || fabs(dr)>1)
-			{
-				error = 1; return;
-			}
-
-
-			//     **** calculate impact angle if balls do collide ***
-			alpha = asin(dr);
-
-
-			//     **** calculate time to collision ***
-			dc = d * cos(dgamma);
-
-			if (dc>0) {
-				sqs = 1.0; 
-			}
-			else {
-				sqs = -1.0;
-			}
-
-			t = (dc - sqs * r12*sqrt(1 - dr * dr)) / sqrt(vx21*vx21 + vy21 * vy21);
-			//    **** update positions ***
-			p1.x = p1.x + v1.x * t;
-			p1.y = p1.y + v1.y * t;
-			p2.x = p2.x + v2.x* t;
-			p2.y = p2.y + v2.y * t;
-
-
-		}
-
-		//******** END 'this block only if initial positions are given' *********
-
-
-
-		//     ***  update velocities ***
-
-		a = tan(gammav + alpha);
-
-		dvx2 = -2 * (vx21 + a * vy21) / ((1 + a * a)*(1 + m21));
-
-		v2.x =v2.x+ dvx2;
-		v2.y = v2.y + a * dvx2;
-		v1.x = v1.x - m21 * dvx2;
-		v1.y = v1.y - a * m21*dvx2;
-
-		//     ***  velocity correction for inelastic collisions ***
-
-		v1.x = (v1.x - vx_cm)*R + vx_cm;
-		v1.y = (v1.y - vy_cm)*R + vy_cm;
-		v2.x = (v2.x - vx_cm)*R + vx_cm;
-		v2.y = (v2.y - vy_cm)*R + vy_cm;
-
-
-		return;
 }
 
 void Model::basicCollision(char mode, double alpha, double R,

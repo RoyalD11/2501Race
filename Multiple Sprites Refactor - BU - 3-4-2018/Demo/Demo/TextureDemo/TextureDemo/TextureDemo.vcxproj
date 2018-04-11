@@ -173,6 +173,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameEntity.cpp" />
+    <ClCompile Include="hud.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameEntity.h" />
+    <ClInclude Include="hud.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
