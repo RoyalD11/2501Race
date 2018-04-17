@@ -62,8 +62,7 @@ void Player::update(double deltaTime) {
 	position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 	position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 
-	hun = (points % 1000 - points % 100) / 100;
-	tho = (points - hun) / 1000;
+	updatePoints();
 	
 
 }
@@ -118,6 +117,11 @@ void Player::initActiveBullet(GLuint t, int s) {
 
 void Player::setActiveBullet(Bullet* b) {
 	current_active_bullet = b;
+}
+
+void Player::updatePoints() {
+	hun = (points % 1000 - points % 100) / 100;
+	tho = (points - hun) / 1000;
 }
 
 //Sets the ships rotation based on the direction you inputed from main

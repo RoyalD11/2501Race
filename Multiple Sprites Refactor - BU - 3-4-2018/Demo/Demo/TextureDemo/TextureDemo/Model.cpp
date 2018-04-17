@@ -23,14 +23,7 @@ Model::Model(GLFWwindow* window, int* state) {
 //Full game function!
 void Model::update(double deltaTime, Shader shader) {
 
-	//Renders players points HUD
-	for (int i = 0; i < player->tho; i++) {
-		thousand[i]->staticRender(shader);
-	}
-	
-	for (int i = 0; i < player->hun; i++) {
-		hundred[i]->staticRender(shader);
-	}
+	displayHud(shader);
 
 
 	//if (startRace) { startCountDown(); }
@@ -218,21 +211,21 @@ void Model::loadGameObjects() {
 	updateables.push_back(player);
 
 	updateables.push_back(police1);
-	//updateables.push_back(police2);
-	//updateables.push_back(police3);
-	//updateables.push_back(police4);
+	updateables.push_back(police2);
+	updateables.push_back(police3);
+	updateables.push_back(police4);
 	
 
 	enemies.push_back(police1);
-	//enemies.push_back(police2);
-	//enemies.push_back(police3);
-	//enemies.push_back(police4);
+	enemies.push_back(police2);
+	enemies.push_back(police3);
+	enemies.push_back(police4);
 	
 	
 	cars.push_back(police1);
-	//cars.push_back(police2);
-	//cars.push_back(police3);
-	//cars.push_back(police4);
+	cars.push_back(police2);
+	cars.push_back(police3);
+	cars.push_back(police4);
 
 	cars.push_back(player);
 	
@@ -297,7 +290,7 @@ void Model::checkLap() {
 }
 
 void Model::endGame(bool winloss) {
-
+	
 
 	//resets gamestate back to menu
 	*state = 0;
@@ -308,6 +301,8 @@ void Model::endGame(bool winloss) {
 	}
 	else { player_deaths++; }
 	
+	player->updatePoints();
+
 	//end game
 	unmountGame();
 }
@@ -579,5 +574,32 @@ void Model::initHud() {
 
 		bill = new Menu(glm::vec3(i*-0.1, -0.7, 0), glm::vec3(0.2, 0.2, 2), 0.0f, texture[28], size, glm::vec3(0, 0, 0));
 		thousand.push_back(bill);
+	}
+}
+
+void Model::displayHud(Shader shader) {
+	player->updatePoints();
+
+	//Renders players points HUD
+	for (int i = 0; i < player->tho; i++) {
+		thousand[i]->staticRender(shader);
+	}
+
+	for (int i = 0; i < player->hun; i++) {
+		hundred[i]->staticRender(shader);
+	}
+}
+
+void Model::storeHud(Shader shader) {
+	int hundreds = (player_points % 1000 - player_points % 100) / 100;
+	int thousands = (player_points - hundreds) / 1000;
+
+	//Renders players points HUD
+	for (int i = 0; i < thousands; i++) {
+		thousand[i]->staticRender(shader);
+	}
+
+	for (int i = 0; i < hundreds; i++) {
+		hundred[i]->staticRender(shader);
 	}
 }

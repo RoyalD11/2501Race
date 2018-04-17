@@ -150,43 +150,51 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 }
 
 void Controller::storeController(GLFWwindow* window,int* state) {
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
+	int callback=0;
+
+	if ((glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_M) != callback) {
 		*state = 0;
 	}
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+	if ((glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_X) != callback) {
 		//player upgrade top speed
 		if (model->player_points >= 500) {
+			callback = glfwGetKey(window, GLFW_KEY_X);
 			model->player->setTopSpeed(glm::vec3(3, 3, 0));
 			model->player_points -= 500;
+			std::cout << "Max Speed Upgarde bought. \n";
 		}
 		else {
 			//nothing
 		}
 	}
-	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+	if ((glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_Z) != callback) {
+		callback = glfwGetKey(window, GLFW_KEY_Z);
 		//player upgrade buff handling
 		if (model->player_points < 500) {
 			model->player->turningBuff++;
 			model->player_points -= 500;
+			std::cout << "Handling Upgarde bought. \n";
 		}
 		else {
 			//nothing
 		}
 
 	}
-	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
-
+	if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS ) && glfwGetKey(window, GLFW_KEY_C) != callback) {
+		callback = glfwGetKey(window, GLFW_KEY_C);
 		//player upgrade ammo cap
 		if (model->player_points >= 1000) {
 			model->player_ammo_cap += 5;
 			model->player_points -= 1000;
 			std::cout << "Ammo Upgarde bought. \n";
 			std::cout << "Current Ammo per Lap Cap:" << model->player_ammo_cap << "\n";
+			std::cout << model->player->points << "\n";
 		}
 		else {
 			//nothing
 		}
 	}
+
 
 }
 

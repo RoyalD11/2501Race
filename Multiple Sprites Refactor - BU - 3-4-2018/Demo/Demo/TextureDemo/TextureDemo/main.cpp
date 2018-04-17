@@ -257,7 +257,7 @@ int main(void){
 				title->staticRender(shader);
 			}
 			if (GAMESTATE == 2) {
-
+				model->storeHud(shader);
 				store->setPosition(0, 0);
 				store->staticRender(shader);
 			}

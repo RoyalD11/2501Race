@@ -36,6 +36,8 @@ public:
 
 	void setActiveBullet(Bullet* b);
 
+	void updatePoints();
+
 	bool hitWall;
 
 	int points;

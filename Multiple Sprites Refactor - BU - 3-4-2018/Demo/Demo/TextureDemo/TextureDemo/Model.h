@@ -38,6 +38,8 @@ public:
 	void printStats();
 	void initBackgrounds(int size, GLuint imports[10]);
 	void initHud();
+	void displayHud(Shader shader);
+	void storeHud(Shader shader);
 
 
 	void boxCollision(GameEntity* a, GameEntity* b);
