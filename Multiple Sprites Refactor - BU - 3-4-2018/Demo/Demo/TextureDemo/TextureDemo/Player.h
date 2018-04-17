@@ -46,7 +46,7 @@ public:
 
 	int current_lap = 1;
 
-	int turningBuff;
+	float turningBuff;
 	int shot;
 	int ammo_cap;
 

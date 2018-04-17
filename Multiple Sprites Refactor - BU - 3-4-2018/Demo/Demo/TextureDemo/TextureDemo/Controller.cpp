@@ -159,7 +159,9 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 		//player upgrade top speed
 		if (model->player_points >= 500) {
 			callback = glfwGetKey(window, GLFW_KEY_X);
-			model->player->setTopSpeed(glm::vec3(3, 3, 0));
+			//model->player->setTopSpeed(glm::vec3(3, 3, 0));
+			glm::vec3 speed = glm::vec3(model->player_top_speed.x + 0.5, model->player_top_speed.y + 0.5, 0);
+			model->player_top_speed = speed;
 			model->player_points -= 500;
 			std::cout << "Max Speed Upgarde bought. \n";
 		}
@@ -170,8 +172,8 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 	if ((glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_Z) != callback) {
 		callback = glfwGetKey(window, GLFW_KEY_Z);
 		//player upgrade buff handling
-		if (model->player_points < 500) {
-			model->player->turningBuff++;
+		if (model->player_points < 500 && model->turning_buff <= 0.25) {
+			model->turning_buff += 0.25;
 			model->player_points -= 500;
 			std::cout << "Handling Upgarde bought. \n";
 		}
