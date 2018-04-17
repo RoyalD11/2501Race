@@ -85,6 +85,8 @@ public:
 	int player_ammo_cap;
 	int player_deaths;
 	int player_points;
+	float turning_buff;
+	glm::vec3 player_top_speed;
 
 private:
 	std::vector<Menu*> hundred;

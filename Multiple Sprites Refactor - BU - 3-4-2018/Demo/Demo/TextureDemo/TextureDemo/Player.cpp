@@ -126,7 +126,13 @@ void Player::updatePoints() {
 
 //Sets the ships rotation based on the direction you inputed from main
 void Player::setRotation(float increment) {
-	rotationAmount += increment + turningBuff;
+	if (increment > 0) {
+		rotationAmount += increment + turningBuff;
+	}
+	else {
+		rotationAmount += increment + (-1*turningBuff);
+	}
+	
 }
 
 void Player::rotateToMouse(float xpos, float ypos) {

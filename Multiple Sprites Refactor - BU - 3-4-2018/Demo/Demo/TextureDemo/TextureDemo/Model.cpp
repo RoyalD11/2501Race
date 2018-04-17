@@ -14,6 +14,8 @@ Model::Model(GLFWwindow* window, int* state) {
 	player_points = 0;
 	player_wins = 0;
 	player_ammo_cap = 5;
+	turning_buff = 0;
+	player_top_speed = glm::vec3(2.5, 2.5, 0);
 
 	
 }
@@ -185,6 +187,8 @@ void Model::update(double deltaTime, Shader shader) {
 void Model::loadGameObjects() {
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, "player", glm::vec3(0.0f, 0.0f, 0.0f));
 	player->ammo_cap = player_ammo_cap;
+	player->turningBuff = turning_buff;
+	player->setTopSpeed(player_top_speed);
 	player->initActiveBullet(texture[2], size);
 
 	std::vector<GLuint> tempTextures;
