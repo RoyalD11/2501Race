@@ -28,6 +28,7 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	checkpoint = false;
 
 	death_counter = 0;
+	hun, tho = 0;
 
 }
 
@@ -60,6 +61,11 @@ void Player::update(double deltaTime) {
 
 	position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 	position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
+
+	hun = (points % 1000 - points % 100) / 100;
+	tho = (points - hun) / 1000;
+	
+
 }
 
 //Sets the ships velocity, and make sure the max speed is maintained and that it can slow to a stop if wanted

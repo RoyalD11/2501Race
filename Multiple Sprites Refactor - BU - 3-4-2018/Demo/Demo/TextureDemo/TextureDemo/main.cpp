@@ -159,6 +159,10 @@ void setallTexture(void)
 	setthisTexture(tex[23], "Sprites/swat2.png");
 	setthisTexture(tex[24], "Sprites/swat1.png");
 
+	//Hud Sprites
+	setthisTexture(tex[27], "Sprites/coin.png");
+	setthisTexture(tex[28], "Sprites/cash.png");
+
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }
 

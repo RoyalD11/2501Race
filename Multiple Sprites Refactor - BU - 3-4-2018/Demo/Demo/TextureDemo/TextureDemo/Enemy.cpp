@@ -23,6 +23,7 @@ Enemy::Enemy(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationA
 	spriteCount = 0;
 	time = 100;
 
+
 }
 
 //methods to make the enemies move, once they hit the borders of the screen they reverse their direction
@@ -62,7 +63,11 @@ void Enemy::update(double deltaTime) {
 	//position.x += cos(rotationAmount * 0.01745333) * deltaTime * velocity.x;
 	//position.y += sin(rotationAmount * 0.01745333) * deltaTime * velocity.y;
 
+
 	
+	float angle = atan2(y - player->getPosition().y, x - player->getPosition().x);
+	rotationAmount = angle * (180 / 3.14);
+
 
 	checkPlayerDeath();
 	animate();
