@@ -185,6 +185,7 @@ void Model::update(double deltaTime, Shader shader) {
 
 
 void Model::loadGameObjects() {
+
 	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, "player", glm::vec3(0.0f, 0.0f, 0.0f));
 	player->ammo_cap = player_ammo_cap;
 	player->turningBuff = turning_buff;
@@ -386,7 +387,7 @@ void Model::initBackgrounds(int size, GLuint imports[10]) {
 				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[6], size, "bg", 6);
 			}
 			else if (mapData[i][j] == 7) {
-				//edge
+				//start
 				temp = new Background(glm::vec3(i - 0.5, j - 0.5, 0.0f), glm::vec3(1, 1, 0.5), 0.0f, imports[7], size, "bg", 7);
 			}
 			else if (mapData[i][j] == 8) {
@@ -569,6 +570,8 @@ void Model::boxCollision(GameEntity* a, GameEntity* b) {
 }
 
 void Model::initHud() {
+
+	//if(map == "map1.txt"){}
 	
 	for (int i = 0; i < 10; i++) {
 		Menu* coin;
