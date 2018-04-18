@@ -201,6 +201,9 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 }
 
 void Controller::mapController(GLFWwindow* window, int* state) {
+	if ((glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)) {
+		*state = 0;
+	}
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
 		model->map = "map3.txt";
 		*state = 1;
@@ -219,4 +222,5 @@ void Controller::mapController(GLFWwindow* window, int* state) {
 		model->loadGameObjects();
 		model->loadPlayerBullets();
 	}
+	
 }
