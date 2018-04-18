@@ -83,13 +83,21 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		//model->player->moveTo(-1.5, 0);
-		model->player->setRotation(0.7);
+		if (model->player->getVelocity().x > 0.3 ||
+			model->player->getVelocity().y > 0.3 ||
+			model->player->getVelocity().x < -0.3 ||
+			model->player->getVelocity().y < -0.3
+			) model->player->setRotation(0.7);
 
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		//model->player->moveTo(1.5,0);
-		model->player->setRotation(-0.7);
+		if(model->player->getVelocity().x > 0.3 ||
+			model->player->getVelocity().y > 0.3 ||
+			model->player->getVelocity().x < -0.3 ||
+			model->player->getVelocity().y < -0.3
+			) model->player->setRotation(-0.7);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
@@ -157,10 +165,10 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 void Controller::storeController(GLFWwindow* window,int* state) {
 	int callback=0;
 
-	if ((glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_M) != callback) {
+	if ((glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)) {
 		*state = 0;
 	}
-	if ((glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_X) != callback) {
+	if ((glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)) {
 		//player upgrade top speed
 		if (model->player_points >= 500) {
 			callback = glfwGetKey(window, GLFW_KEY_X);
@@ -174,7 +182,7 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 			//nothing
 		}
 	}
-	if ((glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) && glfwGetKey(window, GLFW_KEY_Z) != callback) {
+	if ((glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)) {
 		callback = glfwGetKey(window, GLFW_KEY_Z);
 		//player upgrade buff handling
 		if (model->player_points < 500 && model->turning_buff <= 0.25) {
@@ -187,7 +195,7 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 		}
 
 	}
-	if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS ) && glfwGetKey(window, GLFW_KEY_C) != callback) {
+	if ((glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS )) {
 		callback = glfwGetKey(window, GLFW_KEY_C);
 		//player upgrade ammo cap
 		if (model->player_points >= 1000) {
