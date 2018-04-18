@@ -619,13 +619,15 @@ void Model::initHud() {
 void Model::displayHud(Shader shader) {
 	player->updatePoints();
 
-	//Renders players points HUD
-	for (int i = 0; i < player->tho; i++) {
-		thousand[i]->staticRender(shader);
-	}
+	if (player->points < 10000) {
+		//Renders players points HUD
+		for (int i = 0; i < player->tho; i++) {
+			thousand[i]->staticRender(shader);
+		}
 
-	for (int i = 0; i < player->hun; i++) {
-		hundred[i]->staticRender(shader);
+		for (int i = 0; i < player->hun; i++) {
+			hundred[i]->staticRender(shader);
+		}
 	}
 }
 
