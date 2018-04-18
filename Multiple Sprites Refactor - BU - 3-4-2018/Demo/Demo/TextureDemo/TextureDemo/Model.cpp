@@ -615,7 +615,7 @@ void Model::initHud() {
 		thousand.push_back(bill);
 	}
 }
-
+//coment
 void Model::displayHud(Shader shader) {
 	player->updatePoints();
 
