@@ -258,7 +258,8 @@ int main(void){
 			// Select proper shader program to use
 			shader.enable();
 
-			if (GAMESTATE != 1) { audio.playSound(0); }
+			if (GAMESTATE != 1 && !controller->muted) { audio.playSound(0); }
+			if (controller->muted && GAMESTATE !=1)   { audio.playSound(1); }
 			
 			
 			if (GAMESTATE == 0) {

@@ -147,6 +147,10 @@ void Controller::menuController(GLFWwindow* window, int* state) {
 			*state = 8;
 		}
 	}
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
+		muted = true;
+		std::cout << "mute\n";
+	}
 	
 }
 
