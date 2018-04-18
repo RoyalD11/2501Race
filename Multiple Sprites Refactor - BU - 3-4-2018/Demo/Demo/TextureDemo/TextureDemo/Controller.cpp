@@ -210,18 +210,21 @@ void Controller::mapController(GLFWwindow* window, int* state) {
 		*state = 1;
 		model->loadGameObjects();
 		model->loadPlayerBullets();
+		model->sound.playSound(1);
 	}
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		model->map = "map2.txt";
 		*state = 1;
 		model->loadGameObjects();
 		model->loadPlayerBullets();
+		model->sound.playSound(1);
 	}
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		model->map = "map1.txt";
 		*state = 1;
 		model->loadGameObjects();
 		model->loadPlayerBullets();
+		model->sound.playSound(1);
 	}
 	
 }
