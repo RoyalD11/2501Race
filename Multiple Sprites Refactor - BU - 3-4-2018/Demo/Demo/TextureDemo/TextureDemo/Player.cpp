@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <iostream>
 
-Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity)
-	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type)
+Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity, std::vector<GLuint> textures)
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type), textures(textures)
 {
 	//Sets the initial position and velocity
 	position = glm::vec3(2.2, 3, 0);
@@ -30,6 +30,35 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	death_counter = 0;
 	hun, tho = 0;
 
+}
+
+Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity) 
+	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type) {
+
+	//Sets the initial position and velocity
+	position = glm::vec3(2.2, 3, 0);
+	targetPosition = glm::vec3(0, 0, 0);
+	velocity = glm::vec3(0, 0, 0);
+
+	maxSpeed = glm::vec3(2.5, 2.5, 0);
+
+	acceleration = glm::vec3(0.005, 0.005, 0);
+	max_accel = glm::vec3(0.01, 0.01, 0);
+
+	dVelocity = glm::vec3(0, 0, 0);
+	iVelocity = glm::vec3(0, 0, 0);
+	rotationAmount = -90;
+
+	hitWall = false;
+
+	points = 0;
+	shot = 0;
+	ammo_cap = 5;
+
+	checkpoint = false;
+
+	death_counter = 0;
+	hun, tho = 0;
 }
 
 //Updates the position of the spaceship based on how the ship has rotated and its current velocity
@@ -64,6 +93,9 @@ void Player::update(double deltaTime) {
 
 	updatePoints();
 	
+	if (death_counter > 1500) {
+		texture = textures[1];
+	}
 
 }
 

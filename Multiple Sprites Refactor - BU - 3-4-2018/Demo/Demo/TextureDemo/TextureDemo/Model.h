@@ -91,5 +91,6 @@ public:
 private:
 	std::vector<Menu*> hundred;
 	std::vector<Menu*> thousand;
+	std::vector<Menu*> effects;
 	
 };

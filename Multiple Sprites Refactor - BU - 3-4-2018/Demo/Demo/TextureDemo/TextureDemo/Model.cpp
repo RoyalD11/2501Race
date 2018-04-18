@@ -27,6 +27,10 @@ void Model::update(double deltaTime, Shader shader) {
 
 	displayHud(shader);
 
+	for (int i = 0; i < effects.size(); i++) {
+		effects[i]->update(deltaTime);
+		effects[i]->staticRender(shader);
+	}
 
 	//if (startRace) { startCountDown(); }
 	if (player->death) { endGame(false); }
@@ -186,13 +190,19 @@ void Model::update(double deltaTime, Shader shader) {
 
 void Model::loadGameObjects() {
 
-	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.35f, 0.35f), 0.0f, texture[0], size, "player", glm::vec3(0.0f, 0.0f, 0.0f));
+	std::vector<GLuint> tempTextures;
+	tempTextures.push_back(texture[0]);
+	tempTextures.push_back(texture[33]);
+
+	Player* player = new Player(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.35f, 0.2f, 0.2f), 0.0f, texture[0], size, "player", glm::vec3(0.0f, 0.0f, 0.0f), tempTextures);
+
+	tempTextures.clear();
+
 	player->ammo_cap = player_ammo_cap;
 	player->turningBuff = turning_buff;
 	player->setTopSpeed(player_top_speed);
 	player->initActiveBullet(texture[2], size);
 
-	std::vector<GLuint> tempTextures;
 	tempTextures.push_back(texture[3]);
 	tempTextures.push_back(texture[4]);
 	tempTextures.push_back(texture[5]);
@@ -233,13 +243,33 @@ void Model::loadGameObjects() {
 	cars.push_back(police4);
 
 	cars.push_back(player);
+
 	
 
 	currentTile = new Background(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 0.0f, texture[0], size, "bg", 0);
 
 	GLuint temp[10] = { texture[7], texture[8], texture[9], texture[10], texture[11], texture[12], texture[13], texture[21], texture[25], texture[26] };
-	initBackgrounds(size, temp);
+	if (map == "map1.txt") {
+		Menu* snow1 = new Menu(glm::vec3(0, 0, 0), glm::vec3(2, 2, 2), 0.0f, texture[29], size, glm::vec3(0, 0, 0), "effects1");
+		Menu* snow2 = new Menu(glm::vec3(0, 2, 0), glm::vec3(2, 2, 2), 0.0f, texture[29], size, glm::vec3(0, 0, 0), "effects1");
 
+		effects.push_back(snow1);
+		effects.push_back(snow2);
+		
+		temp[6] = texture[30];
+	}
+	else if (map == "map2.txt") {
+		Menu* e1 = new Menu(glm::vec3(0, 0, 0), glm::vec3(2, 2, 2), 0.0f, texture[32], size, glm::vec3(0, 0, 0), "effects2");
+		Menu* e2 = new Menu(glm::vec3(2, 0, 0), glm::vec3(2, 2, 2), 0.0f, texture[32], size, glm::vec3(0, 0, 0), "effects2");
+
+		effects.push_back(e1);
+		effects.push_back(e2);
+
+		temp[6] = texture[31];
+	}
+
+
+	initBackgrounds(size, temp);
 	initHud();
 }
 
@@ -571,7 +601,6 @@ void Model::boxCollision(GameEntity* a, GameEntity* b) {
 
 void Model::initHud() {
 
-	//if(map == "map1.txt"){}
 	
 	for (int i = 0; i < 10; i++) {
 		Menu* coin;

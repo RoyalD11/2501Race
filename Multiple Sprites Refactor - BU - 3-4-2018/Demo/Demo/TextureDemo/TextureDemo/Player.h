@@ -7,7 +7,10 @@
 class Player : public GameEntity {
 public:
 	Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity);
+	Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotationAmount, GLuint entityTexture, GLint entityNumElements, std::string type, glm::vec3 &playerVelocity, std::vector<GLuint> textures);
 
+
+	//std::vector<GLuint*> textures;
 	virtual void update(double deltaTime) override;
 
 	void Player::setRotation(float increment);
@@ -61,5 +64,6 @@ public:
 	Bullet* current_active_bullet;
 
 private:
+	std::vector<GLuint> textures;
 	bool checkpoint;
 };
