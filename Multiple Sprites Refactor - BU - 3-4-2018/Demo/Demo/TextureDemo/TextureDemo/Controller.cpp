@@ -78,6 +78,7 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 		//Shoots a bullet if the number shot is less than the cap, due to framerate relaod is set to a high amount lower it if using a slower machine
 		model->firePlayerBullets();
 		
+		
 	}
 	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {

@@ -299,6 +299,7 @@ void Model::firePlayerBullets() {
 			player->shot++;
 			reload = 500;
 			std::cout << "FIRE \n";
+			sound.playSound(3);
 		}
 		else {
 			std::cout << "Out of ammo! \n";

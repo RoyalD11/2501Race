@@ -8,7 +8,7 @@
 #include "Shader.h"
 #include "Enemy.h"
 #include "Menu.h"
-
+#include "Sound.h"
 #include "Window.h"
 #include <vector>
 #include <algorithm>
@@ -87,6 +87,7 @@ public:
 	int player_points;
 	float turning_buff;
 	glm::vec3 player_top_speed;
+	Sound sound;
 
 private:
 	std::vector<Menu*> hundred;

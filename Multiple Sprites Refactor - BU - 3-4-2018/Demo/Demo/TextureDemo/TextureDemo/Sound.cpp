@@ -22,6 +22,9 @@ void Sound::playSound(int state) {
 		break;
 	case 2:
 		break;
+	case 3:
+		PlaySound(TEXT("Sounds/pew.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		break;
 	}
 	
 }

@@ -11,17 +11,20 @@
 #include "Shader.h"
 #include "Model.h"
 #include "Window.h"
+#include "Sound.h"
 
 class Controller {
 public:
 	Controller(Model* m);
 	void input(GLFWwindow* window,int* state);
+	
 
 	//Gamestate controllers
 	void playerMovement(GLFWwindow* window, int* state);
 	void menuController(GLFWwindow* window, int* state);
 	void storeController(GLFWwindow* window, int* state);
 	void mapController(GLFWwindow* window, int* state);
+
 
 
 	int current_state;

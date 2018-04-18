@@ -248,7 +248,7 @@ int main(void){
 
 		while (!glfwWindowShouldClose(window.getWindow())) {
 
-			audio.playSound(GAMESTATE);
+
 			controller->input(window.getWindow(), &GAMESTATE);
 
 
@@ -258,7 +258,13 @@ int main(void){
 			// Select proper shader program to use
 			shader.enable();
 
-
+			if (GAMESTATE != 1) {
+				audio.playSound(0);
+			}
+			else if (GAMESTATE == 1) {
+				audio.playSound(1);
+			}
+			
 			
 			if (GAMESTATE == 0) {
 
