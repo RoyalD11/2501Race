@@ -16,7 +16,7 @@ void Bullet::update(double deltaTime) {
 
 	position.x += velocity.x * (float)deltaTime * cos(bulletRotate * 0.01745333);
 	position.y += velocity.y * (float)deltaTime * sin(bulletRotate * 0.01745333);
-	rotationAmount++;
+	rotationAmount = bulletRotate;
 
 	
 }

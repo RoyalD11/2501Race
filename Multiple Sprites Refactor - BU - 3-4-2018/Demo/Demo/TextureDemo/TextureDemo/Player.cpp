@@ -6,11 +6,11 @@ Player::Player(glm::vec3 &entityPos, glm::vec3 &entityScale, float entityRotatio
 	: GameEntity(entityPos, entityScale, entityRotationAmount, entityTexture, entityNumElements, type), textures(textures)
 {
 	//Sets the initial position and velocity
-	position = glm::vec3(2.2, 3, 0);
+	position = glm::vec3(2.2, 2.9, 0);
 	targetPosition = glm::vec3(0, 0, 0);
 	velocity = glm::vec3(0, 0, 0);
 	
-	maxSpeed = glm::vec3(2.5, 2.5, 0);
+	maxSpeed = glm::vec3(1, 1, 0);
 
 	acceleration = glm::vec3(0.005, 0.005, 0);
 	max_accel = glm::vec3(0.01, 0.01, 0);

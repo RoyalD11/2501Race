@@ -63,7 +63,7 @@ GLfloat lastFrame = 0.0f;
 //const int AMMO_CAP = 10;
 
 // Global texture info
-GLuint tex[35];
+GLuint tex[40];
 
 // Create the geometry for a square (with two triangles)
 // Return the number of array elements that form the square
@@ -124,10 +124,10 @@ void setthisTexture(GLuint w, char *fname)
 void setallTexture(void)
 {
 	//Holds all textures/sprites used
-	glGenTextures(35, tex);
+	glGenTextures(40, tex);
 	setthisTexture(tex[0], "Sprites/player_backup.png");
 	setthisTexture(tex[1], "Sprites/orb.png");
-	setthisTexture(tex[2], "Sprites/saw.png");
+	setthisTexture(tex[2], "Sprites/bullet2.png");
 	setthisTexture(tex[3], "Sprites/cop1.png");
 	setthisTexture(tex[4], "Sprites/cop2.png");
 	setthisTexture(tex[5], "Sprites/cop1.png");
@@ -170,6 +170,7 @@ void setallTexture(void)
 	setthisTexture(tex[32], "Sprites/sandstorm.png");
 
 	setthisTexture(tex[33], "Sprites/player_damage.png");
+	
 
 	glBindTexture(GL_TEXTURE_2D, tex[0]);
 }

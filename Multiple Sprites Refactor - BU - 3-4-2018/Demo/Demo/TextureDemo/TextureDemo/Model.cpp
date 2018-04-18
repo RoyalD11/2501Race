@@ -210,9 +210,9 @@ void Model::loadGameObjects() {
 	
 	//Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.5f, 0.5f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.5, 1.5, 0), glm::vec3(3, 3, 0), tempTextures);
 
-	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.8, 1.8, 0), glm::vec3(3, 3, 0), tempTextures);
+	Enemy* police1 = new Enemy(glm::vec3(2.4, 3.5, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2.2, 2.2, 0), glm::vec3(3, 3, 0), tempTextures);
 	
-	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(3, 3, 0), glm::vec3(1.5, 1.5, 0), tempTextures);
+	Enemy* police4 = new Enemy(glm::vec3(2.5, 3.2, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(1.5, 1.5, 0), glm::vec3(5, 5, 0), tempTextures);
 	Enemy* police2 = new Enemy(glm::vec3(2.3, 3.8, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(2, 2, 0), tempTextures);
 	Enemy* police3 = new Enemy(glm::vec3(2.2, 4, 0), glm::vec3(0.35, 0.2f, 0.5f), 0.0f, texture[4], size, "enemy", player, glm::vec3(2, 2, 0), glm::vec3(3, 3, 0), tempTextures);
 	
@@ -446,6 +446,7 @@ void Model::unmountGame() {
 	enemies.clear();
 	bgObjects.clear();
 	cars.clear();
+	effects.clear();
 
 	//reset values
 	time = 0;

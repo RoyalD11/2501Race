@@ -15,7 +15,6 @@ public:
 	void setPosition(float x,float y);
 	virtual void update(double deltaTime) override;
 
-
 private:
 	Player* player;
 };
