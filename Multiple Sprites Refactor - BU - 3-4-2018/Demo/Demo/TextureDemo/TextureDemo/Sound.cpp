@@ -25,6 +25,9 @@ void Sound::playSound(int state) {
 	case 3:
 		PlaySound(TEXT("Sounds/pew.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		break;
+	case 4:
+		PlaySound(TEXT("Sounds/Cha-Ching-[AudioTrimmer.com].wav"), NULL, SND_FILENAME | SND_ASYNC);
+		break;
 	}
 	
 }

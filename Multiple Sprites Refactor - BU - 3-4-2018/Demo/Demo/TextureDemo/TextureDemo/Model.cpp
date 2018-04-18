@@ -153,6 +153,7 @@ void Model::update(double deltaTime, Shader shader) {
 			//Checks for coin tile
 			if (bgObjects[i]->bgType == 9) {
 				player->points+=100;
+				sound.playSound(4);
 			}
 			
 		}
