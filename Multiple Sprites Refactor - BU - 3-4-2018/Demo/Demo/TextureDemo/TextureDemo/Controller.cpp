@@ -83,20 +83,20 @@ void Controller::playerMovement(GLFWwindow* window, int* state) {
 	//A and D are used to rotate the player
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
 		//model->player->moveTo(-1.5, 0);
-		if (model->player->getVelocity().x > 0.3 ||
-			model->player->getVelocity().y > 0.3 ||
-			model->player->getVelocity().x < -0.3 ||
-			model->player->getVelocity().y < -0.3
+		if (model->player->getVelocity().x > 0.25 ||
+			model->player->getVelocity().y > 0.25 ||
+			model->player->getVelocity().x < -0.25 ||
+			model->player->getVelocity().y < -0.25
 			) model->player->setRotation(0.7);
 
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 		//model->player->moveTo(1.5,0);
-		if(model->player->getVelocity().x > 0.3 ||
-			model->player->getVelocity().y > 0.3 ||
-			model->player->getVelocity().x < -0.3 ||
-			model->player->getVelocity().y < -0.3
+		if(model->player->getVelocity().x > 0.25 ||
+			model->player->getVelocity().y > 0.25 ||
+			model->player->getVelocity().x < -0.25 ||
+			model->player->getVelocity().y < -0.25
 			) model->player->setRotation(-0.7);
 	}
 
@@ -183,9 +183,8 @@ void Controller::storeController(GLFWwindow* window,int* state) {
 		}
 	}
 	if ((glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)) {
-		callback = glfwGetKey(window, GLFW_KEY_Z);
 		//player upgrade buff handling
-		if (model->player_points < 500 && model->turning_buff <= 0.25) {
+		if (model->player_points > 500 && model->turning_buff <= 0.25) {
 			model->turning_buff += 0.25;
 			model->player_points -= 500;
 			std::cout << "Handling Upgarde bought. \n";
